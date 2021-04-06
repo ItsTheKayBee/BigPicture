@@ -1,7 +1,7 @@
 import 'movieTile.dart';
 
 class MovieTilesModel {
-  final List<MovieTile> _movieTiles = [
+  List<MovieTile> _movieTiles = [
     MovieTile(
       imageUrl: 'assets/wonder.jpg',
       movieName: "Wonder woman",

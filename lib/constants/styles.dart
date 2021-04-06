@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
 
+//colors
+const unfocussedColor = Color(0xa0afcdc9);
+const transparentColor = Color(0x00000000);
+const primaryColor = Color(0xffafcdc9);
+const accentColor = Color(0xff8cb4af);
+const fontColorDark = Color(0xff163e57);
+const fontColorLight = Color(0xff6c8594);
+
 //styles
 const headingFont = TextStyle(
-  color: Color(0xff163e57),
-  fontSize: 24,
+  color: fontColorDark,
+  fontSize: size6,
   fontWeight: FontWeight.bold,
 );
 
 const movieFont = TextStyle(
-  color: Color(0xff163e57),
-  fontSize: 18,
+  color: fontColorDark,
+  fontSize: size4 + 2,
   fontWeight: FontWeight.w400,
 );
 
 const genreFont = TextStyle(
-  color: Color(0xff6c8594),
-  fontSize: 16,
+  color: fontColorLight,
+  fontSize: size4,
   fontWeight: FontWeight.w400,
+);
+
+const gradientBackdrop = BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      primaryColor,
+      Color(0xffeaf2ef),
+      Color(0xfff5f9f8),
+    ],
+  ),
 );
 
 //sizes
@@ -32,7 +52,3 @@ const size3 = 12.0;
 const size4 = 16.0;
 const size5 = 20.0;
 const size6 = 24.0;
-
-//colors
-const unfocussedColor = Color(0xa0afcdc9);
-const transparentColor = Color(0x00000000);
