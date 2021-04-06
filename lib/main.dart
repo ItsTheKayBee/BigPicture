@@ -1,4 +1,5 @@
 import 'package:big_picture/screens/home.dart';
+import 'package:big_picture/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 import './constants/styles.dart';
@@ -29,57 +30,7 @@ class MainApp extends StatelessWidget {
         ),
       ),
       home: SafeArea(
-        child: Scaffold(
-          bottomNavigationBar: BottomAppBar(
-            elevation: cardElevation,
-            notchMargin: size2,
-            shape: CircularNotchedRectangle(),
-            child: Row(
-              children: [
-                Expanded(
-                  child: IconButton(
-                    icon: Icon(Icons.home_outlined),
-                    onPressed: () {},
-                    color: fontColorLight,
-                    iconSize: size8,
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    icon: Icon(Icons.bookmark_outline),
-                    onPressed: () {},
-                    color: fontColorLight,
-                    iconSize: size8,
-                  ),
-                ),
-                Spacer(),
-                Expanded(
-                  child: IconButton(
-                    icon: Icon(Icons.check_circle_outline),
-                    onPressed: () {},
-                    color: fontColorLight,
-                    iconSize: size8,
-                  ),
-                ),
-                Expanded(
-                  child: IconButton(
-                    icon: Icon(Icons.person_outline),
-                    onPressed: () {},
-                    color: fontColorLight,
-                    iconSize: size8,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.search),
-            foregroundColor: Colors.white,
-            onPressed: () {},
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-        ),
+        child: BottomNavBar(),
       ),
     );
   }
