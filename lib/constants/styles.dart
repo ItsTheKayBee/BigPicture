@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const unfocussedColor = Color(0xa0afcdc9);
 const transparentColor = Color(0x00000000);
 const primaryColor = Color(0xffafcdc9);
-const accentColor = Color(0xff8cb4af);
+const accentColor = Color(0xff70bba3);
 const fontColorDark = Color(0xff163e57);
 const fontColorLight = Color(0xff6c8594);
 
@@ -52,3 +52,5 @@ const size3 = 12.0;
 const size4 = 16.0;
 const size5 = 20.0;
 const size6 = 24.0;
+const size7 = 28.0;
+const size8 = 32.0;

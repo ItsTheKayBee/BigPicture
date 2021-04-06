@@ -10,6 +10,8 @@ class Home extends StatelessWidget {
         child: ListView(
           children: [
             MoviesSection(),
+            MoviesSection(),
+            MoviesSection(),
           ],
         ),
         decoration: gradientBackdrop,

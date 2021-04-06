@@ -29,7 +29,57 @@ class MainApp extends StatelessWidget {
         ),
       ),
       home: SafeArea(
-        child: Home(),
+        child: Scaffold(
+          bottomNavigationBar: BottomAppBar(
+            elevation: cardElevation,
+            notchMargin: size2,
+            shape: CircularNotchedRectangle(),
+            child: Row(
+              children: [
+                Expanded(
+                  child: IconButton(
+                    icon: Icon(Icons.home_outlined),
+                    onPressed: () {},
+                    color: fontColorLight,
+                    iconSize: size8,
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    icon: Icon(Icons.bookmark_outline),
+                    onPressed: () {},
+                    color: fontColorLight,
+                    iconSize: size8,
+                  ),
+                ),
+                Spacer(),
+                Expanded(
+                  child: IconButton(
+                    icon: Icon(Icons.check_circle_outline),
+                    onPressed: () {},
+                    color: fontColorLight,
+                    iconSize: size8,
+                  ),
+                ),
+                Expanded(
+                  child: IconButton(
+                    icon: Icon(Icons.person_outline),
+                    onPressed: () {},
+                    color: fontColorLight,
+                    iconSize: size8,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.search),
+            foregroundColor: Colors.white,
+            onPressed: () {},
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+        ),
       ),
     );
   }
