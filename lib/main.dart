@@ -1,6 +1,9 @@
+import 'package:big_picture/models/movieTile.dart';
+import 'package:big_picture/models/movieTilesModel.dart';
 import 'package:flutter/material.dart';
 
 import './constants/styles.dart';
+import './constants/strings.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 void main() => runApp(MainApp());
@@ -12,11 +15,20 @@ class MainApp extends StatelessWidget {
       title: 'Big Picture',
       theme: ThemeData(
         //colors
-        accentColor: Color(0xff70bba3),
-        primaryColor: Color(0xff9ce6dc),
+        accentColor: Color(0xff8cb4af),
+        primaryColor: Color(0xffafcdc9),
 
         //font
         fontFamily: 'Poppins',
+
+        //card theme
+        cardTheme: CardTheme(
+          clipBehavior: Clip.hardEdge,
+          elevation: cardElevation,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+        ),
       ),
       home: SafeArea(
         child: Home(),
@@ -31,22 +43,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<MovieTile> _movieTiles = MovieTilesModel().allMovieTiles;
+
   @override
   Widget build(BuildContext context) {
-    List<MovieTile> data = [
-      MovieTile(
-        selected: false,
-      ),
-      MovieTile(
-        selected: false,
-      ),
-      MovieTile(
-        selected: false,
-      ),
-      MovieTile(
-        selected: false,
-      ),
-    ];
     int _focusedIndex = 0;
 
     var _gradientBackdrop = BoxDecoration(
@@ -55,8 +55,8 @@ class _HomeState extends State<Home> {
         end: Alignment.bottomCenter,
         colors: [
           Theme.of(context).primaryColor,
-          Color(0xffbce0dc),
-          Colors.white,
+          Color(0xffeaf2ef),
+          Color(0xfff5f9f8),
         ],
       ),
     );
@@ -64,48 +64,46 @@ class _HomeState extends State<Home> {
     void _onItemFocus(int index) {
       setState(() {
         _focusedIndex = index;
-        data[index].selected = true;
-      });
-    }
 
-    Widget _buildListItem(BuildContext context, int index) {
-      //horizontal
-      return MovieTile();
+        _movieTiles[index].focussed = true;
+
+        if (index != 0) _movieTiles[index - 1].focussed = false;
+        if (index != _movieTiles.length - 1)
+          _movieTiles[index + 1].focussed = false;
+      });
     }
 
     return Scaffold(
       body: Container(
         child: ListView(
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  Align(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 16.0,
-                        left: 16.0,
-                      ),
-                      child: Text(
-                        "New Movies",
-                        style: headingFont,
-                      ),
-                    ),
-                    alignment: Alignment.centerLeft,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: size4,
+                    left: size4,
                   ),
-                  Container(
-                    height: 300.0,
-                    child: ScrollSnapList(
-                      onItemFocus: _onItemFocus,
-                      itemSize: 180,
-                      itemBuilder: _buildListItem,
-                      itemCount: data.length,
-                      dynamicItemSize: true,
-                      dynamicItemOpacity: 0.8,
-                    ),
+                  child: Text(
+                    newMovies,
+                    style: headingFont,
                   ),
-                ],
-              ),
+                ),
+                Container(
+                  height: movieCardHeight,
+                  child: ScrollSnapList(
+                    onItemFocus: _onItemFocus,
+                    itemSize: movieCardWidth,
+                    itemBuilder: (context, index) => MovieTileItem(
+                      movieTile: _movieTiles[index],
+                    ),
+                    itemCount: _movieTiles.length,
+                    dynamicItemSize: true,
+                    initialIndex: -1.0,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -115,42 +113,42 @@ class _HomeState extends State<Home> {
   }
 }
 
-class MovieTile extends StatelessWidget {
-  var selected;
+class MovieTileItem extends StatelessWidget {
+  final MovieTile movieTile;
 
-  MovieTile({this.selected = false});
+  MovieTileItem({
+    this.movieTile,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 180.0,
+      width: movieCardWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Expanded(
-                child: Image.asset(
-                  'assets/wonder.jpg',
-                  fit: BoxFit.fill,
-                  color: selected ? Colors.white : Colors.black,
-                ),
+            child: Card(
+              child: Image.asset(
+                movieTile.imageUrl,
+                fit: BoxFit.fill,
+                color: movieTile.focussed ? transparentColor : unfocussedColor,
+                colorBlendMode: BlendMode.lighten,
               ),
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: size2),
           Padding(
-            padding: EdgeInsets.only(left: 4.0),
+            padding: EdgeInsets.only(left: size1),
             child: Text(
-              "Wonder woman",
+              movieTile.movieName,
               style: movieFont,
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 4.0),
+            padding: EdgeInsets.only(left: size1),
             child: Text(
-              "Action, Sci-Fi",
+              movieTile.movieGenres,
               style: genreFont,
             ),
           ),
