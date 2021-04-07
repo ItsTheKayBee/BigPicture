@@ -4,8 +4,8 @@ class MovieTilesModel {
   List<MovieTile> _movieTiles = [
     MovieTile(
       imageUrl: 'assets/wonder.jpg',
-      movieName: "Wonder woman",
-      movieGenres: "Action, Adeventure",
+      movieName: "Wonder woman and the wasp Wonder woman and the wasp",
+      movieGenres: "Action, Adeventure, Action, Adeventure",
     ),
     MovieTile(
       imageUrl: 'assets/wonder.jpg',

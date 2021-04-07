@@ -1,8 +1,9 @@
 // Titles
+const String appName = 'Big Picture';
 const String newMovies = 'Now in Theatres';
 const String popularMovies = 'Popular Movies';
 const String popularTvShows = 'Popular TV Shows';
-const String appName = 'Big Picture';
+const String recommendations = 'Recommendations for you';
 
 // Screens
 const String homeRoute = '/';

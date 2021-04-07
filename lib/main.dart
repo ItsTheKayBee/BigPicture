@@ -32,7 +32,6 @@ class MainApp extends StatelessWidget {
         //card theme
         cardTheme: CardTheme(
           clipBehavior: Clip.hardEdge,
-          elevation: cardElevation,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),

@@ -1,3 +1,4 @@
+import 'package:big_picture/constants/strings.dart';
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/widgets/movies_section.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,18 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         child: ListView(
           children: [
-            MoviesSection(),
-            MoviesSection(),
-            MoviesSection(),
+            MoviesSection(
+              sectionTitle: newMovies,
+            ),
+            MoviesSection(
+              sectionTitle: popularMovies,
+            ),
+            MoviesSection(
+              sectionTitle: popularTvShows,
+            ),
+            MoviesSection(
+              sectionTitle: recommendations,
+            ),
           ],
         ),
         decoration: gradientBackdrop,

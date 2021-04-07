@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 //colors
@@ -12,25 +10,25 @@ const Color fontColorDark = Color(0xff163e57);
 const Color fontColorLight = Color(0xff6c8594);
 
 //styles
-const headingFont = TextStyle(
+const TextStyle headingFont = TextStyle(
   color: fontColorDark,
-  fontSize: size6,
+  fontSize: size5,
   fontWeight: FontWeight.bold,
 );
 
-const movieFont = TextStyle(
+const TextStyle movieFont = TextStyle(
   color: fontColorDark,
-  fontSize: size4 + 2,
-  fontWeight: FontWeight.w400,
+  fontSize: size3 + 2,
+  fontWeight: FontWeight.w500,
 );
 
-const genreFont = TextStyle(
+const TextStyle genreFont = TextStyle(
   color: fontColorLight,
-  fontSize: size4,
-  fontWeight: FontWeight.w400,
+  fontSize: size3,
+  fontWeight: FontWeight.w300,
 );
 
-const gradientBackdrop = BoxDecoration(
+const BoxDecoration gradientBackdrop = BoxDecoration(
   gradient: LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
@@ -43,17 +41,16 @@ const gradientBackdrop = BoxDecoration(
 );
 
 //sizes
-const movieCardHeight = 320.0;
-const movieCardWidth = 180.0;
-const borderRadius = 24.0;
-const cardElevation = 40.0;
+const double movieCardHeight = 320.0;
+const double borderRadius = 24.0;
+const double cardElevation = 10.0;
 
 // generic sizes
-const size1 = 4.0;
-const size2 = 8.0;
-const size3 = 12.0;
-const size4 = 16.0;
-const size5 = 20.0;
-const size6 = 24.0;
-const size7 = 28.0;
-const size8 = 32.0;
+const double size1 = 4.0;
+const double size2 = 8.0;
+const double size3 = 12.0;
+const double size4 = 16.0;
+const double size5 = 20.0;
+const double size6 = 24.0;
+const double size7 = 28.0;
+const double size8 = 32.0;
