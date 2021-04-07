@@ -1,12 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 //colors
-const unfocussedColor = Color(0xa0afcdc9);
-const transparentColor = Color(0x00000000);
-const primaryColor = Color(0xffafcdc9);
-const accentColor = Color(0xff70bba3);
-const fontColorDark = Color(0xff163e57);
-const fontColorLight = Color(0xff6c8594);
+const Color unfocussedColor = Color(0xa0afcdc9);
+const Color transparentColor = Color(0x00000000);
+const Color primaryColor = Color(0xffafcdc9);
+const Color accentColor = Color(0xff70bba3);
+const Color secondaryColor = Color(0xff8db3ae);
+const Color fontColorDark = Color(0xff163e57);
+const Color fontColorLight = Color(0xff6c8594);
 
 //styles
 const headingFont = TextStyle(

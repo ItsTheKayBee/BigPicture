@@ -20,7 +20,9 @@ class MoviesSection extends StatelessWidget {
             style: headingFont,
           ),
         ),
-        MoviesScrollView(movieTiles: MovieTilesModel().allMovieTiles),
+        MoviesScrollView(
+          movieTiles: MovieTilesModel().allMovieTiles,
+        ),
       ],
     );
   }

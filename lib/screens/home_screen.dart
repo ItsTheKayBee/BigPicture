@@ -2,7 +2,7 @@ import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/widgets/movies_section.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
