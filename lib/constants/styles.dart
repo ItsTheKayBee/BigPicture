@@ -42,7 +42,8 @@ const Color accentColor = Color(0xff70bba3);
 const Color secondaryColor = Color(0xff8db3ae);
 const Color fontColorDark = Color(0xff163e57);
 const Color fontColorLight = Color(0xff6c8594);
-const Color textFieldFilledColor = Color(0x3bffffff);
+const Color textFieldFilledColor = Color(0x55ffffff);
+
 MaterialColor primarySwatch = MaterialColor(
   0xFFAFCDC9,
   <int, Color>{

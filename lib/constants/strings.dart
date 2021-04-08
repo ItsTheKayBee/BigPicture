@@ -10,11 +10,5 @@ const String watchListTitle = 'Watch List';
 const String watchHistoryTitle = 'Completed';
 const String userProfileTitle = 'KayBee';
 
-// Screens
-const String homeRoute = '/';
-const String watchListRoute = '/watch_list';
-const String watchHistoryRoute = '/watch_history';
-const String userProfileRoute = '/user_profile';
-
 // Others
 const String searchText = "Search...";
