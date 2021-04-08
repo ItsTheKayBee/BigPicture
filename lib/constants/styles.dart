@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 //colors
-const Color unfocussedColor = Color(0xa0afcdc9);
+const Color unfocussedColor = Color(0xaf8db3ae);
 const Color transparentColor = Color(0x00000000);
 const Color primaryColor = Color(0xffafcdc9);
 const Color accentColor = Color(0xff70bba3);
@@ -41,9 +41,9 @@ const BoxDecoration gradientBackdrop = BoxDecoration(
 );
 
 //sizes
-const double movieCardHeight = 320.0;
-const double borderRadius = 24.0;
-const double cardElevation = 10.0;
+const double movieCardHeight = size8 * 10;
+const double borderRadius = size4;
+const double cardElevation = size2;
 
 // generic sizes
 const double size1 = 4.0;

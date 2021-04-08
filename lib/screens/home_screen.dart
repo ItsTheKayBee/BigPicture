@@ -6,26 +6,24 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: ListView(
-          children: [
-            MoviesSection(
-              sectionTitle: newMovies,
-            ),
-            MoviesSection(
-              sectionTitle: popularMovies,
-            ),
-            MoviesSection(
-              sectionTitle: popularTvShows,
-            ),
-            MoviesSection(
-              sectionTitle: recommendations,
-            ),
-          ],
-        ),
-        decoration: gradientBackdrop,
+    return Container(
+      child: ListView(
+        children: [
+          MoviesSection(
+            sectionTitle: newMovies,
+          ),
+          MoviesSection(
+            sectionTitle: popularMovies,
+          ),
+          MoviesSection(
+            sectionTitle: popularTvShows,
+          ),
+          MoviesSection(
+            sectionTitle: recommendations,
+          ),
+        ],
       ),
+      // decoration: gradientBackdrop,
     );
   }
 }
