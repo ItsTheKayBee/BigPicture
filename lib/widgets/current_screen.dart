@@ -45,15 +45,14 @@ class _CurrentScreenState extends State<CurrentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavBar(
         navBarIndex: _index,
         onChangedTab: onChangedTab,
       ),
-      body: Scaffold(
-        body: Container(
-          child: pages[_index]['view'],
-          decoration: gradientBackdrop,
-        ),
+      body: Container(
+        child: pages[_index]['view'],
+        decoration: gradientBackdrop,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),

@@ -25,7 +25,7 @@ class MoviesSection extends StatelessWidget {
             ),
             child: Text(
               sectionTitle,
-              style: headingFont,
+              style: sectionTitleStyle,
               overflow: TextOverflow.fade,
               softWrap: false,
             ),

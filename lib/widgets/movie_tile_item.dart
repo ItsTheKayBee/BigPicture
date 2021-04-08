@@ -39,7 +39,7 @@ Widget movieTileItem({
               // shows marquee text if text overflows
               child: Text(
                 movieTile.movieName,
-                style: movieFont,
+                style: titleStyle,
               ),
             ),
           ),
@@ -49,7 +49,7 @@ Widget movieTileItem({
               // shows marquee text if text overflows
               child: Text(
                 movieTile.movieGenres,
-                style: genreFont,
+                style: subTitleStyle,
               ),
             ),
           ),

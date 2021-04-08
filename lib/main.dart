@@ -10,28 +10,14 @@ void main() => runApp(MainApp());
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: secondaryColor,
-    ));
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     return MaterialApp(
       title: appName,
-      theme: ThemeData(
-        //colors
-        accentColor: accentColor,
-        primaryColor: primaryColor,
-
-        //font
-        fontFamily: 'Poppins',
-
-        //card theme
-        cardTheme: CardTheme(
-          clipBehavior: Clip.hardEdge,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-        ),
-      ),
+      theme: themeData,
       home: SafeArea(
         child: CurrentScreen(),
       ),
