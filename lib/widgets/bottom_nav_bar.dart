@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
           ),
           navBarItem(
             index: 3,
-            iconData: Icons.person_outline,
+            iconData: Icons.insights_outlined,
           ),
         ],
       ),

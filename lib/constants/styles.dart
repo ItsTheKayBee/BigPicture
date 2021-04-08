@@ -118,7 +118,7 @@ OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 
 //sizes
 const double movieCardHeight = size8 * 10;
-const double borderRadius = size4;
+const double borderRadius = size6;
 const double cardElevation = size2;
 
 // generic sizes

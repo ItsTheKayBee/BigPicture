@@ -13,6 +13,8 @@ Widget movieTileItem({
   final bool _isFocussed = index == currentIndex;
 
   return Container(
+    width: 160,
+    height: 300,
     child: Transform.scale(
       scale:
           _isFocussed ? 1.0 : 0.75, // changes size based on the focussed prop

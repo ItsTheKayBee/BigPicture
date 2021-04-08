@@ -9,6 +9,36 @@ class HomeScreen extends StatelessWidget {
     return Container(
       child: ListView(
         children: [
+          Padding(
+            padding: EdgeInsets.only(
+              top: size8 + size2,
+              left: size8,
+              right: size8,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(
+                    Icons.explore,
+                    size: size2 * 7,
+                    color: Color(0x8f163e57),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: size4,
+                    bottom: size4,
+                  ),
+                  child: Text(
+                    homeTitle,
+                    style: headingStyle,
+                  ),
+                ),
+              ],
+            ),
+          ),
           MoviesSection(
             sectionTitle: newMovies,
           ),

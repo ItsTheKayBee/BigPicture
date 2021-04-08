@@ -20,8 +20,7 @@ class MoviesSection extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(
-              top: size4,
-              left: size4,
+              left: size8,
             ),
             child: Text(
               sectionTitle,
