@@ -1,5 +1,6 @@
 import 'package:big_picture/constants/strings.dart';
 import 'package:big_picture/constants/styles.dart';
+import 'package:big_picture/widgets/default_header.dart';
 import 'package:big_picture/widgets/movies_section.dart';
 import 'package:flutter/material.dart';
 
@@ -15,28 +16,9 @@ class HomeScreen extends StatelessWidget {
               left: size8,
               right: size8,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    Icons.explore,
-                    size: size2 * 7,
-                    color: Color(0x8f163e57),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: size4,
-                    bottom: size4,
-                  ),
-                  child: Text(
-                    homeTitle,
-                    style: headingStyle,
-                  ),
-                ),
-              ],
+            child: DefaultHeader(
+              headingIcon: Icons.explore,
+              headingTitle: homeTitle,
             ),
           ),
           MoviesSection(

@@ -3,6 +3,7 @@ import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTile.dart';
 import 'package:flutter/material.dart';
 
+import 'default_header.dart';
 import 'movies_grid_view.dart';
 
 class MoviesListLayout extends StatelessWidget {
@@ -28,22 +29,10 @@ class MoviesListLayout extends StatelessWidget {
               right: size8,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  headingIcon,
-                  size: size2 * 7,
-                  color: Color(0x8f163e57),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: size4,
-                    bottom: size4,
-                  ),
-                  child: Text(
-                    headingTitle,
-                    style: headingStyle,
-                  ),
+                DefaultHeader(
+                  headingIcon: headingIcon,
+                  headingTitle: headingTitle,
                 ),
                 Row(
                   children: [

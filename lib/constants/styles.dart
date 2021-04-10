@@ -35,15 +35,25 @@ ThemeData themeData = ThemeData(
 );
 
 //colors
+const Color primaryColor = Color(0xffafcdc9);
+const Color accentColor = Color(0xff70bba3);
+const Color secondaryColor = Color(0xff8db3ae);
+
 const Color unfocussedColor = Color(0xaf8db3ae);
 const Color transparentColor = Color(0x00000000);
-const Color primaryColor = Color(0xffafcdc9);
-const Color accentColor = Color(0xfff9bd2e);
-const Color secondaryColor = Color(0xff8db3ae);
+
 const Color fontColorDark = Color(0xff163e57);
 const Color fontColorLight = Color(0xff6c8594);
+
 const Color textFieldFilledColor = Color(0x55ffffff);
 const Color searchTextFieldColor = Color(0xffe7ecf2);
+
+// nav bar icon color
+Color yellowIconColor = Colors.amberAccent.shade200;
+Color greenIconColor = Colors.greenAccent.shade200;
+Color blueIconColor = Colors.lightBlueAccent.shade200;
+Color redIconColor = Colors.redAccent.shade200;
+Color purpleIconColor = Colors.pinkAccent.shade100;
 
 MaterialColor primarySwatch = MaterialColor(
   0xFFAFCDC9,
@@ -62,6 +72,7 @@ MaterialColor primarySwatch = MaterialColor(
 );
 
 //styles
+//
 // text styles
 // section titles text ex. recommendations, new releases, etc
 const TextStyle sectionTitleStyle = TextStyle(
