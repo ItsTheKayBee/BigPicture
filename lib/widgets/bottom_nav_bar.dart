@@ -39,7 +39,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           navItem(
             index: 1,
-            iconData: Icons.favorite_outline,
+            iconData: Icons.bookmark_border_rounded,
             selectedColor: redIconColor,
           ),
           navItem(

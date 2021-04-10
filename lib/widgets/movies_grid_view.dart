@@ -23,10 +23,8 @@ class MoviesGridView extends StatelessWidget {
         crossAxisSpacing: size4,
         mainAxisSpacing: size2,
       ),
-      itemBuilder: (context, index) => Expanded(
-        child: movieTileItem(
-          movieTile: movieTiles[index],
-        ),
+      itemBuilder: (context, index) => MovieTileItem(
+        movieTile: movieTiles[index],
       ),
       itemCount: movieTiles.length,
     );

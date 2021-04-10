@@ -24,7 +24,7 @@ class _MoviesScrollViewState extends State<MoviesScrollView> {
       height: movieCardHeight,
       child: Swiper(
         // external library to create scrollable list with snap effect
-        itemBuilder: (BuildContext context, int index) => movieTileItem(
+        itemBuilder: (BuildContext context, int index) => MovieTileItem(
           movieTile: widget.movieTiles[index],
           currentIndex: _currentIndex,
           index: index,

@@ -13,6 +13,7 @@ class SearchScreen extends StatelessWidget {
       headingTitle: searchTitle,
       headingIcon: Icons.search,
       movieTiles: movieTiles,
+      isChoiceChipGroupPresent: true,
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class WatchListScreen extends StatelessWidget {
   final List<MovieTile> movieTiles = MovieTilesModel().allMovieTiles;
-  final IconData headingIcon = Icons.favorite_rounded;
+  final IconData headingIcon = Icons.bookmark_rounded;
   final String headingTitle = watchListTitle;
 
   @override
