@@ -40,13 +40,11 @@ const Color accentColor = Color(0xff70bba3);
 const Color secondaryColor = Color(0xff8db3ae);
 
 const Color unfocussedColor = Color(0xaf8db3ae);
-const Color transparentColor = Color(0x00000000);
 
 const Color fontColorDark = Color(0xff163e57);
 const Color fontColorLight = Color(0xff6c8594);
 
 const Color textFieldFilledColor = Color(0x55ffffff);
-const Color searchTextFieldColor = Color(0xffe7ecf2);
 
 // nav bar icon color
 Color yellowIconColor = Colors.amberAccent.shade200;
@@ -71,8 +69,7 @@ MaterialColor primarySwatch = MaterialColor(
   },
 );
 
-//styles
-//
+///styles
 // text styles
 // section titles text ex. recommendations, new releases, etc
 const TextStyle sectionTitleStyle = TextStyle(
@@ -109,6 +106,13 @@ const TextStyle hintTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
+// lavel text font
+const TextStyle labelTextStyle = TextStyle(
+  color: fontColorDark,
+  fontSize: size4 + 2,
+  fontWeight: FontWeight.w400,
+);
+
 // background color
 const BoxDecoration gradientBackdrop = BoxDecoration(
   gradient: LinearGradient(
@@ -142,3 +146,9 @@ const double size5 = 20.0;
 const double size6 = 24.0;
 const double size7 = 28.0;
 const double size8 = 32.0;
+
+const headerPadding = EdgeInsets.only(
+  top: size8 + size2,
+  left: size8,
+  right: size8,
+);

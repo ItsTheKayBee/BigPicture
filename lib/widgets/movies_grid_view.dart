@@ -6,9 +6,8 @@ import 'movie_tile_item.dart';
 
 class MoviesGridView extends StatelessWidget {
   final List<MovieTile> movieTiles;
-  final ScrollController controller;
 
-  const MoviesGridView({@required this.movieTiles, this.controller});
+  const MoviesGridView({@required this.movieTiles});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class MoviesGridView extends StatelessWidget {
       padding: EdgeInsets.only(
         left: size8,
         right: size8,
-        bottom: size8 + size2,
+        bottom: size8 * 2 + size2,
       ),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200,
@@ -30,7 +29,6 @@ class MoviesGridView extends StatelessWidget {
         ),
       ),
       itemCount: movieTiles.length,
-      controller: controller,
     );
   }
 }

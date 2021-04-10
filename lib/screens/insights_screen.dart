@@ -7,11 +7,7 @@ class InsightsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: size8 + size2,
-        left: size8,
-        right: size8,
-      ),
+      margin: headerPadding,
       child: DefaultHeader(
         headingIcon: Icons.insights,
         headingTitle: insightsTitle,

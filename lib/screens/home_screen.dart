@@ -11,11 +11,7 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsets.only(
-              top: size8 + size2,
-              left: size8,
-              right: size8,
-            ),
+            padding: headerPadding,
             child: DefaultHeader(
               headingIcon: Icons.explore,
               headingTitle: homeTitle,

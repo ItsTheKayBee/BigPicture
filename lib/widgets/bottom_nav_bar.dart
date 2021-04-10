@@ -27,39 +27,42 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
       ),
       child: CurvedNavigationBar(
-        backgroundColor: transparentColor,
+        backgroundColor: Colors.transparent,
         buttonBackgroundColor: fontColorDark,
         height: 60,
         animationCurve: Curves.easeIn,
         items: <Widget>[
           navItem(
-              index: 0,
-              iconData: Icons.explore_outlined,
-              selectedColor: greenIconColor),
+            index: 0,
+            iconData: Icons.explore_outlined,
+            selectedColor: greenIconColor,
+          ),
           navItem(
-              index: 1,
-              iconData: Icons.favorite_outline,
-              selectedColor: redIconColor),
+            index: 1,
+            iconData: Icons.favorite_outline,
+            selectedColor: redIconColor,
+          ),
           navItem(
-              index: 2,
-              iconData: Icons.search_outlined,
-              selectedColor: yellowIconColor),
+            index: 2,
+            iconData: Icons.search_outlined,
+            selectedColor: yellowIconColor,
+          ),
           navItem(
-              index: 3,
-              iconData: Icons.verified_outlined,
-              selectedColor: blueIconColor),
+            index: 3,
+            iconData: Icons.verified_outlined,
+            selectedColor: blueIconColor,
+          ),
           navItem(
-              index: 4,
-              iconData: Icons.insights_outlined,
-              selectedColor: purpleIconColor),
+            index: 4,
+            iconData: Icons.insights_outlined,
+            selectedColor: purpleIconColor,
+          ),
         ],
         onTap: (int index) {
           widget.onChangeTab(index);
-          Future.delayed(Duration(milliseconds: 400), () {
-            setState(
-              () => _currentIndex = index,
-            );
-          });
+          setState(
+            () => _currentIndex = index,
+          );
         },
       ),
     );

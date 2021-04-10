@@ -31,7 +31,7 @@ Widget movieTileItem({
               fit: BoxFit.fill,
               colorBlendMode: BlendMode.lighten,
               color: _isFocussed
-                  ? transparentColor
+                  ? Colors.transparent
                   : unfocussedColor, // changes color overlay based on focussed prop
             ),
           ),
