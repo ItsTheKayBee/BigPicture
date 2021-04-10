@@ -27,7 +27,7 @@ ThemeData themeData = ThemeData(
 
   //card theme
   cardTheme: CardTheme(
-    clipBehavior: Clip.hardEdge,
+    clipBehavior: Clip.antiAlias,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(borderRadius),
     ),
@@ -38,11 +38,12 @@ ThemeData themeData = ThemeData(
 const Color unfocussedColor = Color(0xaf8db3ae);
 const Color transparentColor = Color(0x00000000);
 const Color primaryColor = Color(0xffafcdc9);
-const Color accentColor = Color(0xff70bba3);
+const Color accentColor = Color(0xfff9bd2e);
 const Color secondaryColor = Color(0xff8db3ae);
 const Color fontColorDark = Color(0xff163e57);
 const Color fontColorLight = Color(0xff6c8594);
 const Color textFieldFilledColor = Color(0x55ffffff);
+const Color searchTextFieldColor = Color(0xffe7ecf2);
 
 MaterialColor primarySwatch = MaterialColor(
   0xFFAFCDC9,

@@ -5,11 +5,10 @@ import 'package:flutter/material.dart';
 import 'movie_tile_item.dart';
 
 class MoviesGridView extends StatelessWidget {
-  const MoviesGridView({
-    @required this.movieTiles,
-  });
-
   final List<MovieTile> movieTiles;
+  final ScrollController controller;
+
+  const MoviesGridView({@required this.movieTiles, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +30,7 @@ class MoviesGridView extends StatelessWidget {
         ),
       ),
       itemCount: movieTiles.length,
+      controller: controller,
     );
   }
 }

@@ -1,53 +1,78 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-class BottomNavBar extends StatelessWidget {
-  final int navBarIndex;
-  final ValueChanged<int> onChangedTab;
-  BottomNavBar({this.navBarIndex, this.onChangedTab});
+class BottomNavBar extends StatefulWidget {
+  final ValueChanged<int> onChangeTab;
+  BottomNavBar({this.onChangeTab});
+
+  @override
+  _BottomNavBarState createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      elevation: cardElevation,
-      shape: CircularNotchedRectangle(),
-      notchMargin: size2,
-      child: Row(
-        children: [
-          navBarItem(
-            index: 0,
-            iconData: Icons.home_outlined,
+    return Container(
+      child: CurvedNavigationBar(
+        backgroundColor: transparentColor,
+        buttonBackgroundColor: fontColorDark,
+        height: 60,
+        animationCurve: Curves.easeIn,
+        items: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(size1), // padding to increase button size
+            child: Icon(
+              Icons.explore_outlined,
+              size: size8,
+              color: _currentIndex == 0
+                  ? accentColor
+                  : fontColorDark, // changes color based on selected
+            ),
           ),
-          navBarItem(
-            index: 1,
-            iconData: Icons.bookmark_outline,
+          Padding(
+            padding: EdgeInsets.all(size1),
+            child: Icon(
+              Icons.favorite_border_outlined,
+              size: size8,
+              color: _currentIndex == 1 ? accentColor : fontColorDark,
+            ),
           ),
-          Spacer(),
-          navBarItem(
-            index: 2,
-            iconData: Icons.check_circle_outline,
+          Padding(
+            padding: EdgeInsets.all(size1),
+            child: Icon(
+              Icons.search_outlined,
+              size: size8,
+              color: _currentIndex == 2 ? accentColor : fontColorDark,
+            ),
           ),
-          navBarItem(
-            index: 3,
-            iconData: Icons.insights_outlined,
+          Padding(
+            padding: EdgeInsets.all(size1),
+            child: Icon(
+              Icons.verified_outlined,
+              size: size8,
+              color: _currentIndex == 3 ? accentColor : fontColorDark,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(size1),
+            child: Icon(
+              Icons.insights_outlined,
+              size: size8,
+              color: _currentIndex == 4 ? accentColor : fontColorDark,
+            ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget navBarItem({
-    @required int index,
-    @required IconData iconData,
-  }) {
-    final bool isSelected = index == navBarIndex;
-
-    return Expanded(
-      child: IconButton(
-        icon: Icon(iconData),
-        onPressed: () => onChangedTab(index),
-        color: isSelected ? fontColorDark : fontColorLight,
-        iconSize: size7,
+        onTap: (int index) {
+          widget.onChangeTab(index);
+          Future.delayed(Duration(milliseconds: 400), () {
+            setState(
+              () => _currentIndex = index,
+            );
+          });
+        },
       ),
     );
   }

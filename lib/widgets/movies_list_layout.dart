@@ -58,6 +58,7 @@ class MoviesListLayout extends StatelessWidget {
                             size: size6,
                           ),
                           hintText: searchText,
+                          contentPadding: EdgeInsets.all(size3),
                         ),
                       ),
                     ),
