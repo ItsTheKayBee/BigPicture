@@ -113,6 +113,61 @@ const TextStyle labelTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
+// title for movie preview screen
+const TextStyle moviePreviewTitle = TextStyle(
+  color: Colors.black,
+  fontSize: size4 + 2,
+  fontWeight: FontWeight.w500,
+  height: 1.1,
+);
+
+// year, time and genre for moview preview screen
+TextStyle moviePreviewSubTitle = TextStyle(
+  color: Colors.grey.shade700,
+  fontSize: size2 + 2,
+  fontWeight: FontWeight.w300,
+);
+
+// short description for movie preview
+TextStyle moviePreviewDescription = TextStyle(
+  color: Colors.grey.shade900,
+  fontSize: size3,
+  fontWeight: FontWeight.w400,
+);
+
+// imdb and rotten tomato text
+const TextStyle moviePreviewRatings = TextStyle(
+  color: Colors.black,
+  fontSize: size4 + 2,
+  fontWeight: FontWeight.w400,
+);
+
+// metacritic ratings text
+const TextStyle moviePreviewMetacritic = TextStyle(
+  color: Colors.white70,
+  fontSize: size4 + 2,
+  fontWeight: FontWeight.w500,
+);
+
+const TextStyle movieDetailsTitle = TextStyle(
+  color: Colors.black,
+  fontSize: size6,
+  height: 1.15,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle movieDetailsSubTitle = TextStyle(
+  color: Colors.grey.shade500,
+  fontSize: size4,
+  fontWeight: FontWeight.w300,
+);
+
+TextStyle movieDetailsData = TextStyle(
+  color: Colors.grey.shade800,
+  fontSize: size4,
+  fontWeight: FontWeight.w400,
+);
+
 // background color
 const BoxDecoration gradientBackdrop = BoxDecoration(
   gradient: LinearGradient(
