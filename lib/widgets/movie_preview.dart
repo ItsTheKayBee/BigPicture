@@ -1,5 +1,6 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/screens/movie_details_screen.dart';
+import 'package:big_picture/screens/test.dart';
 import 'package:flutter/material.dart';
 
 class MoviePreview extends StatelessWidget {
