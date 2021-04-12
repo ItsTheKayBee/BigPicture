@@ -46,6 +46,11 @@ const Color fontColorLight = Color(0xff6c8594);
 
 const Color textFieldFilledColor = Color(0x55ffffff);
 
+//pastel shades
+const Color blueCustomViewColor = Color(0xff4fa9fb);
+const Color redCustomViewColor = Color(0xfff67280);
+const Color greenCustomViewColor = Color(0xff9fdfcd);
+
 // nav bar icon color
 Color yellowIconColor = Colors.amberAccent.shade200;
 Color greenIconColor = Colors.greenAccent.shade200;
@@ -156,15 +161,34 @@ const TextStyle movieDetailsTitle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-TextStyle movieDetailsSubTitle = TextStyle(
+TextStyle movieDetailsDescription = TextStyle(
   color: Colors.grey.shade500,
-  fontSize: size4,
+  fontSize: size3 + 2,
   fontWeight: FontWeight.w300,
+  height: 1.25,
 );
 
 TextStyle movieDetailsData = TextStyle(
   color: Colors.grey.shade800,
   fontSize: size4,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle movieDetailsSectionTitle = TextStyle(
+  color: Colors.white,
+  fontSize: size5,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle movieDetailsCastName = TextStyle(
+  color: Colors.white70,
+  fontSize: size3 + 2,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle movieDetailsCastScreenName = TextStyle(
+  color: Colors.white60,
+  fontSize: size3,
   fontWeight: FontWeight.w400,
 );
 
@@ -189,7 +213,7 @@ OutlineInputBorder outlineInputBorder = OutlineInputBorder(
 
 //sizes
 const double movieCardHeight = size8 * 10;
-const double borderRadius = size6;
+const double borderRadius = size4;
 const double cardElevation = size2;
 
 // generic sizes

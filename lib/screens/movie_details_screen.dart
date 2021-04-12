@@ -1,11 +1,16 @@
 import 'package:big_picture/constants/styles.dart';
+import 'package:big_picture/models/movieTile.dart';
+import 'package:big_picture/models/movieTilesModel.dart';
 import 'package:big_picture/utilities/scrollable_view_clipper.dart';
 import 'package:big_picture/widgets/bottom_circular_menu.dart';
-import 'package:big_picture/widgets/circular_button.dart';
 import 'package:big_picture/widgets/genre_label.dart';
+import 'package:big_picture/widgets/movies_detail_scroll_view.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
+  final List<MovieTile> movieTiles = MovieTilesModel().allMovieTiles;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -21,6 +26,7 @@ class MovieDetailsScreen extends StatelessWidget {
       body: Container(
         width: size.width,
         height: size.height,
+        color: Colors.white,
         child: Stack(
           children: [
             Positioned(
@@ -47,8 +53,10 @@ class MovieDetailsScreen extends StatelessWidget {
               builder: (context, controller) {
                 return Container(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.only(bottom: 32),
                     controller: controller,
+                    dragStartBehavior: DragStartBehavior.down,
+                    physics: BouncingScrollPhysics(),
                     child: ClipPath(
                       clipper: ScrollableViewClipper(
                         parentHeight: size.height,
@@ -66,7 +74,10 @@ class MovieDetailsScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: offset, top: 24, right: 24),
+                                left: offset,
+                                top: 24,
+                                right: 24,
+                              ),
                               child: Text(
                                 'Wonder Woman and the wasp of the golden age',
                                 style: movieDetailsTitle,
@@ -88,7 +99,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     '‧',
-                                    style: movieDetailsSubTitle,
+                                    style: movieDetailsDescription,
                                   ),
                                   Text(
                                     '2h 31m',
@@ -96,7 +107,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     '‧',
-                                    style: movieDetailsSubTitle,
+                                    style: movieDetailsDescription,
                                   ),
                                   Text(
                                     'English',
@@ -126,94 +137,43 @@ class MovieDetailsScreen extends StatelessWidget {
                                           .withOpacity(0.7),
                                       textColor: Colors.purple.shade700,
                                     ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Action',
-                                      bgColor: Colors.amberAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.amber.shade700,
-                                    ),
-                                    GenreLabel(
-                                      genreText: 'Adventure',
-                                      bgColor: Colors.purpleAccent.shade100
-                                          .withOpacity(0.7),
-                                      textColor: Colors.purple.shade700,
-                                    ),
                                   ],
                                 ),
                               ),
                             ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                left: offset,
+                                top: 12,
+                                right: 24,
+                              ),
+                              child: Text(
+                                'Lorem ipsum ipsum unceuiwniur fucrwiufnw weiunewufnew weiucnweuincw enciweu ceunew ceunceu cuewnue ceuecnuenc uecneunc ecue euec cnec ceuce cuecne ceu',
+                                style: movieDetailsDescription,
+                              ),
+                            ),
+                            Container(
+                              height: 940,
+                              child: Stack(
+                                children: [
+                                  MoviesDetailScrollView(
+                                    size: size,
+                                    color: blueCustomViewColor,
+                                    offset: offset,
+                                    movieTiles: movieTiles,
+                                  ),
+                                  Positioned(
+                                    top: 374,
+                                    child: MoviesDetailScrollView(
+                                      size: size,
+                                      offset: offset,
+                                      movieTiles: movieTiles,
+                                      color: redCustomViewColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
                           ],
                         ),
                       ),
