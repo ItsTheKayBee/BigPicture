@@ -62,12 +62,12 @@ class SearchChoiceChip extends StatelessWidget {
   final int selectedIndex;
 
   SearchChoiceChip({
-    @required this.labelText,
-    @required this.iconData,
-    @required this.selectedIconData,
-    @required this.index,
-    @required this.onSelected,
-    @required this.selectedIndex,
+    required this.labelText,
+    required this.iconData,
+    required this.selectedIconData,
+    required this.index,
+    required this.onSelected,
+    required this.selectedIndex,
   });
 
   @override

@@ -192,27 +192,12 @@ TextStyle movieDetailsCastScreenName = TextStyle(
   fontWeight: FontWeight.w400,
 );
 
-// background color
-const BoxDecoration gradientBackdrop = BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [
-      primaryColor,
-      Color(0xFFE7F0EF),
-      Color(0xffeaf2ef),
-      Color(0xFFF5F9F9),
-    ],
-  ),
-);
-
 OutlineInputBorder outlineInputBorder = OutlineInputBorder(
   borderRadius: BorderRadius.circular(size4),
   borderSide: BorderSide(style: BorderStyle.none),
 );
 
 //sizes
-const double movieCardHeight = size8 * 10;
 const double borderRadius = size4;
 const double cardElevation = size2;
 

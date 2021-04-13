@@ -6,7 +6,7 @@ class CastTileItem extends StatelessWidget {
   final MovieTile movieTile;
 
   CastTileItem({
-    @required this.movieTile, // data model
+    required this.movieTile, // data model
   });
 
   @override

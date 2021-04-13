@@ -4,8 +4,8 @@ class MovieTile {
   final String movieGenres;
 
   MovieTile({
-    this.imageUrl,
-    this.movieName,
-    this.movieGenres,
+    required this.imageUrl,
+    required this.movieName,
+    required this.movieGenres,
   });
 }

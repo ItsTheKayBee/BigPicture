@@ -5,7 +5,7 @@ class DefaultHeader extends StatelessWidget {
   final IconData headingIcon;
   final String headingTitle;
 
-  DefaultHeader({this.headingIcon, this.headingTitle});
+  DefaultHeader({required this.headingIcon, required this.headingTitle});
   @override
   Widget build(BuildContext context) {
     return Column(

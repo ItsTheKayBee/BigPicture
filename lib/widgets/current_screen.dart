@@ -2,6 +2,7 @@ import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/screens/home_screen.dart';
 import 'package:big_picture/screens/insights_screen.dart';
 import 'package:big_picture/screens/search_screen.dart';
+import 'package:big_picture/screens/test.dart';
 import 'package:big_picture/screens/watch_history_screen.dart';
 import 'package:big_picture/screens/watch_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
       // change screen according to selected nav item
       body: Container(
         child: pages[_index],
-        decoration: gradientBackdrop, // constant gradient background
+        color: Colors.white,
       ),
     );
   }

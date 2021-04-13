@@ -1,6 +1,7 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/screens/movie_details_screen.dart';
 import 'package:big_picture/screens/test.dart';
+import 'package:big_picture/widgets/ratings_section.dart';
 import 'package:flutter/material.dart';
 
 class MoviePreview extends StatelessWidget {
@@ -83,59 +84,8 @@ class MoviePreview extends StatelessWidget {
           ),
           Divider(),
           Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Transform.scale(
-                        scale: 1.25,
-                        child: Image.asset(
-                          'assets/imdb.png',
-                        ),
-                      ),
-                      SizedBox(
-                        width: size3,
-                      ),
-                      Text(
-                        '8.5',
-                        style: moviePreviewRatings,
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/tomato.png',
-                        height: 25,
-                      ),
-                      SizedBox(
-                        width: size3,
-                      ),
-                      Text(
-                        '85%',
-                        style: moviePreviewRatings,
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.lightGreen,
-                    borderRadius: BorderRadius.circular(size1),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: size2),
-                  child: Center(
-                    child: Text(
-                      '89',
-                      style: moviePreviewMetacritic,
-                    ),
-                  ),
-                ),
-              ],
+            child: RatingsSection(
+              scale: 1.25,
             ),
           ),
           Divider(),

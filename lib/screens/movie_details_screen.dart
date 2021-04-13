@@ -5,6 +5,7 @@ import 'package:big_picture/utilities/scrollable_view_clipper.dart';
 import 'package:big_picture/widgets/bottom_circular_menu.dart';
 import 'package:big_picture/widgets/genre_label.dart';
 import 'package:big_picture/widgets/movies_detail_scroll_view.dart';
+import 'package:big_picture/widgets/ratings_section.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -86,33 +87,51 @@ class MovieDetailsScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: offset, top: 12, right: 24),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                            Container(
+                              margin: EdgeInsets.only(
+                                left: offset,
+                                right: 24,
+                                top: 12,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.grey.shade400,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Column(
                                 children: [
-                                  Text(
-                                    '12.04.2021',
-                                    style: movieDetailsData,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 12, top: 12, right: 12),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '12.04.2021',
+                                          style: movieDetailsData,
+                                        ),
+                                        Text(
+                                          '‧',
+                                          style: movieDetailsDescription,
+                                        ),
+                                        Text(
+                                          '2h 31m',
+                                          style: movieDetailsData,
+                                        ),
+                                        Text(
+                                          '‧',
+                                          style: movieDetailsDescription,
+                                        ),
+                                        Text(
+                                          'English',
+                                          style: movieDetailsData,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Text(
-                                    '‧',
-                                    style: movieDetailsDescription,
-                                  ),
-                                  Text(
-                                    '2h 31m',
-                                    style: movieDetailsData,
-                                  ),
-                                  Text(
-                                    '‧',
-                                    style: movieDetailsDescription,
-                                  ),
-                                  Text(
-                                    'English',
-                                    style: movieDetailsData,
-                                  ),
+                                  RatingsSection(),
                                 ],
                               ),
                             ),
@@ -153,13 +172,14 @@ class MovieDetailsScreen extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              height: 940,
+                              height: 900,
                               child: Stack(
                                 children: [
                                   MoviesDetailScrollView(
                                     size: size,
                                     color: blueCustomViewColor,
                                     offset: offset,
+                                    sectionTitle: 'Cast',
                                     movieTiles: movieTiles,
                                   ),
                                   Positioned(
@@ -168,6 +188,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                       size: size,
                                       offset: offset,
                                       movieTiles: movieTiles,
+                                      sectionTitle: 'Videos',
                                       color: redCustomViewColor,
                                     ),
                                   ),

@@ -23,7 +23,7 @@ class MovieCastViewClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
-  }
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) =>
+     false;
+  
 }

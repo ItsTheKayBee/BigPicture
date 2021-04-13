@@ -9,13 +9,13 @@ class BottomCircularMenu extends StatefulWidget {
 
 class _BottomCircularMenuState extends State<BottomCircularMenu>
     with SingleTickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
 
-  Animation degOneTranslationAnimation,
+  late Animation degOneTranslationAnimation,
       degTwoTranslationAnimation,
       degThreeTranslationAnimation;
 
-  Animation rotationAnimation;
+  late Animation rotationAnimation;
   bool isFabCLicked = false;
 
   double getRadiansFromDegree(double degree) {
@@ -100,6 +100,7 @@ class _BottomCircularMenuState extends State<BottomCircularMenu>
                   Icons.check_rounded,
                   color: Colors.white,
                 ),
+                onClick: () {},
               ),
             ),
           ),
@@ -121,6 +122,7 @@ class _BottomCircularMenuState extends State<BottomCircularMenu>
                   Icons.playlist_add_rounded,
                   color: Colors.white,
                 ),
+                onClick: () {},
               ),
             ),
           ),
@@ -142,6 +144,7 @@ class _BottomCircularMenuState extends State<BottomCircularMenu>
                   Icons.bookmark_border_rounded,
                   color: Colors.white,
                 ),
+                onClick: () {},
               ),
             ),
           ),

@@ -7,10 +7,10 @@ class ScrollableViewClipper extends CustomClipper<Path> {
   double radialOffset;
 
   ScrollableViewClipper({
-    this.parentHeight,
-    this.heightPercentage,
-    this.widthPercentage,
-    this.radialOffset,
+    required this.parentHeight,
+    required this.heightPercentage,
+    required this.widthPercentage,
+    required this.radialOffset,
   });
 
   @override
@@ -40,5 +40,5 @@ class ScrollableViewClipper extends CustomClipper<Path> {
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper oldClipper) => true;
+  bool shouldReclip(covariant CustomClipper oldClipper) => false;
 }

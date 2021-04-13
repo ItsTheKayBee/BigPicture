@@ -6,9 +6,9 @@ class GenreLabel extends StatelessWidget {
   final Color textColor;
 
   const GenreLabel({
-    @required this.genreText,
-    @required this.bgColor,
-    @required this.textColor,
+    required this.genreText,
+    required this.bgColor,
+    required this.textColor,
   });
 
   @override

@@ -7,7 +7,7 @@ import 'movie_tile_item.dart';
 class MoviesGridView extends StatelessWidget {
   final List<MovieTile> movieTiles;
 
-  const MoviesGridView({@required this.movieTiles});
+  const MoviesGridView({required this.movieTiles});
 
   @override
   Widget build(BuildContext context) {

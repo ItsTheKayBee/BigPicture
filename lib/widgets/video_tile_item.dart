@@ -1,12 +1,11 @@
-import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTile.dart';
 import 'package:flutter/material.dart';
 
-class CastTileItem extends StatelessWidget {
+class VideoTileItem extends StatelessWidget {
   final MovieTile movieTile;
 
-  CastTileItem({
-    @required this.movieTile, // data model
+  VideoTileItem({
+    required this.movieTile, // data model
   });
 
   @override
@@ -20,7 +19,7 @@ class CastTileItem extends StatelessWidget {
         child: Card(
           child: Image.asset(
             movieTile.imageUrl,
-            fit: BoxFit.fill,
+            fit: BoxFit.contain,
           ),
         ),
       ),

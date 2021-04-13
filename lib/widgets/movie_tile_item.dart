@@ -3,26 +3,26 @@ import 'package:flutter/material.dart';
 
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTile.dart';
-import 'package:big_picture/utilities/marquee.dart';
 
 class MovieTileItem extends StatelessWidget {
   // condition to check whether current card is the focussed card
   final MovieTile movieTile;
   final int index;
   final int currentIndex;
+  late final Size size;
 
   MovieTileItem({
-    @required this.movieTile, // data model
+    required this.movieTile, // data model
     this.index = 0, // state index of this item
     this.currentIndex = 0, // index of focussed item
   });
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     final bool _isFocussed = index == currentIndex;
-    return InkWell(
+    return GestureDetector(
       onTap: () {
-        print('hello');
         showModalBottomSheet(
           context: context,
           backgroundColor: Colors.transparent,
@@ -31,13 +31,16 @@ class MovieTileItem extends StatelessWidget {
           },
         );
       },
-      child: Container(
-        width: 160,
-        height: 300,
+      child: AnimatedContainer(
+        curve: Curves.easeOut,
+        duration: Duration(milliseconds: 2000),
+        width: size.width * 0.6,
+        padding: EdgeInsets.only(right: 16),
         child: Transform.scale(
+          alignment: Alignment.topCenter,
           scale: _isFocussed
               ? 1.0
-              : 0.75, // changes size based on the focussed prop
+              : 0.9, // changes size based on the focussed prop
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -48,31 +51,24 @@ class MovieTileItem extends StatelessWidget {
                 shadowColor: primaryColor,
                 child: Image.asset(
                   movieTile.imageUrl,
-                  fit: BoxFit.fill,
-                  colorBlendMode: BlendMode.lighten,
-                  color: _isFocussed
-                      ? Colors.transparent
-                      : unfocussedColor, // changes color overlay based on focussed prop
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(left: size1),
-                child: MarqueeWidget(
-                  // shows marquee text if text overflows
-                  child: Text(
-                    movieTile.movieName,
-                    style: titleStyle,
-                  ),
+                child: Text(
+                  movieTile.movieName,
+                  style: titleStyle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(left: size1),
-                child: MarqueeWidget(
-                  // shows marquee text if text overflows
-                  child: Text(
-                    movieTile.movieGenres,
-                    style: subTitleStyle,
-                  ),
+                child: Text(
+                  movieTile.movieGenres,
+                  style: subTitleStyle,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

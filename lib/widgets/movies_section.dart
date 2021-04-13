@@ -1,6 +1,5 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTilesModel.dart';
-import 'package:big_picture/utilities/marquee.dart';
 import 'package:big_picture/widgets/movies_scroll_view.dart';
 import 'package:flutter/material.dart';
 

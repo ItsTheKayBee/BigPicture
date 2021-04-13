@@ -7,11 +7,12 @@ import 'default_header.dart';
 import 'movies_grid_view.dart';
 
 class MoviesListLayout extends StatelessWidget {
-  const MoviesListLayout(
-      {@required this.headingIcon,
-      @required this.headingTitle,
-      @required this.movieTiles,
-      this.isChoiceChipGroupPresent = false});
+  MoviesListLayout({
+    required this.headingIcon,
+    required this.headingTitle,
+    required this.movieTiles,
+    this.isChoiceChipGroupPresent = false,
+  });
 
   final IconData headingIcon;
   final String headingTitle;

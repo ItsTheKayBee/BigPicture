@@ -4,7 +4,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class BottomNavBar extends StatefulWidget {
   final ValueChanged<int> onChangeTab;
-  BottomNavBar({this.onChangeTab});
+  BottomNavBar({required this.onChangeTab});
 
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
@@ -68,7 +68,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
-  Widget navItem({int index, IconData iconData, Color selectedColor}) {
+  Widget navItem({
+    required int index,
+    required IconData iconData,
+    required Color selectedColor,
+  }) {
     return Padding(
       padding: EdgeInsets.all(size1),
       child: Icon(
