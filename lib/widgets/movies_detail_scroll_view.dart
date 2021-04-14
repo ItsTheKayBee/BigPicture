@@ -1,6 +1,5 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTile.dart';
-import 'package:big_picture/widgets/video_tile_item.dart';
 import 'package:flutter/material.dart';
 
 import 'cast_tile_item.dart';

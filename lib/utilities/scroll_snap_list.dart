@@ -277,28 +277,6 @@ class ScrollSnapListState extends State<ScrollSnapList> {
       margin: widget.margin,
       child: LayoutBuilder(
         builder: (BuildContext ctx, BoxConstraints constraint) {
-          double _listPadding = 0;
-
-          //determine anchor
-          switch (widget.selectedItemAnchor) {
-            case SelectedItemAnchor.START:
-              _listPadding = 0;
-              break;
-            case SelectedItemAnchor.MIDDLE:
-              _listPadding = (widget.scrollDirection == Axis.horizontal
-                          ? constraint.maxWidth
-                          : constraint.maxHeight) /
-                      2 -
-                  widget.itemSize / 2;
-              break;
-            case SelectedItemAnchor.END:
-              _listPadding = (widget.scrollDirection == Axis.horizontal
-                      ? constraint.maxWidth
-                      : constraint.maxHeight) -
-                  widget.itemSize;
-              break;
-          }
-
           return GestureDetector(
             //by catching onTapDown gesture, it's possible to keep animateTo from removing user's scroll listener
             onTapDown: (_) {},

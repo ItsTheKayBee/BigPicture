@@ -39,7 +39,7 @@ class CastTileItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: size1),
               child: Text(
-                movieTile.movieGenres,
+                'genre',
                 style: movieDetailsCastScreenName,
                 overflow: TextOverflow.ellipsis,
               ),

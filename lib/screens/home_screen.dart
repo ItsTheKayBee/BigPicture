@@ -5,6 +5,7 @@ import 'package:big_picture/widgets/movies_section.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Container(

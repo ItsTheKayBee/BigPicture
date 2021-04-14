@@ -1,6 +1,5 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/screens/movie_details_screen.dart';
-import 'package:big_picture/screens/test.dart';
 import 'package:big_picture/widgets/ratings_section.dart';
 import 'package:flutter/material.dart';
 

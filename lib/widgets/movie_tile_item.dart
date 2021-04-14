@@ -49,7 +49,7 @@ class MovieTileItem extends StatelessWidget {
                     ? cardElevation
                     : 0.0, // changes elevation bases on focussed prop
                 shadowColor: primaryColor,
-                child: Image.asset(
+                child: Image.network(
                   movieTile.imageUrl,
                   fit: BoxFit.cover,
                 ),
@@ -66,7 +66,7 @@ class MovieTileItem extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: size1),
                 child: Text(
-                  movieTile.movieGenres,
+                  'genre',
                   style: subTitleStyle,
                   overflow: TextOverflow.ellipsis,
                 ),
