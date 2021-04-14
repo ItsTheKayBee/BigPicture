@@ -1,6 +1,6 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:flutter/material.dart';
-// import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class BottomNavBar extends StatefulWidget {
   final ValueChanged<int> onChangeTab;
@@ -26,45 +26,45 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ],
       ),
-      // child: CurvedNavigationBar(
-      //   backgroundColor: Colors.transparent,
-      //   buttonBackgroundColor: fontColorDark,
-      //   height: 60,
-      //   animationCurve: Curves.easeIn,
-      //   items: <Widget>[
-      //     navItem(
-      //       index: 0,
-      //       iconData: Icons.explore_outlined,
-      //       selectedColor: greenIconColor,
-      //     ),
-      //     navItem(
-      //       index: 1,
-      //       iconData: Icons.bookmark_border_rounded,
-      //       selectedColor: redIconColor,
-      //     ),
-      //     navItem(
-      //       index: 2,
-      //       iconData: Icons.search_outlined,
-      //       selectedColor: yellowIconColor,
-      //     ),
-      //     navItem(
-      //       index: 3,
-      //       iconData: Icons.verified_outlined,
-      //       selectedColor: blueIconColor,
-      //     ),
-      //     navItem(
-      //       index: 4,
-      //       iconData: Icons.insights_outlined,
-      //       selectedColor: purpleIconColor,
-      //     ),
-      //   ],
-      //   onTap: (int index) {
-      //     widget.onChangeTab(index);
-      //     setState(
-      //       () => _currentIndex = index,
-      //     );
-      //   },
-      // ),
+      child: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        buttonBackgroundColor: fontColorDark,
+        height: 60,
+        animationCurve: Curves.easeIn,
+        items: <Widget>[
+          navItem(
+            index: 0,
+            iconData: Icons.explore_outlined,
+            selectedColor: greenIconColor,
+          ),
+          navItem(
+            index: 1,
+            iconData: Icons.bookmark_border_rounded,
+            selectedColor: redIconColor,
+          ),
+          navItem(
+            index: 2,
+            iconData: Icons.search_outlined,
+            selectedColor: yellowIconColor,
+          ),
+          navItem(
+            index: 3,
+            iconData: Icons.verified_outlined,
+            selectedColor: blueIconColor,
+          ),
+          navItem(
+            index: 4,
+            iconData: Icons.insights_outlined,
+            selectedColor: purpleIconColor,
+          ),
+        ],
+        onTap: (int index) {
+          widget.onChangeTab(index);
+          setState(
+            () => _currentIndex = index,
+          );
+        },
+      ),
     );
   }
 

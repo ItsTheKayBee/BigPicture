@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieTileItem extends StatelessWidget {
   // condition to check whether current card is the focussed card
@@ -49,9 +50,14 @@ class MovieTileItem extends StatelessWidget {
                     ? cardElevation
                     : 0.0, // changes elevation bases on focussed prop
                 shadowColor: primaryColor,
-                child: Image.network(
-                  movieTile.imageUrl,
+
+                child: CachedNetworkImage(
+                  imageUrl: movieTile.imageUrl,
                   fit: BoxFit.cover,
+                  placeholder: (ctx, url) => Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
               ),
               Padding(
@@ -66,7 +72,7 @@ class MovieTileItem extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: size1),
                 child: Text(
-                  'genre',
+                  '${movieTile.voteAverage}/10',
                   style: subTitleStyle,
                   overflow: TextOverflow.ellipsis,
                 ),
