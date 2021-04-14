@@ -1,5 +1,4 @@
 import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/genre.dart';
 import 'package:big_picture/models/movieTile.dart';
 import 'package:big_picture/models/movieTilesModel.dart';
 import 'package:big_picture/widgets/movies_scroll_view.dart';
@@ -7,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class MoviesSection extends StatefulWidget {
   final sectionTitle;
+  final movieListType;
 
-  MoviesSection({@required this.sectionTitle});
+  MoviesSection({required this.sectionTitle, required this.movieListType});
 
   @override
   _MoviesSectionState createState() => _MoviesSectionState();
@@ -22,7 +22,7 @@ class _MoviesSectionState extends State<MoviesSection> {
   void initState() {
     super.initState();
     try {
-      moviesList = movieTilesModel.getNewMovies();
+      moviesList = movieTilesModel.getMovieList(movieListType: widget.movieListType);
     } on Exception catch (_) {
       print('exception');
     }
