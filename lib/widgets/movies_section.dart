@@ -22,7 +22,8 @@ class _MoviesSectionState extends State<MoviesSection> {
   void initState() {
     super.initState();
     try {
-      moviesList = movieTilesModel.getMovieList(movieListType: widget.movieListType);
+      moviesList =
+          movieTilesModel.getMovieList(movieListType: widget.movieListType);
     } on Exception catch (_) {
       print('exception');
     }
@@ -32,7 +33,7 @@ class _MoviesSectionState extends State<MoviesSection> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        bottom: size6,
+        bottom: size3,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -44,8 +45,6 @@ class _MoviesSectionState extends State<MoviesSection> {
             child: Text(
               widget.sectionTitle,
               style: sectionTitleStyle,
-              overflow: TextOverflow.fade,
-              softWrap: false,
             ),
           ),
           MoviesScrollView(

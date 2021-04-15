@@ -51,14 +51,16 @@ class MovieTileItem extends StatelessWidget {
                     : 0.0, // changes elevation bases on focussed prop
                 shadowColor: primaryColor,
 
-                child: CachedNetworkImage(
-                  imageUrl: movieTile.imageUrl,
-                  fit: BoxFit.cover,
-                  placeholder: (ctx, url) => Align(
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
+                child: movieTile.isImageValid
+                    ? CachedNetworkImage(
+                        imageUrl: movieTile.imageUrl,
+                        fit: BoxFit.cover,
+                        placeholder: (ctx, url) => Align(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : Image.asset('assets/image.png'),
               ),
               Padding(
                 padding: EdgeInsets.only(left: size1),

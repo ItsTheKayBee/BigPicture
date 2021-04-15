@@ -84,7 +84,6 @@ class MovieTilesModel {
     throw Exception('Failed to load genre list');
   }
 
-
 // this function return ISO code of country (US, IN, etc)
   Future getIsoCode() async {
     await CountryCodes.init();
