@@ -31,12 +31,12 @@ class HomeScreen extends StatelessWidget {
             movieListType: Explore.popular,
           ),
           MoviesSection(
-            sectionTitle: popularTvShows,
-            movieListType: Explore.popularTv,
-          ),
-          MoviesSection(
             sectionTitle: popularMoviesInRegion,
             movieListType: Explore.popularInRegion,
+          ),
+          MoviesSection(
+            sectionTitle: popularTvShows,
+            movieListType: Explore.popularTv,
           ),
           MoviesSection(
             sectionTitle: airingNowTv,

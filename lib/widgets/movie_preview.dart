@@ -1,9 +1,34 @@
 import 'package:big_picture/constants/styles.dart';
+import 'package:big_picture/models/moviePreviewModel.dart';
+import 'package:big_picture/models/preview.dart';
 import 'package:big_picture/screens/movie_details_screen.dart';
 import 'package:big_picture/widgets/ratings_section.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class MoviePreview extends StatelessWidget {
+class MoviePreview extends StatefulWidget {
+  final int tmdbID;
+  final String imageUrl;
+  final bool isImageValid;
+
+  MoviePreview({
+    required this.tmdbID,
+    required this.imageUrl,
+    required this.isImageValid,
+  });
+
+  @override
+  _MoviePreviewState createState() => _MoviePreviewState();
+}
+
+class _MoviePreviewState extends State<MoviePreview> {
+  late Future<Preview> preview;
+  @override
+  void initState() {
+    super.initState();
+    preview = MoviePreviewModel().getPreview(tmdbID: widget.tmdbID);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,10 +56,18 @@ class MoviePreview extends StatelessWidget {
                   flex: 3,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(size4),
-                    child: Image.asset(
-                      'assets/wonder.jpg',
-                      height: 160,
-                    ),
+                    child: widget.isImageValid
+                        ? CachedNetworkImage(
+                            imageUrl: widget.imageUrl,
+                            fit: BoxFit.cover,
+                            placeholder: (ctx, url) => Align(
+                              alignment: Alignment.center,
+                              child: Image.asset(
+                                'assets/image.png',
+                              ), //placeholder will be shown while image is loading
+                            ),
+                          )
+                        : Image.asset('assets/image.png'),
                   ),
                 ),
                 Expanded(
@@ -43,37 +76,60 @@ class MoviePreview extends StatelessWidget {
                     padding: EdgeInsets.only(left: size3),
                     child: SizedBox(
                       height: 150,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Wonder Woman and the wasp and the wasp',
-                            style: moviePreviewTitle,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Container(
-                            child: Text(
-                              '2020 ‧ 2h 31m ‧ Action, Adventure',
-                              style: moviePreviewSubTitle,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 4,
-                          ),
-                          Expanded(
-                            child: Text(
-                              "Diana Prince lives quietly Diana Prince lives quietly among mortals in the vibrant, sleek 1980s -- an era of excess driven by the pursuit of having it all.",
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
-                              style: moviePreviewDescription,
-                              maxLines: 5,
-                            ),
-                          ),
-                        ],
+                      child: FutureBuilder<Preview>(
+                        future: preview,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.none:
+                            case ConnectionState.waiting:
+                              return Align(
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(),
+                              );
+                            case ConnectionState.done:
+                              if (snapshot.hasData) {
+                                return Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      snapshot.data!.title,
+                                      style: moviePreviewTitle,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        "${snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${snapshot.data!.genre}",
+                                        style: moviePreviewSubTitle,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 4,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        snapshot.data!.plot,
+                                        overflow: TextOverflow.ellipsis,
+                                        softWrap: true,
+                                        style: moviePreviewDescription,
+                                        maxLines: 5,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              } else if (snapshot.hasError) {
+                                print(snapshot.error);
+                                return Text('no data');
+                              } else {
+                                return Text('uncaught');
+                              }
+                            default:
+                              return Text('Default');
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -82,10 +138,32 @@ class MoviePreview extends StatelessWidget {
             ),
           ),
           Divider(),
-          Expanded(
-            child: RatingsSection(
-              scale: 1.25,
-            ),
+          FutureBuilder<Preview>(
+            future: preview,
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                case ConnectionState.waiting:
+                  return Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  );
+                case ConnectionState.done:
+                  if (snapshot.hasData) {
+                    return Expanded(
+                      child: RatingsSection(
+                        scale: 1.25,
+                        ratings: snapshot.data!.ratings,
+                      ),
+                    );
+                  } else {
+                    return Text('Error');
+                  }
+                default:
+                  print("default");
+                  return Text('default');
+              }
+            },
           ),
           Divider(),
           Expanded(
@@ -138,5 +216,20 @@ class MoviePreview extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  convertTime(String runtime) {
+    int duration = int.parse(runtime.split(' ')[0]);
+    String convertedTime = '';
+    if (duration >= 60) {
+      int hours = (duration / 60).floor();
+      duration %= 60;
+      convertedTime = '${hours}h';
+    }
+    if (duration < 60) {
+      convertedTime += ' ${duration}m';
+    }
+
+    return convertedTime.trim();
   }
 }

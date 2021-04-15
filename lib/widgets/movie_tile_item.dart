@@ -28,7 +28,11 @@ class MovieTileItem extends StatelessWidget {
           context: context,
           backgroundColor: Colors.transparent,
           builder: (context) {
-            return MoviePreview();
+            return MoviePreview(
+              tmdbID: movieTile.movieId,
+              imageUrl: movieTile.imageUrl,
+              isImageValid: movieTile.isImageValid,
+            );
           },
         );
       },
@@ -57,7 +61,9 @@ class MovieTileItem extends StatelessWidget {
                         fit: BoxFit.cover,
                         placeholder: (ctx, url) => Align(
                           alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
+                          child: Image.asset(
+                            'assets/image.png',
+                          ), //placeholder will be shown while image is loading
                         ),
                       )
                     : Image.asset('assets/image.png'),

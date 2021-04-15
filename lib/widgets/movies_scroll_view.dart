@@ -25,8 +25,8 @@ class _MoviesScrollViewState extends State<MoviesScrollView> {
     return Stack(
       children: [
         Container(
-          height: 440,
-          child: FutureBuilder(
+          height: 420,
+          child: FutureBuilder<List<MovieTile>>(
             future: widget.movieTiles,
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {

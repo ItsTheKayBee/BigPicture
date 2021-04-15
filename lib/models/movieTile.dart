@@ -19,9 +19,12 @@ class MovieTile {
     return MovieTile(
       movieId: json['id'],
       imageUrl: "$IMG_BASE_URL${json['poster_path']}",
-      isImageValid: json['poster_path'] == null ? false : true,
-      movieName: json['title'] ?? json['name'],
-      voteAverage: json['vote_average'].toString(),
+      isImageValid: json['poster_path'] == null
+          ? false
+          : true, // if poster path is null then set placeholder image instead
+      movieName: json['title'] ??
+          json['name'], //title for movies & name for tv series as per tmdb api
+      voteAverage: json['vote_average'].toString(), // tmdb ratings
     );
   }
 }

@@ -131,7 +131,9 @@ class MovieDetailsScreen extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  RatingsSection(),
+                                  RatingsSection(
+                                    ratings: [],
+                                  ),
                                 ],
                               ),
                             ),

@@ -31,27 +31,22 @@ class _MoviesSectionState extends State<MoviesSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: size3,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              left: size8,
-            ),
-            child: Text(
-              widget.sectionTitle,
-              style: sectionTitleStyle,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            left: size8,
           ),
-          MoviesScrollView(
-            movieTiles: moviesList,
+          child: Text(
+            widget.sectionTitle,
+            style: sectionTitleStyle,
           ),
-        ],
-      ),
+        ),
+        MoviesScrollView(
+          movieTiles: moviesList,
+        ),
+      ],
     );
   }
 }
