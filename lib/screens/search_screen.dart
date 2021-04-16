@@ -12,7 +12,6 @@ class SearchScreen extends StatelessWidget {
     return MoviesListLayout(
       headingTitle: searchTitle,
       headingIcon: Icons.search,
-      movieTiles: movieTiles,
       isChoiceChipGroupPresent: true,
     );
   }

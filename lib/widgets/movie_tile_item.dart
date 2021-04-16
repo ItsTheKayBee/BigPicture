@@ -10,7 +10,7 @@ class MovieTileItem extends StatelessWidget {
   final MovieTile movieTile;
   final int index;
   final int currentIndex;
-  late final Size size;
+  late Size size;
 
   MovieTileItem({
     required this.movieTile, // data model

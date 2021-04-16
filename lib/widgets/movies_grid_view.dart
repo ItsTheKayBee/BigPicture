@@ -5,28 +5,48 @@ import 'package:flutter/material.dart';
 import 'movie_tile_item.dart';
 
 class MoviesGridView extends StatelessWidget {
-  final List<MovieTile> movieTiles;
+  final Future<List<MovieTile>> movieTiles;
 
   const MoviesGridView({required this.movieTiles});
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: EdgeInsets.only(
-        left: size8,
-        right: size8,
-        bottom: size8 * 2 + size2,
-      ),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        childAspectRatio: 0.55,
-        crossAxisSpacing: size4,
-        mainAxisSpacing: size2,
-      ),
-      itemBuilder: (context, index) => MovieTileItem(
-        movieTile: movieTiles[index],
-      ),
-      itemCount: movieTiles.length,
+    return FutureBuilder<List<MovieTile>>(
+      future: movieTiles,
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return Align(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            );
+          case ConnectionState.done:
+            if (snapshot.hasData) {
+              return GridView.builder(
+                padding: EdgeInsets.only(
+                  left: size8,
+                  right: size8,
+                  bottom: size8 * 2 + size2,
+                ),
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 0.55,
+                  crossAxisSpacing: size4,
+                  mainAxisSpacing: size2,
+                ),
+                itemBuilder: (context, index) => MovieTileItem(
+                  movieTile: snapshot.data![index],
+                ),
+                itemCount: snapshot.data!.length,
+              );
+            } else {
+              return Text('${snapshot.error}');
+            }
+          default:
+            return Text('default');
+        }
+      },
     );
   }
 }

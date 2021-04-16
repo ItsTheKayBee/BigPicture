@@ -1,4 +1,3 @@
-
 import 'package:big_picture/constants/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -32,18 +31,18 @@ class _ChoiceChipGroupState extends State<ChoiceChipGroup> {
             selectedIndex: selectedIndex,
           ),
           SearchChoiceChip(
-            labelText: 'Actors',
-            iconData: Icons.face_outlined,
-            selectedIconData: Icons.face,
-            index: 1,
+            labelText: 'TV Series',
+            iconData: Icons.videocam_outlined,
+            selectedIconData: Icons.videocam,
+            index: 2,
             onSelected: onSelected,
             selectedIndex: selectedIndex,
           ),
           SearchChoiceChip(
-            labelText: 'Directors',
-            iconData: Icons.videocam_outlined,
-            selectedIconData: Icons.videocam,
-            index: 2,
+            labelText: 'People',
+            iconData: Icons.face_outlined,
+            selectedIconData: Icons.face,
+            index: 1,
             onSelected: onSelected,
             selectedIndex: selectedIndex,
           ),

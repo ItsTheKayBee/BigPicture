@@ -219,6 +219,9 @@ class _MoviePreviewState extends State<MoviePreview> {
   }
 
   convertTime(String runtime) {
+    if (runtime == 'N/A') {
+      return '-';
+    }
     int duration = int.parse(runtime.split(' ')[0]);
     String convertedTime = '';
     if (duration >= 60) {

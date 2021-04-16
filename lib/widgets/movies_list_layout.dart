@@ -1,23 +1,54 @@
 import 'package:big_picture/constants/strings.dart';
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTile.dart';
+import 'package:big_picture/models/searchModel.dart';
 import 'choice_chip_group.dart';
 import 'package:flutter/material.dart';
 import 'default_header.dart';
 import 'movies_grid_view.dart';
 
-class MoviesListLayout extends StatelessWidget {
+class MoviesListLayout extends StatefulWidget {
   MoviesListLayout({
     required this.headingIcon,
     required this.headingTitle,
-    required this.movieTiles,
     this.isChoiceChipGroupPresent = false,
   });
 
   final IconData headingIcon;
   final String headingTitle;
-  final List<MovieTile> movieTiles;
   final bool isChoiceChipGroupPresent;
+
+  @override
+  _MoviesListLayoutState createState() => _MoviesListLayoutState();
+}
+
+class _MoviesListLayoutState extends State<MoviesListLayout> {
+  SearchModel searchModel = SearchModel();
+  final searchController = TextEditingController();
+  String searchQuery = '';
+
+  @override
+  void initState() {
+    super.initState();
+    searchController.addListener(onSearch);
+  }
+
+  Future<List<MovieTile>> updateSearchResults() {
+    return searchModel.getSearchResults(query: searchQuery);
+  }
+
+  void onSearch() {
+    setState(() {
+      searchQuery = searchController.text;
+      updateSearchResults();
+    });
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +61,8 @@ class MoviesListLayout extends StatelessWidget {
             child: Column(
               children: [
                 DefaultHeader(
-                  headingIcon: headingIcon,
-                  headingTitle: headingTitle,
+                  headingIcon: widget.headingIcon,
+                  headingTitle: widget.headingTitle,
                 ),
                 Row(
                   children: [
@@ -39,6 +70,7 @@ class MoviesListLayout extends StatelessWidget {
                       flex: 5,
                       child: TextFormField(
                         style: titleStyle,
+                        controller: searchController,
                         textInputAction: TextInputAction.search,
                         decoration: InputDecoration(
                           prefixIcon: Icon(
@@ -66,14 +98,16 @@ class MoviesListLayout extends StatelessWidget {
                     ),
                   ],
                 ),
-                isChoiceChipGroupPresent ? ChoiceChipGroup() : Container(),
+                widget.isChoiceChipGroupPresent
+                    ? ChoiceChipGroup()
+                    : Container(),
               ],
             ),
           ),
           SizedBox(
             height: size4,
           ),
-          Flexible(child: MoviesGridView(movieTiles: movieTiles)),
+          Flexible(child: MoviesGridView(movieTiles: updateSearchResults())),
         ],
       ),
     );

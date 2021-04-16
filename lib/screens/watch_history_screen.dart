@@ -14,7 +14,6 @@ class WatchHistoryScreen extends StatelessWidget {
     return MoviesListLayout(
       headingIcon: headingIcon,
       headingTitle: headingTitle,
-      movieTiles: movieTiles,
     );
   }
 }
