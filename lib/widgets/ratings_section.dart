@@ -31,61 +31,58 @@ class RatingsSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        modifiedRatings[0].value != '-'
-            ? Container(
-                child: Row(
-                  children: [
-                    Transform.scale(
-                      scale: scale,
-                      child: Image.asset(
-                        'assets/imdb.png',
-                      ),
-                    ),
-                    SizedBox(
-                      width: size3,
-                    ),
-                    Text(
-                      modifiedRatings[0].value.split('/')[0],
-                      style: moviePreviewRatings,
-                    )
-                  ],
-                ),
-              )
-            : Container(),
-        modifiedRatings[1].value != '-'
-            ? Container(
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/tomato.png',
-                      height: 25,
-                    ),
-                    SizedBox(
-                      width: size3,
-                    ),
-                    Text(
-                      modifiedRatings[1].value,
-                      style: moviePreviewRatings,
-                    )
-                  ],
-                ),
-              )
-            : Container(),
-        modifiedRatings[2].value != '-'
-            ? Container(
-                decoration: BoxDecoration(
-                  color: Colors.lightGreen,
-                  borderRadius: BorderRadius.circular(size1),
-                ),
-                padding: EdgeInsets.symmetric(horizontal: size2),
-                child: Center(
-                  child: Text(
-                    modifiedRatings[2].value.split('/')[0],
-                    style: moviePreviewMetacritic,
+        if (modifiedRatings[0].value != '-')
+          Container(
+            child: Row(
+              children: [
+                Transform.scale(
+                  scale: scale,
+                  child: Image.asset(
+                    'assets/imdb.png',
                   ),
                 ),
-              )
-            : Container(),
+                SizedBox(
+                  width: size3,
+                ),
+                Text(
+                  modifiedRatings[0].value.split('/')[0],
+                  style: moviePreviewRatings,
+                )
+              ],
+            ),
+          ),
+        if (modifiedRatings[1].value != '-')
+          Container(
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/tomato.png',
+                  height: 25,
+                ),
+                SizedBox(
+                  width: size3,
+                ),
+                Text(
+                  modifiedRatings[1].value,
+                  style: moviePreviewRatings,
+                )
+              ],
+            ),
+          ),
+        if (modifiedRatings[2].value != '-')
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.lightGreen,
+              borderRadius: BorderRadius.circular(size1),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: size2),
+            child: Center(
+              child: Text(
+                modifiedRatings[2].value.split('/')[0],
+                style: moviePreviewMetacritic,
+              ),
+            ),
+          ),
       ],
     );
   }

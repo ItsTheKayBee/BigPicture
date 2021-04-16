@@ -7,7 +7,6 @@ class InsightsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: headerPadding,
       child: DefaultHeader(
         headingIcon: Icons.insights,
         headingTitle: insightsTitle,

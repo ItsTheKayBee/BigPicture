@@ -15,16 +15,10 @@ class MainApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(statusBarColor: secondaryColor),
-    );
-
     return MaterialApp(
       title: appName,
       theme: themeData,
-      home: SafeArea(
-        child: CurrentScreen(),
-      ),
+      home: CurrentScreen(),
     );
   }
 }

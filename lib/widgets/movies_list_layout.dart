@@ -24,30 +24,17 @@ class MoviesListLayout extends StatefulWidget {
 
 class _MoviesListLayoutState extends State<MoviesListLayout> {
   SearchModel searchModel = SearchModel();
-  final searchController = TextEditingController();
   String searchQuery = '';
-
-  @override
-  void initState() {
-    super.initState();
-    searchController.addListener(onSearch);
-  }
 
   Future<List<MovieTile>> updateSearchResults() {
     return searchModel.getSearchResults(query: searchQuery);
   }
 
-  void onSearch() {
+  void onSearch(String query) {
     setState(() {
-      searchQuery = searchController.text;
+      searchQuery = query;
       updateSearchResults();
     });
-  }
-
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
   }
 
   @override
@@ -56,57 +43,50 @@ class _MoviesListLayoutState extends State<MoviesListLayout> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: headerPadding,
-            child: Column(
-              children: [
-                DefaultHeader(
-                  headingIcon: widget.headingIcon,
-                  headingTitle: widget.headingTitle,
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      flex: 5,
-                      child: TextFormField(
-                        style: titleStyle,
-                        controller: searchController,
-                        textInputAction: TextInputAction.search,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: fontColorDark,
-                            size: size6,
-                          ),
-                          hintText: searchText,
-                          contentPadding: EdgeInsets.all(size3),
+          Column(
+            children: [
+              DefaultHeader(
+                headingIcon: widget.headingIcon,
+                headingTitle: widget.headingTitle,
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    flex: 5,
+                    child: TextFormField(
+                      style: titleStyle,
+                      onFieldSubmitted: onSearch,
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: fontColorDark,
+                          size: size6,
                         ),
+                        hintText: searchText,
+                        contentPadding: EdgeInsets.all(size3),
                       ),
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: RotatedBox(
-                        quarterTurns: 1,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.tune_outlined,
-                            color: fontColorDark,
-                          ),
-                          onPressed: () {},
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: RotatedBox(
+                      quarterTurns: 1,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.tune_outlined,
+                          color: fontColorDark,
                         ),
+                        onPressed: () {},
                       ),
                     ),
-                  ],
-                ),
-                widget.isChoiceChipGroupPresent
-                    ? ChoiceChipGroup()
-                    : Container(),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              if (widget.isChoiceChipGroupPresent) ChoiceChipGroup(),
+            ],
           ),
-          SizedBox(
-            height: size4,
-          ),
+          SizedBox(height: size4),
           Flexible(child: MoviesGridView(movieTiles: updateSearchResults())),
         ],
       ),

@@ -160,7 +160,6 @@ class _MoviePreviewState extends State<MoviePreview> {
                     return Text('Error');
                   }
                 default:
-                  print("default");
                   return Text('default');
               }
             },

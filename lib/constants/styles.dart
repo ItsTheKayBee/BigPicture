@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 ThemeData themeData = ThemeData(
   accentColor: accentColor,
   //colors scheme
-  primarySwatch: primarySwatch,
+  primarySwatch: Colors.grey,
 
   // Custom text selection colors
   textSelectionTheme: TextSelectionThemeData(
     cursorColor: fontColorDark,
-    selectionColor: primaryColor,
+    // selectionColor: primaryColor,
     selectionHandleColor: fontColorDark,
   ),
 
@@ -35,13 +35,12 @@ ThemeData themeData = ThemeData(
 );
 
 //colors
-const Color primaryColor = Color(0xffafcdc9);
-const Color accentColor = Color(0xff70bba3);
-const Color secondaryColor = Color(0xff8db3ae);
+const Color primaryColor = Color(0xff278ea5);
+const Color accentColor = Color(0xff21e6c1);
 
 const Color unfocussedColor = Color(0xaf8db3ae);
 
-const Color fontColorDark = Color(0xff163e57);
+const Color fontColorDark = primaryColor;
 const Color fontColorLight = Color(0xff6c8594);
 
 const Color textFieldFilledColor = Color(0x55ffffff);
@@ -57,22 +56,6 @@ Color greenIconColor = Colors.greenAccent.shade200;
 Color blueIconColor = Colors.lightBlueAccent.shade200;
 Color redIconColor = Colors.redAccent.shade200;
 Color purpleIconColor = Colors.pinkAccent.shade100;
-
-MaterialColor primarySwatch = MaterialColor(
-  0xFFAFCDC9,
-  <int, Color>{
-    50: Color(0xFFF5F9F9),
-    100: Color(0xFFE7F0EF),
-    200: Color(0xFFD7E6E4),
-    300: Color(0xFFC7DCD9),
-    400: Color(0xFFBBD5D1),
-    500: Color(0xFFAFCDC9),
-    600: Color(0xFFA8C8C3),
-    700: Color(0xFF9FC1BC),
-    800: Color(0xFF96BAB5),
-    900: Color(0xFF86AEA9),
-  },
-);
 
 ///styles
 // text styles
@@ -211,8 +194,3 @@ const double size6 = 24.0;
 const double size7 = 28.0;
 const double size8 = 32.0;
 
-const headerPadding = EdgeInsets.only(
-  top: size8 + size2,
-  left: size8,
-  right: size8,
-);
