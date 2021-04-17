@@ -2,13 +2,13 @@ class MovieTile {
   final int movieId;
   final String imageUrl;
   final String movieName;
-  final String voteAverage;
+  final List genre;
 
   MovieTile({
     required this.movieId,
     required this.imageUrl,
     required this.movieName,
-    required this.voteAverage,
+    required this.genre,
   });
 
   factory MovieTile.fromJson(Map<String, dynamic> json) {
@@ -23,7 +23,7 @@ class MovieTile {
       movieName: json['title'] ?? json['name'],
 
       // tmdb ratings
-      voteAverage: json['vote_average'].toString(),
+      genre: json['genre_ids'],
     );
   }
 }

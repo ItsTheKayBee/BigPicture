@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:big_picture/constants/config.dart';
-import 'genre.dart';
 import 'movieTile.dart';
 import 'package:http/http.dart' as http;
 import 'package:country_codes/country_codes.dart';
+import '../constants/genre_list.dart';
 
 enum Explore {
   nowPlaying,
@@ -69,19 +69,12 @@ class MovieTilesModel {
     throw Exception('Failed to load new movies');
   }
 
-  Future<List<Genre>> getAllGenres() async {
-    List<Genre> genreList = [];
-
-    var url =
-        Uri.parse('$BASE_URL/genre/movie/list?api_key=$API_KEY&language=en-US');
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(response.body);
-      List<dynamic> list = map["genres"];
-      genreList = list.map((model) => Genre.fromJson(model)).toList();
-      return genreList;
+  String getGenre({required int genreId}) {
+    try {
+      return '${genreList[genreId]}';
+    } catch (e) {
+      throw Exception('Genre not found: e');
     }
-    throw Exception('Failed to load genre list');
   }
 
 // this function return ISO code of country (US, IN, etc)

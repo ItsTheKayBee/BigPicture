@@ -1,4 +1,6 @@
 import 'package:big_picture/constants/config.dart';
+import 'package:big_picture/constants/genre_list.dart';
+import 'package:big_picture/models/movieTilesModel.dart';
 import 'package:big_picture/utilities/progressive_image.dart';
 import 'package:big_picture/widgets/movie_preview.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 class MovieTileItem extends StatelessWidget {
   // condition to check whether current card is the focussed card
   final MovieTile movieTile;
+  final MovieTilesModel movieTilesModel = MovieTilesModel();
 
   MovieTileItem({
     required this.movieTile, // data model
@@ -17,6 +20,14 @@ class MovieTileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String genreString = '';
+    if (movieTile.genre.isNotEmpty) {
+      movieTile.genre.forEach((genreId) {
+        genreString += movieTilesModel.getGenre(genreId: genreId) + ', ';
+      });
+      genreString = genreString.substring(0, genreString.length - 2);
+    }
+
     final Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
@@ -67,7 +78,7 @@ class MovieTileItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: size1),
               child: Text(
-                '${movieTile.voteAverage}/10',
+                genreString,
                 style: subTitleStyle,
                 overflow: TextOverflow.ellipsis,
               ),
