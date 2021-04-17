@@ -1,3 +1,5 @@
+import 'package:big_picture/constants/config.dart';
+import 'package:big_picture/utilities/progressive_image.dart';
 import 'package:big_picture/widgets/movie_preview.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +10,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 class MovieTileItem extends StatelessWidget {
   // condition to check whether current card is the focussed card
   final MovieTile movieTile;
-  late Size size;
 
   MovieTileItem({
     required this.movieTile, // data model
@@ -16,7 +17,7 @@ class MovieTileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
@@ -26,14 +27,11 @@ class MovieTileItem extends StatelessWidget {
             return MoviePreview(
               tmdbID: movieTile.movieId,
               imageUrl: movieTile.imageUrl,
-              isImageValid: movieTile.isImageValid,
             );
           },
         );
       },
-      child: AnimatedContainer(
-        curve: Curves.easeOut,
-        duration: Duration(milliseconds: 2000),
+      child: Container(
         width: size.width * 0.6,
         padding: EdgeInsets.only(right: 16),
         child: Column(
@@ -41,16 +39,19 @@ class MovieTileItem extends StatelessWidget {
           children: [
             Card(
               shadowColor: primaryColor,
-              child: movieTile.isImageValid
-                  ? CachedNetworkImage(
-                      imageUrl: movieTile.imageUrl,
-                      fit: BoxFit.cover,
-                      placeholder: (ctx, url) => Align(
-                        alignment: Alignment.center,
-                        child: Image.asset(
-                          'assets/image.png',
-                        ), //placeholder will be shown while image is loading
+              child: movieTile.imageUrl != ''
+                  ? ProgressiveImage(
+                      placeholder: AssetImage(
+                        'assets/image.png',
                       ),
+                      thumbnail: NetworkImage(
+                        '$IMG_BASE_URL/$LOW_QUALITY/${movieTile.imageUrl}',
+                      ),
+                      image: CachedNetworkImageProvider(
+                        '$IMG_BASE_URL/$HIGH_QUALITY/${movieTile.imageUrl}',
+                      ),
+                      width: size.width * 0.6,
+                      height: 340,
                     )
                   : Image.asset('assets/image.png'),
             ),

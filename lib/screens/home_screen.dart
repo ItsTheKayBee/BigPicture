@@ -1,5 +1,4 @@
 import 'package:big_picture/constants/strings.dart';
-import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieTilesModel.dart';
 import 'package:big_picture/widgets/default_header.dart';
 import 'package:big_picture/widgets/movies_section.dart';

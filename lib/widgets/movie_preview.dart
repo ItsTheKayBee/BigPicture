@@ -9,12 +9,10 @@ import 'package:flutter/material.dart';
 class MoviePreview extends StatefulWidget {
   final int tmdbID;
   final String imageUrl;
-  final bool isImageValid;
 
   MoviePreview({
     required this.tmdbID,
     required this.imageUrl,
-    required this.isImageValid,
   });
 
   @override
@@ -56,7 +54,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                   flex: 3,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(size4),
-                    child: widget.isImageValid
+                    child: widget.imageUrl != ''
                         ? CachedNetworkImage(
                             imageUrl: widget.imageUrl,
                             fit: BoxFit.cover,
@@ -111,7 +109,9 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Expanded(
                                       child: Text(
-                                        snapshot.data!.plot,
+                                        snapshot.data!.plot == 'N/A'
+                                            ? 'No description found'
+                                            : snapshot.data!.plot,
                                         overflow: TextOverflow.ellipsis,
                                         softWrap: true,
                                         style: moviePreviewDescription,
