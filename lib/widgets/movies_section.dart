@@ -7,8 +7,15 @@ import 'package:flutter/material.dart';
 class MoviesSection extends StatefulWidget {
   final sectionTitle;
   final movieListType;
+  final double containerHeight;
+  final double posterWidth;
 
-  MoviesSection({required this.sectionTitle, required this.movieListType});
+  MoviesSection({
+    required this.sectionTitle,
+    required this.movieListType,
+    this.containerHeight = 320,
+    this.posterWidth = 180,
+  });
 
   @override
   _MoviesSectionState createState() => _MoviesSectionState();
@@ -37,6 +44,8 @@ class _MoviesSectionState extends State<MoviesSection> {
         Padding(
           padding: EdgeInsets.only(
             left: size8,
+            top: 20,
+            bottom: 8,
           ),
           child: Text(
             widget.sectionTitle,
@@ -45,6 +54,8 @@ class _MoviesSectionState extends State<MoviesSection> {
         ),
         MoviesScrollView(
           movieTiles: moviesList,
+          posterWidth: widget.posterWidth,
+          containerHeight: widget.containerHeight,
         ),
       ],
     );

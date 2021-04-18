@@ -1,5 +1,4 @@
 import 'package:big_picture/constants/config.dart';
-import 'package:big_picture/constants/genre_list.dart';
 import 'package:big_picture/models/movieTilesModel.dart';
 import 'package:big_picture/utilities/progressive_image.dart';
 import 'package:big_picture/widgets/movie_preview.dart';
@@ -14,8 +13,13 @@ class MovieTileItem extends StatelessWidget {
   final MovieTile movieTile;
   final MovieTilesModel movieTilesModel = MovieTilesModel();
 
+  final double posterWidth;
+  final double posterHeight;
+
   MovieTileItem({
     required this.movieTile, // data model
+    required this.posterWidth,
+    required this.posterHeight,
   });
 
   @override
@@ -28,7 +32,6 @@ class MovieTileItem extends StatelessWidget {
       genreString = genreString.substring(0, genreString.length - 2);
     }
 
-    final Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
@@ -38,12 +41,13 @@ class MovieTileItem extends StatelessWidget {
             return MoviePreview(
               tmdbID: movieTile.movieId,
               imageUrl: movieTile.imageUrl,
+              genreString: genreString,
             );
           },
         );
       },
       child: Container(
-        width: size.width * 0.6,
+        width: posterWidth,
         padding: EdgeInsets.only(right: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -61,9 +65,8 @@ class MovieTileItem extends StatelessWidget {
                       image: CachedNetworkImageProvider(
                         '$IMG_BASE_URL/$HIGH_QUALITY/${movieTile.imageUrl}',
                       ),
-                      width: size.width * 0.6,
-                      height: 340,
-                    )
+                      width: posterWidth,
+                      height: posterHeight)
                   : Image.asset('assets/image.png'),
             ),
             Padding(

@@ -5,17 +5,19 @@ import 'package:flutter/material.dart';
 
 class MoviesScrollView extends StatelessWidget {
   final Future<List<MovieTile>> movieTiles;
+  final double containerHeight;
+  final double posterWidth;
 
   MoviesScrollView({
     required this.movieTiles,
+    required this.containerHeight,
+    required this.posterWidth,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-
     return Container(
-      height: 420,
+      height: containerHeight,
       child: FutureBuilder<List<MovieTile>>(
         future: movieTiles,
         builder: (context, snapshot) {
@@ -34,9 +36,11 @@ class MoviesScrollView extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) =>
                       MovieTileItem(
                     movieTile: snapshot.data![index],
+                    posterWidth: posterWidth,
+                    posterHeight: containerHeight - 80,
                   ),
                   itemCount: snapshot.data!.length,
-                  itemSize: size.width * 0.6,
+                  itemSize: posterWidth,
                   selectedItemAnchor: SelectedItemAnchor.START,
                   onItemFocus: (_) {},
                 );

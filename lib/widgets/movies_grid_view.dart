@@ -6,6 +6,8 @@ import 'movie_tile_item.dart';
 
 class MoviesGridView extends StatelessWidget {
   final Future<List<MovieTile>> movieTiles;
+  final double posterWidth = 180;
+  final double posterHeight = 320;
 
   const MoviesGridView({required this.movieTiles});
 
@@ -37,6 +39,8 @@ class MoviesGridView extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) => MovieTileItem(
                   movieTile: snapshot.data![index],
+                  posterWidth: posterWidth,
+                  posterHeight: posterHeight,
                 ),
                 itemCount: snapshot.data!.length,
               );

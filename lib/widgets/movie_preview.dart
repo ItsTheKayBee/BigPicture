@@ -1,3 +1,4 @@
+import 'package:big_picture/constants/config.dart';
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/moviePreviewModel.dart';
 import 'package:big_picture/models/preview.dart';
@@ -9,10 +10,12 @@ import 'package:flutter/material.dart';
 class MoviePreview extends StatefulWidget {
   final int tmdbID;
   final String imageUrl;
+  final String genreString;
 
   MoviePreview({
     required this.tmdbID,
     required this.imageUrl,
+    required this.genreString,
   });
 
   @override
@@ -56,7 +59,8 @@ class _MoviePreviewState extends State<MoviePreview> {
                     borderRadius: BorderRadius.circular(size4),
                     child: widget.imageUrl != ''
                         ? CachedNetworkImage(
-                            imageUrl: widget.imageUrl,
+                            imageUrl:
+                                '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
                             fit: BoxFit.cover,
                             placeholder: (ctx, url) => Align(
                               alignment: Alignment.center,
@@ -98,7 +102,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Container(
                                       child: Text(
-                                        "${snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${snapshot.data!.genre}",
+                                        "${snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${widget.genreString}",
                                         style: moviePreviewSubTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
