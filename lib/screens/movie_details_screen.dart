@@ -1,6 +1,5 @@
 import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/movieTile.dart';
-import 'package:big_picture/models/movieTilesModel.dart';
+import 'package:big_picture/models/castTile.dart';
 import 'package:big_picture/utilities/scrollable_view_clipper.dart';
 import 'package:big_picture/widgets/bottom_circular_menu.dart';
 import 'package:big_picture/widgets/genre_label.dart';
@@ -10,7 +9,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
-  final List<MovieTile> movieTiles = MovieTilesModel().allMovieTiles;
+  final List<CastTile> movieTiles = [];
 
   @override
   Widget build(BuildContext context) {
@@ -182,14 +181,14 @@ class MovieDetailsScreen extends StatelessWidget {
                                     color: blueCustomViewColor,
                                     offset: offset,
                                     sectionTitle: 'Cast',
-                                    movieTiles: movieTiles,
+                                    castTiles: movieTiles,
                                   ),
                                   Positioned(
                                     top: 374,
                                     child: MoviesDetailScrollView(
                                       size: size,
                                       offset: offset,
-                                      movieTiles: movieTiles,
+                                      castTiles: movieTiles,
                                       sectionTitle: 'Videos',
                                       color: redCustomViewColor,
                                     ),

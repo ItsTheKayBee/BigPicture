@@ -17,42 +17,53 @@ enum Explore {
   upcomingInRegion
 }
 
+enum Type { MOVIE, TV }
+
 class MovieTilesModel {
   List<MovieTile> _movieTiles = [];
 
   Future<List<MovieTile>> getMovieList({required movieListType}) async {
     late final url;
-
+    late final type;
     switch (movieListType) {
       case Explore.nowPlaying:
         url = '$BASE_URL/movie/now_playing?api_key=$API_KEY';
+        type = Type.MOVIE;
         break;
       case Explore.newInRegion:
         final isoCode = await getIsoCode();
         url = '$BASE_URL/movie/now_playing?api_key=$API_KEY&region=$isoCode';
+        type = Type.MOVIE;
         break;
       case Explore.popular:
         url = '$BASE_URL/movie/popular?api_key=$API_KEY';
+        type = Type.MOVIE;
         break;
       case Explore.popularInRegion:
         final isoCode = await getIsoCode();
         url = '$BASE_URL/movie/popular?api_key=$API_KEY&region=$isoCode';
+        type = Type.MOVIE;
         break;
       case Explore.popularTv:
+        type = Type.TV;
         url = '$BASE_URL/tv/popular?api_key=$API_KEY';
         break;
       case Explore.airingNowTv:
+        type = Type.TV;
         url = '$BASE_URL/tv/on_the_air?api_key=$API_KEY';
         break;
       case Explore.upcoming:
+        type = Type.MOVIE;
         url = '$BASE_URL/movie/upcoming?api_key=$API_KEY';
         break;
       case Explore.upcomingInRegion:
+        type = Type.MOVIE;
         final isoCode = await getIsoCode();
         url = '$BASE_URL/movie/upcoming?api_key=$API_KEY&region=$isoCode';
         break;
       case Explore.recommendations:
         //TODO: Make recommendations dynamic
+        type = Type.MOVIE;
         url = '$BASE_URL/movie/popular?api_key=$API_KEY';
         break;
       default:
@@ -64,7 +75,7 @@ class MovieTilesModel {
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
       List<dynamic> list = map["results"];
-      return list.map((model) => MovieTile.fromJson(model)).toList();
+      return list.map((model) => MovieTile.fromJson(model, type)).toList();
     }
     throw Exception('Failed to load new movies');
   }

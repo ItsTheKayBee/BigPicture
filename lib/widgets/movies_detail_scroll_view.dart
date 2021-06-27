@@ -1,4 +1,5 @@
 import 'package:big_picture/constants/styles.dart';
+import 'package:big_picture/models/castTile.dart';
 import 'package:big_picture/models/movieTile.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +10,14 @@ class MoviesDetailScrollView extends StatelessWidget {
   MoviesDetailScrollView({
     required this.size,
     required this.offset,
-    required this.movieTiles,
+    required this.castTiles,
     required this.color,
     required this.sectionTitle,
   });
 
   final Size size;
   final double offset;
-  final List<MovieTile> movieTiles;
+  final List<CastTile> castTiles;
   final Color color;
   final String sectionTitle;
 
@@ -47,10 +48,12 @@ class MoviesDetailScrollView extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (ctx, index) {
                   return CastTileItem(
-                    movieTile: movieTiles[index],
+                    castTile: castTiles[index],
+                    posterHeight: 320,
+                    posterWidth: 180,
                   );
                 },
-                itemCount: movieTiles.length,
+                itemCount: castTiles.length,
               ),
             ),
           ],

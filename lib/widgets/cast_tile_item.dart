@@ -1,46 +1,70 @@
-import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/movieTile.dart';
+import 'package:big_picture/constants/config.dart';
+import 'package:big_picture/models/castTile.dart';
+import 'package:big_picture/models/movieTilesModel.dart';
+import 'package:big_picture/utilities/progressive_image.dart';
 import 'package:flutter/material.dart';
 
+import 'package:big_picture/constants/styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 class CastTileItem extends StatelessWidget {
-  final MovieTile movieTile;
+  // condition to check whether current card is the focussed card
+  final CastTile castTile;
+  final MovieTilesModel movieTilesModel = MovieTilesModel();
+
+  final double posterWidth;
+  final double posterHeight;
 
   CastTileItem({
-    required this.movieTile, // data model
+    required this.castTile, // data model
+    required this.posterWidth,
+    required this.posterHeight,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+
+    return GestureDetector(
       onTap: () {
-        print('hello');
+       
       },
       child: Container(
-        width: 160,
-        height: 250,
-        padding: EdgeInsets.only(right: 8),
+        width: posterWidth,
+        padding: EdgeInsets.only(right: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Card(
-              child: Image.asset(
-                movieTile.imageUrl,
-                fit: BoxFit.fill,
-              ),
+              shadowColor: primaryColor,
+              child: castTile.imageUrl != ''
+                  ? ProgressiveImage(
+                      placeholder: AssetImage(
+                        'assets/image.png',
+                      ),
+                      thumbnail: NetworkImage(
+                        '$IMG_BASE_URL/$LOW_QUALITY/${castTile.imageUrl}',
+                      ),
+                      image: CachedNetworkImageProvider(
+                        '$IMG_BASE_URL/$HIGH_QUALITY/${castTile.imageUrl}',
+                      ),
+                      width: posterWidth,
+                      height: posterHeight)
+                  : Image.asset('assets/image.png'),
             ),
             Padding(
               padding: EdgeInsets.only(left: size1),
               child: Text(
-                movieTile.movieName,
-                style: movieDetailsCastName,
+                castTile.castName,
+                style: titleStyle,
                 overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: size1),
               child: Text(
-                'genre',
-                style: movieDetailsCastScreenName,
+                castTile.castRoleName,
+                style: subTitleStyle,
                 overflow: TextOverflow.ellipsis,
               ),
             ),

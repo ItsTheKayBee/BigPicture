@@ -42,6 +42,7 @@ class MovieTileItem extends StatelessWidget {
               tmdbID: movieTile.movieId,
               imageUrl: movieTile.imageUrl,
               genreString: genreString,
+              contentType: movieTile.type,
             );
           },
         );

@@ -3,6 +3,7 @@ import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/moviePreviewModel.dart';
 import 'package:big_picture/models/preview.dart';
 import 'package:big_picture/screens/movie_details_screen.dart';
+import 'package:big_picture/utilities/utility.dart';
 import 'package:big_picture/widgets/ratings_section.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +12,13 @@ class MoviePreview extends StatefulWidget {
   final int tmdbID;
   final String imageUrl;
   final String genreString;
+  final contentType;
 
   MoviePreview({
     required this.tmdbID,
     required this.imageUrl,
     required this.genreString,
+    required this.contentType
   });
 
   @override
@@ -27,7 +30,7 @@ class _MoviePreviewState extends State<MoviePreview> {
   @override
   void initState() {
     super.initState();
-    preview = MoviePreviewModel().getPreview(tmdbID: widget.tmdbID);
+    preview = MoviePreviewModel().getPreview(tmdbID: widget.tmdbID, contentType: widget.contentType);
   }
 
   @override
@@ -219,23 +222,5 @@ class _MoviePreviewState extends State<MoviePreview> {
         ],
       ),
     );
-  }
-
-  convertTime(String runtime) {
-    if (runtime == 'N/A') {
-      return '-';
-    }
-    int duration = int.parse(runtime.split(' ')[0]);
-    String convertedTime = '';
-    if (duration >= 60) {
-      int hours = (duration / 60).floor();
-      duration %= 60;
-      convertedTime = '${hours}h';
-    }
-    if (duration < 60) {
-      convertedTime += ' ${duration}m';
-    }
-
-    return convertedTime.trim();
   }
 }

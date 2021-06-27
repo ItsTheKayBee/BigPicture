@@ -3,15 +3,17 @@ class MovieTile {
   final String imageUrl;
   final String movieName;
   final List genre;
+  final type;
 
   MovieTile({
     required this.movieId,
     required this.imageUrl,
     required this.movieName,
     required this.genre,
+    required this.type,
   });
 
-  factory MovieTile.fromJson(Map<String, dynamic> json) {
+  factory MovieTile.fromJson(Map<String, dynamic> json, contentType) {
     return MovieTile(
       // TMDB ID
       movieId: json['id'],
@@ -22,8 +24,11 @@ class MovieTile {
       //title for movies & name for tv series as per tmdb api
       movieName: json['title'] ?? json['name'],
 
-      // tmdb ratings
+      // tmdb genre
       genre: json['genre_ids'],
+
+      //content type
+      type: contentType,
     );
   }
 }

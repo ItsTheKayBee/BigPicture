@@ -16,9 +16,11 @@ class Preview {
   });
 
   factory Preview.fromJson(Map<String, dynamic> json) {
-    List<Rating> ratingsList = List<Rating>.from(json['Ratings'].map(
-      (rating) => Rating.fromJson(rating),
-    ));
+    List<Rating> ratingsList = List<Rating>.from(
+      json['Ratings'].map(
+        (rating) => Rating.fromJson(rating),
+      ),
+    );
     return Preview(
       title: json['Title'],
       year: json['Year'],
