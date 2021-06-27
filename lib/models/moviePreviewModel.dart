@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:big_picture/constants/config.dart';
 import 'package:big_picture/models/preview.dart';
-import './movieTilesModel.dart';
+import 'movieTilesModel.dart';
 import 'package:http/http.dart' as http;
 
 class MoviePreviewModel {

@@ -18,7 +18,7 @@ class MoviePreview extends StatefulWidget {
     required this.tmdbID,
     required this.imageUrl,
     required this.genreString,
-    required this.contentType
+    required this.contentType,
   });
 
   @override
@@ -30,7 +30,8 @@ class _MoviePreviewState extends State<MoviePreview> {
   @override
   void initState() {
     super.initState();
-    preview = MoviePreviewModel().getPreview(tmdbID: widget.tmdbID, contentType: widget.contentType);
+    preview = MoviePreviewModel()
+        .getPreview(tmdbID: widget.tmdbID, contentType: widget.contentType);
   }
 
   @override
@@ -211,7 +212,13 @@ class _MoviePreviewState extends State<MoviePreview> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MovieDetailsScreen(),
+                        builder: (context) => MovieDetailsScreen(
+                          contentType: widget.contentType,
+                          imageUrl: widget.imageUrl,
+                          tmdbID: widget.tmdbID,
+                          genreString: widget.genreString,
+                          preview: preview,
+                        ),
                       ),
                     );
                   },

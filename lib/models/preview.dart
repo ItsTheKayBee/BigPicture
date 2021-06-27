@@ -2,7 +2,6 @@ class Preview {
   final String title;
   final String year;
   final String runtime;
-  final String genre;
   final String plot;
   final List<Rating> ratings;
 
@@ -10,7 +9,6 @@ class Preview {
     required this.title,
     required this.year,
     required this.runtime,
-    required this.genre,
     required this.plot,
     required this.ratings,
   });
@@ -25,7 +23,6 @@ class Preview {
       title: json['Title'],
       year: json['Year'],
       runtime: json['Runtime'],
-      genre: json['Genre'],
       plot: json['Plot'],
       ratings: ratingsList,
     );

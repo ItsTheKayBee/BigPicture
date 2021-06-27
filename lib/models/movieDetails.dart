@@ -1,10 +1,9 @@
+import 'package:big_picture/models/castTile.dart';
+import 'package:big_picture/models/movieTile.dart';
+import 'videoTile.dart';
+
 class MovieDetails {
-  final String imageUrl;
-  final String title;
-  final String releaseDate;
-  final String runtime;
   final String originalLanguage;
-  // final List genres;
   final String overview;
   final List castList;
   final List videos;
@@ -12,34 +11,36 @@ class MovieDetails {
   final int collectionId;
 
   MovieDetails({
-    required this.title,
-    required this.releaseDate,
-    required this.runtime,
     required this.originalLanguage,
-    // required this.genres,
     required this.overview,
     required this.castList,
     required this.videos,
     required this.recommendations,
     required this.collectionId,
-    required this.imageUrl,
   });
 
-  factory MovieDetails.fromJson(Map<String, dynamic> json) {
+  factory MovieDetails.fromJson(Map<String, dynamic> json, contentType) {
+    List<CastTile> castList = List<CastTile>.from(
+      json['credits']['cast'].map((cast) => CastTile.fromJson(cast)),
+    );
+    List<MovieTile> recommendations = List<MovieTile>.from(
+      json['recommendations']['results'].map(
+          (recommendation) => MovieTile.fromJson(recommendation, contentType)),
+    );
+    List<VideoTile> videos = List<VideoTile>.from(
+      json['videos']['results'].map((video) => VideoTile.fromJson(video)),
+    );
+    print(json['belongs_to_collection']);
+
     return MovieDetails(
-      // set to empty string if null
-      imageUrl: json['poster_path'] ?? '',
-      title: json['title'],
-      releaseDate: json['release_date'],
-      castList: [],
-      collectionId:
-          json['belongs_to_collection'] ? json['belongs_to_collection'].id : 0,
-      // genres: [],
+      castList: castList,
+      collectionId: json['belongs_to_collection']
+          ? json['belongs_to_collection']['id']
+          : 0,
       originalLanguage: json['original_language'],
       overview: json['overview'],
-      recommendations: json['recommendations'].results,
-      runtime: json['runtime'],
-      videos: json['videos'].results,
+      recommendations: recommendations,
+      videos: videos,
     );
   }
 }
