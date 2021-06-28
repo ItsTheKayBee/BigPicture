@@ -3,12 +3,14 @@ import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieDetails.dart';
 import 'package:big_picture/models/movieDetailsModel.dart';
 import 'package:big_picture/models/preview.dart';
+import 'package:big_picture/utilities/progressive_image.dart';
 import 'package:big_picture/utilities/scrollable_view_clipper.dart';
 import 'package:big_picture/utilities/utility.dart';
 import 'package:big_picture/widgets/bottom_circular_menu.dart';
 import 'package:big_picture/widgets/genre_label.dart';
 import 'package:big_picture/widgets/movies_detail_scroll_view.dart';
 import 'package:big_picture/widgets/ratings_section.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +42,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     movieDetails = MovieDetailsModel().getMovieDetails(
       tmdbID: widget.tmdbID,
       contentType: widget.contentType,
+    );
+  }
+
+  Widget getAllGenre() {
+    List genres = widget.genreString.split(', ');
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: genres
+          .map(
+            (genre) => GenreLabel(
+              genreText: genre,
+              bgColor: Colors.purpleAccent.shade100.withOpacity(0.7),
+              textColor: Colors.purple.shade700,
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -75,33 +94,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     children: [
                       Positioned(
                         right: 0,
-                        child: Container(
-                          width: posterWidth,
-                          height: posterHeight,
-                          decoration: BoxDecoration(
-                            /* image: widget.imageUrl != ''
-                                ? CachedNetworkImage(
-                                    imageUrl:
-                                        '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
-                                    fit: BoxFit.cover,
-                                    placeholder: (ctx, url) => Align(
-                                      alignment: Alignment.center,
-                                      child: Image.asset(
-                                        'assets/image.png',
-                                      ), //placeholder will be shown while image is loading
-                                    ),
-                                  )
-                                : Image.asset('assets/image.png'), */
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
-                              ),
-                              fit: BoxFit.fitHeight,
-                              alignment: Alignment.center,
+                        child: ClipRRect(
+                          child: ProgressiveImage(
+                            placeholder: AssetImage(
+                              'assets/image.png',
                             ),
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: posterBLRadius,
+                            thumbnail: NetworkImage(
+                              '$IMG_BASE_URL/$LOW_QUALITY/${widget.imageUrl}',
                             ),
+                            image: CachedNetworkImageProvider(
+                              '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
+                            ),
+                            width: posterWidth,
+                            height: posterHeight,
+                            fit: BoxFit.fitHeight,
+                          ),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: posterBLRadius,
                           ),
                         ),
                       ),
@@ -145,17 +154,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
+                                      Divider(
+                                        indent: offset,
+                                        thickness: 1.0,
+                                      ),
                                       Container(
                                         margin: EdgeInsets.only(
                                           left: offset,
                                           right: 24,
-                                          top: 12,
                                         ),
                                         child: Column(
                                           children: [
                                             Padding(
                                               padding: EdgeInsets.only(
-                                                  left: 12, top: 12, right: 12),
+                                                left: 12,
+                                                top: 8,
+                                                right: 12,
+                                              ),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -190,21 +205,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               ),
                                             ),
                                             RatingsSection(
-                                              ratings: [],
+                                              ratings:
+                                                  snapshot.data![0].ratings,
                                             ),
                                           ],
                                         ),
+                                      ),
+                                      Divider(
+                                        indent: offset,
+                                        thickness: 1.0,
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
                                             left: offset, top: 12, right: 24),
                                         child: Align(
                                           alignment: Alignment.centerLeft,
-                                          child: Wrap(
-                                            spacing: 8,
-                                            runSpacing: 8,
-                                            children: [
-                                              GenreLabel(
+                                          child: getAllGenre(),
+                                          /*  GenreLabel(
                                                 genreText: 'Action',
                                                 bgColor: Colors
                                                     .amberAccent.shade100
@@ -219,9 +236,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                     .withOpacity(0.7),
                                                 textColor:
                                                     Colors.purple.shade700,
-                                              ),
-                                            ],
-                                          ),
+                                              ), */
                                         ),
                                       ),
                                       Container(

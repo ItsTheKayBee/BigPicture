@@ -14,6 +14,7 @@ class Preview {
   });
 
   factory Preview.fromJson(Map<String, dynamic> json, String imdbID) {
+    //OMDB way
     if (imdbID != '') {
       List<Rating> ratingsList = List<Rating>.from(
         json['Ratings'].map(
@@ -27,12 +28,22 @@ class Preview {
         plot: json['Plot'],
         ratings: ratingsList,
       );
-    } else {
+    }
+    //else TMDB way
+    else {
       return Preview(
+        //title for movies & name for tv series as per tmdb api
         title: json['title'] ?? json['name'],
+
+        //get the year only from the release date
         year: json['release_date']?.substring(0, 4),
+
+        //convert int duration to string
         runtime: json['runtime'].toString(),
+
         plot: json['overview'],
+
+        //ratinsg do not exist in tmdb api
         ratings: [],
       );
     }
