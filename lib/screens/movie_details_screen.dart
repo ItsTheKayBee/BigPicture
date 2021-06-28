@@ -259,7 +259,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               color: blueCustomViewColor,
                                               offset: offset,
                                               sectionTitle: 'Cast',
-                                              castTiles: [],
+                                              castTiles:
+                                                  snapshot.data![1].castList,
                                             ),
                                             Positioned(
                                               top: 374,

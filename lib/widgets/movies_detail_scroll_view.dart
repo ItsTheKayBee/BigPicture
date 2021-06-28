@@ -1,6 +1,5 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/castTile.dart';
-import 'package:big_picture/models/movieTile.dart';
 import 'package:flutter/material.dart';
 
 import 'cast_tile_item.dart';
@@ -49,8 +48,8 @@ class MoviesDetailScrollView extends StatelessWidget {
                 itemBuilder: (ctx, index) {
                   return CastTileItem(
                     castTile: castTiles[index],
-                    posterHeight: 320,
-                    posterWidth: 180,
+                    posterHeight: 250,
+                    posterWidth: 190,
                   );
                 },
                 itemCount: castTiles.length,
