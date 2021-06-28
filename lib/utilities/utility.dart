@@ -1,3 +1,5 @@
+import 'package:big_picture/constants/language.dart';
+
 convertTime(String runtime) {
   if (runtime == 'N/A') {
     return '-';
@@ -9,9 +11,17 @@ convertTime(String runtime) {
     duration %= 60;
     convertedTime = '${hours}h';
   }
-  if (duration < 60) {
+  if (duration < 60 && duration != 0) {
     convertedTime += ' ${duration}m';
   }
 
   return convertedTime.trim();
+}
+
+getLanguageName(String? key) {
+  if (isoLangs.containsKey(key)) {
+    return isoLangs[key]?['name'];
+  } else {
+    throw Exception("Language key incorrect");
+  }
 }

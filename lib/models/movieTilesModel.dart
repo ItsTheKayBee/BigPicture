@@ -75,7 +75,15 @@ class MovieTilesModel {
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
       List<dynamic> list = map["results"];
-      return list.map((model) => MovieTile.fromJson(model, type)).toList();
+      List<dynamic> modifiedList = [];
+      list.forEach((model) {
+        if (model['poster_path'] != null) {
+          modifiedList.add(model);
+        }
+      });
+      return modifiedList
+          .map((model) => MovieTile.fromJson(model, type))
+          .toList();
     }
     throw Exception('Failed to load new movies');
   }
@@ -84,7 +92,7 @@ class MovieTilesModel {
     try {
       return '${genreList[genreId]}';
     } catch (e) {
-      throw Exception('Genre not found: e');
+      throw Exception('Genre not found: $e');
     }
   }
 

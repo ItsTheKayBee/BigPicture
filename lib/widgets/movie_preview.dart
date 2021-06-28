@@ -106,7 +106,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Container(
                                       child: Text(
-                                        "${snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${widget.genreString}",
+                                        '${snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${widget.genreString}',
                                         style: moviePreviewSubTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,

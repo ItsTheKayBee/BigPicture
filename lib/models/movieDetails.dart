@@ -30,13 +30,10 @@ class MovieDetails {
     List<VideoTile> videos = List<VideoTile>.from(
       json['videos']['results'].map((video) => VideoTile.fromJson(video)),
     );
-    print(json['belongs_to_collection']);
 
     return MovieDetails(
       castList: castList,
-      collectionId: json['belongs_to_collection']
-          ? json['belongs_to_collection']['id']
-          : 0,
+      collectionId: json['belongs_to_collection']?['id'] ?? 0,
       originalLanguage: json['original_language'],
       overview: json['overview'],
       recommendations: recommendations,

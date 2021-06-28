@@ -1,8 +1,10 @@
+import 'package:big_picture/constants/config.dart';
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieDetails.dart';
 import 'package:big_picture/models/movieDetailsModel.dart';
 import 'package:big_picture/models/preview.dart';
 import 'package:big_picture/utilities/scrollable_view_clipper.dart';
+import 'package:big_picture/utilities/utility.dart';
 import 'package:big_picture/widgets/bottom_circular_menu.dart';
 import 'package:big_picture/widgets/genre_label.dart';
 import 'package:big_picture/widgets/movies_detail_scroll_view.dart';
@@ -77,8 +79,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           width: posterWidth,
                           height: posterHeight,
                           decoration: BoxDecoration(
+                            /* image: widget.imageUrl != ''
+                                ? CachedNetworkImage(
+                                    imageUrl:
+                                        '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
+                                    fit: BoxFit.cover,
+                                    placeholder: (ctx, url) => Align(
+                                      alignment: Alignment.center,
+                                      child: Image.asset(
+                                        'assets/image.png',
+                                      ), //placeholder will be shown while image is loading
+                                    ),
+                                  )
+                                : Image.asset('assets/image.png'), */
                             image: DecorationImage(
-                              image: AssetImage('assets/wonder.jpg'),
+                              image: NetworkImage(
+                                '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
+                              ),
                               fit: BoxFit.fitHeight,
                               alignment: Alignment.center,
                             ),
@@ -134,13 +151,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                           right: 24,
                                           top: 12,
                                         ),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: Colors.grey.shade400,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
                                         child: Column(
                                           children: [
                                             Padding(
@@ -149,7 +159,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
-                                                        .spaceBetween,
+                                                        .spaceEvenly,
                                                 children: [
                                                   Text(
                                                     snapshot.data![0].year,
@@ -161,7 +171,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                         movieDetailsDescription,
                                                   ),
                                                   Text(
-                                                    snapshot.data![0].runtime,
+                                                    convertTime(snapshot
+                                                        .data![0].runtime),
                                                     style: movieDetailsData,
                                                   ),
                                                   Text(
@@ -170,8 +181,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                         movieDetailsDescription,
                                                   ),
                                                   Text(
-                                                    snapshot.data![1]
-                                                        .originalLanguage,
+                                                    getLanguageName(snapshot
+                                                        .data![1]
+                                                        .originalLanguage),
                                                     style: movieDetailsData,
                                                   ),
                                                 ],
