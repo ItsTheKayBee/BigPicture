@@ -7,6 +7,7 @@ import 'package:big_picture/utilities/progressive_image.dart';
 import 'package:big_picture/utilities/scrollable_view_clipper.dart';
 import 'package:big_picture/utilities/utility.dart';
 import 'package:big_picture/widgets/bottom_circular_menu.dart';
+import 'package:big_picture/widgets/cast_tile_item.dart';
 import 'package:big_picture/widgets/genre_label.dart';
 import 'package:big_picture/widgets/movies_detail_scroll_view.dart';
 import 'package:big_picture/widgets/ratings_section.dart';
@@ -143,7 +144,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                       Padding(
                                         padding: EdgeInsets.only(
                                           left: offset,
-                                          top: 24,
+                                          top: 18,
                                           right: 24,
                                         ),
                                         child: Text(
@@ -156,6 +157,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                       ),
                                       Divider(
                                         indent: offset,
+                                        endIndent: offset,
                                         thickness: 1.0,
                                       ),
                                       Container(
@@ -213,6 +215,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                       ),
                                       Divider(
                                         indent: offset,
+                                        endIndent: offset,
                                         thickness: 1.0,
                                       ),
                                       Padding(
@@ -259,8 +262,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               color: blueCustomViewColor,
                                               offset: offset,
                                               sectionTitle: 'Cast',
-                                              castTiles:
-                                                  snapshot.data![1].castList,
+                                              items: snapshot.data![1].castList,
                                             ),
                                             Positioned(
                                               top: 374,
@@ -269,7 +271,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                 color: redCustomViewColor,
                                                 offset: offset,
                                                 sectionTitle: 'Videos',
-                                                castTiles: [],
+                                                items: snapshot.data![1].videos,
                                               ),
                                             ),
                                           ],
