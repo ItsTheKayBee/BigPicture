@@ -30,6 +30,8 @@ class MovieTileItem extends StatelessWidget {
         genreString += movieTilesModel.getGenre(genreId: genreId) + ', ';
       });
       genreString = genreString.substring(0, genreString.length - 2);
+    } else {
+      genreString = '-';
     }
 
     return GestureDetector(

@@ -128,14 +128,12 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                   ],
                                 );
-                              } else if (snapshot.hasError) {
-                                print(snapshot.error);
-                                return Text('no data');
                               } else {
-                                return Text('uncaught');
+                                print(snapshot.error);
+                                return Text('No Data');
                               }
                             default:
-                              return Text('Default');
+                              return Text('Connection failed');
                           }
                         },
                       ),
@@ -165,10 +163,10 @@ class _MoviePreviewState extends State<MoviePreview> {
                       ),
                     );
                   } else {
-                    return Text('Error');
+                    return Text('Error ${snapshot.error}');
                   }
                 default:
-                  return Text('default');
+                  return Text('Connecton failed');
               }
             },
           ),

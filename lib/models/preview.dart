@@ -31,7 +31,7 @@ class Preview {
       return Preview(
         title: json['title'] ?? json['name'],
         year: json['release_date']?.substring(0, 4),
-        runtime: "$json['runtime']",
+        runtime: json['runtime'].toString(),
         plot: json['overview'],
         ratings: [],
       );

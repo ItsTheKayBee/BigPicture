@@ -1,7 +1,7 @@
 import 'package:big_picture/constants/language.dart';
 
 convertTime(String runtime) {
-  if (runtime == 'N/A') {
+  if (runtime == 'N/A' || runtime == '' || runtime == '0') {
     return '-';
   }
   int duration = int.parse(runtime.split(' ')[0]);
