@@ -145,10 +145,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         builder: (context, controller) {
                           return Container(
                             child: SingleChildScrollView(
-                              padding: EdgeInsets.only(bottom: 32),
                               controller: controller,
-                              dragStartBehavior: DragStartBehavior.down,
-                              physics: BouncingScrollPhysics(),
                               child: ClipPath(
                                 clipper: ScrollableViewClipper(
                                   parentHeight: size.height,
@@ -280,54 +277,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                           style: movieDetailsDescription,
                                         ),
                                       ),
-                                      Container(
-                                        height: 1200,
-                                        child: Stack(
-                                          children: [
-                                            if (snapshot
-                                                .data![1].castList.isNotEmpty)
-                                              getMovieScrollView(
-                                                size: size,
-                                                offset: offset,
-                                                color: blueCustomViewColor,
-                                                sectionTitle: castTitle,
-                                                items:
-                                                    snapshot.data![1].castList,
-                                              ),
-                                            if (snapshot
-                                                .data![1].videos.isNotEmpty)
-                                              getMovieScrollView(
-                                                size: size,
-                                                offset: offset,
-                                                color: redCustomViewColor,
-                                                sectionTitle: videosTitle,
-                                                items: snapshot.data![1].videos,
-                                              ),
-                                            if (snapshot.data![1]
-                                                .collectionParts.isNotEmpty)
-                                              getMovieScrollView(
-                                                size: size,
-                                                offset: offset,
-                                                color: blueCustomViewColor,
-                                                sectionTitle: snapshot
-                                                    .data![1].collectionName,
-                                                items: snapshot
-                                                    .data![1].collectionParts,
-                                              ),
-                                            if (snapshot.data![1]
-                                                .recommendations.isNotEmpty)
-                                              getMovieScrollView(
-                                                size: size,
-                                                offset: offset,
-                                                color: greenCustomViewColor,
-                                                sectionTitle:
-                                                    recommendationsTitle,
-                                                items: snapshot
-                                                    .data![1].recommendations,
-                                              ),
-                                          ],
-                                        ),
-                                      )
+                                      renderSections(
+                                        size: size,
+                                        offset: offset,
+                                        movieDetails: snapshot.data![1],
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -363,6 +317,65 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
             }
           },
         ),
+      ),
+    );
+  }
+
+  Widget renderSections(
+      {required Size size,
+      required double offset,
+      required MovieDetails movieDetails}) {
+    double sectionCount = 0;
+    if (movieDetails.castList.isNotEmpty) {
+      sectionCount++;
+    }
+    if (movieDetails.videos.isNotEmpty) {
+      sectionCount++;
+    }
+    if (movieDetails.collectionParts.isNotEmpty) {
+      sectionCount++;
+    }
+    if (movieDetails.recommendations.isNotEmpty) {
+      sectionCount++;
+    }
+
+    return Container(
+      height: 470 * sectionCount - (sectionCount - 1) * 96,
+      child: Stack(
+        children: [
+          if (movieDetails.castList.isNotEmpty)
+            getMovieScrollView(
+              size: size,
+              offset: offset,
+              color: blueCustomViewColor,
+              sectionTitle: castTitle,
+              items: movieDetails.castList,
+            ),
+          if (movieDetails.videos.isNotEmpty)
+            getMovieScrollView(
+              size: size,
+              offset: offset,
+              color: redCustomViewColor,
+              sectionTitle: videosTitle,
+              items: movieDetails.videos,
+            ),
+          if (movieDetails.collectionParts.isNotEmpty)
+            getMovieScrollView(
+              size: size,
+              offset: offset,
+              color: blueCustomViewColor,
+              sectionTitle: movieDetails.collectionName,
+              items: movieDetails.collectionParts,
+            ),
+          if (movieDetails.recommendations.isNotEmpty)
+            getMovieScrollView(
+              size: size,
+              offset: offset,
+              color: greenCustomViewColor,
+              sectionTitle: recommendationsTitle,
+              items: movieDetails.recommendations,
+            ),
+        ],
       ),
     );
   }
