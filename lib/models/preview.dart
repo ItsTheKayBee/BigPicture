@@ -6,6 +6,7 @@ class Preview {
   final String runtime;
   final String plot;
   final List<Rating> ratings;
+  final int totalSeasons;
 
   Preview({
     required this.title,
@@ -13,6 +14,7 @@ class Preview {
     required this.runtime,
     required this.plot,
     required this.ratings,
+    required this.totalSeasons,
   });
 
   factory Preview.fromJson(Map<String, dynamic> json, String imdbID) {
@@ -29,6 +31,8 @@ class Preview {
         runtime: json['Runtime'],
         plot: json['Plot'],
         ratings: ratingsList,
+        totalSeasons: int.parse(
+            json['totalSeasons'] == 'N/A' ? '0' : json['totalSeasons'] ?? '0'),
       );
     }
     //else TMDB way
@@ -42,11 +46,13 @@ class Preview {
 
         //convert int duration to string
         runtime: json['runtime'].toString(),
-
         plot: json['overview'],
 
         //ratinsg do not exist in tmdb api
         ratings: [],
+
+        //number of seasons
+        totalSeasons: json['number_of_seasons'] ?? 0,
       );
     }
   }

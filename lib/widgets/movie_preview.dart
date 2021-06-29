@@ -1,11 +1,11 @@
-import 'package:big_picture/constants/config.dart';
-import 'package:big_picture/constants/strings.dart';
-import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/moviePreviewModel.dart';
-import 'package:big_picture/models/preview.dart';
-import 'package:big_picture/screens/movie_details_screen.dart';
-import 'package:big_picture/utilities/utility.dart';
-import 'package:big_picture/widgets/ratings_section.dart';
+import '../constants/config.dart';
+import '../constants/strings.dart';
+import '../constants/styles.dart';
+import '../models/moviePreviewModel.dart';
+import '../models/movieTilesModel.dart';
+import '../models/preview.dart';
+import '../screens/movie_details_screen.dart';
+import '../utilities/utility.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -35,10 +35,20 @@ class _MoviePreviewState extends State<MoviePreview> {
         .getPreview(tmdbID: widget.tmdbID, contentType: widget.contentType);
   }
 
+  String displaySeasons(int totalSeasons) {
+    if (totalSeasons == 1) {
+      return '$totalSeasons season';
+    } else if (totalSeasons == 0) {
+      return hyphen;
+    } else {
+      return '$totalSeasons seasons';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
+      height: 250,
       margin: EdgeInsets.all(size3),
       padding: EdgeInsets.only(
         top: size4,
@@ -60,21 +70,59 @@ class _MoviePreviewState extends State<MoviePreview> {
               children: [
                 Expanded(
                   flex: 3,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(size4),
-                    child: widget.imageUrl != ''
-                        ? CachedNetworkImage(
-                            imageUrl:
-                                '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
-                            fit: BoxFit.cover,
-                            placeholder: (ctx, url) => Align(
-                              alignment: Alignment.center,
-                              child: Image.asset(
-                                'assets/image.png',
-                              ), //placeholder will be shown while image is loading
-                            ),
-                          )
-                        : Image.asset('assets/image.png'),
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(size4),
+                        child: widget.imageUrl != ''
+                            ? CachedNetworkImage(
+                                imageUrl:
+                                    '$IMG_BASE_URL/$HIGH_QUALITY/${widget.imageUrl}',
+                                fit: BoxFit.cover,
+                                placeholder: (ctx, url) => Align(
+                                  alignment: Alignment.center,
+                                  child: Image.asset(
+                                    'assets/image.png',
+                                  ), //placeholder will be shown while image is loading
+                                ),
+                              )
+                            : Image.asset('assets/image.png'),
+                      ),
+                      FutureBuilder<Preview>(
+                        future: preview,
+                        builder: (ctx, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.done:
+                              if (snapshot.hasData &&
+                                  snapshot.data!.ratings.isNotEmpty)
+                                return Positioned(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(6),
+                                      ),
+                                      color: Colors.amber,
+                                    ),
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 4),
+                                      child: Text(
+                                        snapshot.data!.ratings[0].value
+                                            .split('/')[0],
+                                      ),
+                                    ),
+                                  ),
+                                  bottom: 10,
+                                  right: 10,
+                                );
+                              else
+                                return SizedBox();
+                            default:
+                              return SizedBox();
+                          }
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -107,7 +155,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Container(
                                       child: Text(
-                                        '${snapshot.data!.year==defaultDate?hyphen:snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${widget.genreString}',
+                                        '${snapshot.data!.year == defaultDate ? hyphen : snapshot.data!.year} ‧ ${widget.contentType == Type.MOVIE ? convertTime(snapshot.data!.runtime) : displaySeasons(snapshot.data!.totalSeasons)} ‧ ${widget.genreString}',
                                         style: moviePreviewSubTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -124,7 +172,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                         overflow: TextOverflow.ellipsis,
                                         softWrap: true,
                                         style: moviePreviewDescription,
-                                        maxLines: 5,
+                                        maxLines: 6,
                                       ),
                                     ),
                                   ],
@@ -144,34 +192,36 @@ class _MoviePreviewState extends State<MoviePreview> {
               ],
             ),
           ),
-          Divider(),
-          FutureBuilder<Preview>(
-            future: preview,
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.none:
-                case ConnectionState.waiting:
-                  return Align(
-                    alignment: Alignment.center,
-                    child: CircularProgressIndicator(),
-                  );
-                case ConnectionState.done:
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: RatingsSection(
-                        scale: 1.25,
-                        ratings: snapshot.data!.ratings,
-                      ),
-                    );
-                  } else {
-                    return Text('Error ${snapshot.error}');
-                  }
-                default:
-                  return Text('Connecton failed');
-              }
-            },
+          // Divider(),
+          // FutureBuilder<Preview>(
+          //   future: preview,
+          //   builder: (context, snapshot) {
+          //     switch (snapshot.connectionState) {
+          //       case ConnectionState.none:
+          //       case ConnectionState.waiting:
+          //         return Align(
+          //           alignment: Alignment.center,
+          //           child: CircularProgressIndicator(),
+          //         );
+          //       case ConnectionState.done:
+          //         if (snapshot.hasData) {
+          //           return Expanded(
+          //             child: RatingsSection(
+          //               scale: 1.25,
+          //               ratings: snapshot.data!.ratings,
+          //             ),
+          //           );
+          //         } else {
+          //           return Text('Error ${snapshot.error}');
+          //         }
+          //       default:
+          //         return Text('Connecton failed');
+          //     }
+          //   },
+          // ),
+          Divider(
+            thickness: 1.0,
           ),
-          Divider(),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

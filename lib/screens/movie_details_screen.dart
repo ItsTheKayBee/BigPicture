@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/config.dart';
@@ -313,7 +312,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                   return Text('No $snapshot.error');
                 }
               default:
-                return Text('default');
+                return Text('Connection could not be established');
             }
           },
         ),

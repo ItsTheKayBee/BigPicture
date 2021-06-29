@@ -16,29 +16,25 @@ class RatingsSection extends StatelessWidget {
       missingRating,
       missingRating
     ];
-    bool noRatings = true;
+    // bool noRatings = true;
     for (Rating rating in ratings) {
       if (rating.source == 'Internet Movie Database') {
         modifiedRatings[0] = rating;
-        noRatings = false;
+        // noRatings = false;
       }
       if (rating.source == 'Rotten Tomatoes') {
         modifiedRatings[1] = rating;
-        noRatings = false;
+        // noRatings = false;
       }
       if (rating.source == 'Metacritic') {
         modifiedRatings[2] = rating;
-        noRatings = false;
+        // noRatings = false;
       }
     }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        if (noRatings)
-          Container(
-            child: Text('No Ratings Found'),
-          ),
         if (modifiedRatings[0].value != '-')
           Container(
             child: Row(
