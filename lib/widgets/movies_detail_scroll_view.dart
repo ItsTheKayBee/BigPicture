@@ -1,9 +1,9 @@
-import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/castTile.dart';
-import 'package:big_picture/widgets/video_item.dart';
+import 'package:big_picture/widgets/movie_tile_item.dart';
 import 'package:flutter/material.dart';
 
+import 'video_item.dart';
 import 'cast_tile_item.dart';
+import '../constants/styles.dart';
 import '../utilities/movie_cast_view_clipper.dart';
 
 class MoviesDetailScrollView extends StatelessWidget {
@@ -53,10 +53,16 @@ class MoviesDetailScrollView extends StatelessWidget {
                       posterHeight: 250,
                       posterWidth: 190,
                     );
-                  else
+                  else if (sectionTitle == 'Videos')
                     return VideoItem(
                       videoTile: items[index],
                       videoWidth: size.width - 2 * offset,
+                    );
+                  else
+                    return MovieTileItem(
+                      movieTile: items[index],
+                      posterHeight: 250,
+                      posterWidth: 190,
                     );
                 },
                 itemCount: items.length,

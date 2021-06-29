@@ -254,7 +254,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                         ),
                                       ),
                                       Container(
-                                        height: 900,
+                                        height: 1500,
                                         child: Stack(
                                           children: [
                                             MoviesDetailScrollView(
@@ -272,6 +272,17 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                 offset: offset,
                                                 sectionTitle: 'Videos',
                                                 items: snapshot.data![1].videos,
+                                              ),
+                                            ),
+                                            Positioned(
+                                              top: 2 * 374,
+                                              child: MoviesDetailScrollView(
+                                                size: size,
+                                                color: greenCustomViewColor,
+                                                offset: offset,
+                                                sectionTitle: 'Recommendations',
+                                                items: snapshot
+                                                    .data![1].recommendations,
                                               ),
                                             ),
                                           ],

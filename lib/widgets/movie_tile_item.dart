@@ -9,7 +9,6 @@ import 'package:big_picture/models/movieTile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class MovieTileItem extends StatelessWidget {
-  // condition to check whether current card is the focussed card
   final MovieTile movieTile;
   final MovieTilesModel movieTilesModel = MovieTilesModel();
 
@@ -69,7 +68,8 @@ class MovieTileItem extends StatelessWidget {
                         '$IMG_BASE_URL/$HIGH_QUALITY/${movieTile.imageUrl}',
                       ),
                       width: posterWidth,
-                      height: posterHeight)
+                      height: posterHeight,
+                    )
                   : Image.asset('assets/image.png'),
             ),
             Padding(

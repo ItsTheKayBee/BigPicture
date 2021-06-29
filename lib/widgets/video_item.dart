@@ -1,7 +1,6 @@
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/videoTile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoItem extends StatefulWidget {

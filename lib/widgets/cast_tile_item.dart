@@ -8,7 +8,6 @@ import 'package:big_picture/constants/styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class CastTileItem extends StatelessWidget {
-  // condition to check whether current card is the focussed card
   final CastTile castTile;
   final MovieTilesModel movieTilesModel = MovieTilesModel();
 
@@ -45,7 +44,8 @@ class CastTileItem extends StatelessWidget {
                         '$IMG_BASE_URL/$HIGH_QUALITY/${castTile.imageUrl}',
                       ),
                       width: posterWidth,
-                      height: posterHeight)
+                      height: posterHeight,
+                    )
                   : Image.asset('assets/image.png'),
             ),
             Padding(
