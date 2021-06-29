@@ -22,6 +22,11 @@ const String searchText = 'Search...';
 const String movieText = 'Movies';
 const String actorText = 'Actors';
 
+//section titles
+const String castTitle = 'Cast';
+const String videosTitle = 'Videos';
+const String recommendationsTitle = 'Recommendations';
+
 //defaults
 const String defaultDate = '9999-99-99';
 const String hyphen = '-';
