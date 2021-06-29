@@ -1,27 +1,22 @@
 import 'package:big_picture/constants/language.dart';
+import 'package:big_picture/constants/strings.dart';
 
-convertTime(String runtime) {
-  if (runtime == 'N/A' || runtime == '' || runtime == '0') {
+String convertTime({required int runtime}) {
+  if (runtime == 0) {
     return '-';
   }
-  int duration = int.parse(runtime.split(' ')[0]);
   String convertedTime = '';
-  if (duration >= 60) {
-    int hours = (duration / 60).floor();
-    duration %= 60;
+  if (runtime >= 60) {
+    int hours = (runtime / 60).floor();
+    runtime %= 60;
     convertedTime = '${hours}h';
   }
-  if (duration < 60 && duration != 0) {
-    convertedTime += ' ${duration}m';
+  if (runtime < 60 && runtime != 0) {
+    convertedTime += ' ${runtime}m';
   }
 
   return convertedTime.trim();
 }
 
-getLanguageName(String? key) {
-  if (isoLangs.containsKey(key)) {
-    return isoLangs[key]?['name'];
-  } else {
-    throw Exception("Language key incorrect");
-  }
-}
+String getLanguageName({required String key}) =>
+    isoLangs[key]?['name'] ?? hyphen;

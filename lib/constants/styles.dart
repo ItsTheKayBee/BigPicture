@@ -151,6 +151,14 @@ TextStyle movieDetailsDescription = TextStyle(
   height: 1.25,
 );
 
+TextStyle movieDetailsTagline = TextStyle(
+  color: Colors.grey.shade500,
+  fontSize: size3 + 2,
+  fontWeight: FontWeight.w300,
+  height: 1.25,
+  fontStyle: FontStyle.italic,
+);
+
 TextStyle movieDetailsData = TextStyle(
   color: Colors.grey.shade800,
   fontSize: size4,
@@ -193,4 +201,3 @@ const double size5 = 20.0;
 const double size6 = 24.0;
 const double size7 = 28.0;
 const double size8 = 32.0;
-

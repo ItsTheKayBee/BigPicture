@@ -155,7 +155,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Container(
                                       child: Text(
-                                        '${snapshot.data!.year == defaultDate ? hyphen : snapshot.data!.year} ‧ ${widget.contentType == Type.MOVIE ? convertTime(snapshot.data!.runtime) : displaySeasons(snapshot.data!.totalSeasons)} ‧ ${widget.genreString}',
+                                        '${snapshot.data!.year == defaultDate ? hyphen : snapshot.data!.year} ‧ ${widget.contentType == Type.MOVIE ? convertTime(runtime: snapshot.data!.runtime) : displaySeasons(snapshot.data!.totalSeasons)} ‧ ${widget.genreString}',
                                         style: moviePreviewSubTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -172,14 +172,15 @@ class _MoviePreviewState extends State<MoviePreview> {
                                         overflow: TextOverflow.ellipsis,
                                         softWrap: true,
                                         style: moviePreviewDescription,
-                                        maxLines: 6,
+                                        maxLines: 5,
                                       ),
                                     ),
                                   ],
                                 );
                               } else {
                                 print(snapshot.error);
-                                return Text('No Data');
+                                return Text(
+                                    'Error: Please try again after some time');
                               }
                             default:
                               return Text('Connection failed');

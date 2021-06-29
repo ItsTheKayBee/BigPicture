@@ -1,12 +1,14 @@
 import 'package:big_picture/constants/strings.dart';
+import 'movieTilesModel.dart';
 
 class Preview {
   final String title;
   final String year;
-  final String runtime;
+  final int runtime;
   final String plot;
-  final List<Rating> ratings;
+  List<Rating> ratings;
   final int totalSeasons;
+  final String status;
 
   Preview({
     required this.title,
@@ -15,46 +17,65 @@ class Preview {
     required this.plot,
     required this.ratings,
     required this.totalSeasons,
+    required this.status,
   });
 
-  factory Preview.fromJson(Map<String, dynamic> json, String imdbID) {
-    //OMDB way
-    if (imdbID != '') {
-      List<Rating> ratingsList = List<Rating>.from(
-        json['Ratings'].map(
-          (rating) => Rating.fromJson(rating),
-        ),
-      );
-      return Preview(
-        title: json['Title'],
-        year: json['Year'],
-        runtime: json['Runtime'],
-        plot: json['Plot'],
-        ratings: ratingsList,
-        totalSeasons: int.parse(
-            json['totalSeasons'] == 'N/A' ? '0' : json['totalSeasons'] ?? '0'),
-      );
+  factory Preview.fromJson(Map<String, dynamic> json, contentType) {
+    String title = '';
+    String year = '';
+    String status = '';
+    int runtime = 0;
+
+    if (contentType == Type.MOVIE) {
+      //for movies
+      title = json['title'] ?? '';
+      year = json['release_date'] != ''
+          ? json['release_date']?.substring(0, 4)
+          : defaultDate;
+      runtime = json['runtime'];
+      status = json['status'] ?? '';
+    } else if (contentType == Type.TV) {
+      //for tv
+      title = json['name'] ?? '';
+      status = json['status'] ?? '';
+      String firstAirDate =
+          json['first_air_date']?.substring(0, 4) ?? defaultDate;
+      String lastAirDate =
+          json['last_air_date']?.substring(0, 4) ?? defaultDate;
+      if (firstAirDate == defaultDate) {
+        year = hyphen;
+      } else if (firstAirDate == lastAirDate && status != 'Returning Series') {
+        //if only for one year
+        year = firstAirDate;
+      } else if (status == 'Returning Series') {
+        //if ongoing
+        year = firstAirDate + '-';
+      } else {
+        // if finished
+        year = firstAirDate + '-' + lastAirDate;
+      }
     }
-    //else TMDB way
-    else {
-      return Preview(
-        //title for movies & name for tv series as per tmdb api
-        title: json['title'] ?? json['name'],
 
-        //get the year only from the release date
-        year: json['release_date']?.substring(0, 4) ?? defaultDate,
+    return Preview(
+      //title for movies & name for tv series as per tmdb api
+      title: title,
 
-        //convert int duration to string
-        runtime: json['runtime'].toString(),
-        plot: json['overview'],
+      //get the year only from the release date
+      year: year,
 
-        //ratinsg do not exist in tmdb api
-        ratings: [],
+      //convert int duration to string
+      runtime: runtime,
 
-        //number of seasons
-        totalSeasons: json['number_of_seasons'] ?? 0,
-      );
-    }
+      plot: json['overview'],
+
+      //ratinsg do not exist in tmdb api
+      ratings: [],
+
+      status: status,
+
+      //number of seasons
+      totalSeasons: json['number_of_seasons'] ?? 0,
+    );
   }
 }
 

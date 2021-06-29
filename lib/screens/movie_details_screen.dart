@@ -5,6 +5,7 @@ import '../constants/strings.dart';
 import '../constants/styles.dart';
 import '../models/movieDetails.dart';
 import '../models/movieDetailsModel.dart';
+import '../models/movieTilesModel.dart';
 import '../models/preview.dart';
 import '../utilities/progressive_image.dart';
 import '../utilities/scrollable_view_clipper.dart';
@@ -83,6 +84,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         items: items,
       ),
     );
+  }
+
+  String displaySeasons(int totalSeasons) {
+    if (totalSeasons == 1) {
+      return '$totalSeasons season';
+    } else if (totalSeasons == 0) {
+      return hyphen;
+    } else {
+      return '$totalSeasons seasons';
+    }
   }
 
   @override
@@ -164,7 +175,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                         padding: EdgeInsets.only(
                                           left: offset,
                                           top: 18,
-                                          right: 24,
+                                          right: offset,
                                         ),
                                         child: Text(
                                           snapshot.data![0].title,
@@ -174,6 +185,21 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
+                                      if (snapshot.data![1].tagline != '')
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            left: offset,
+                                            top: 8,
+                                            right: offset,
+                                          ),
+                                          child: Text(
+                                            snapshot.data![1].tagline,
+                                            style: movieDetailsTagline,
+                                            softWrap: true,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
                                       Divider(
                                         indent: offset,
                                         endIndent: offset,
@@ -211,8 +237,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                         movieDetailsDescription,
                                                   ),
                                                   Text(
-                                                    convertTime(snapshot
-                                                        .data![0].runtime),
+                                                    widget.contentType ==
+                                                            Type.MOVIE
+                                                        ? convertTime(
+                                                            runtime: snapshot
+                                                                .data![0]
+                                                                .runtime)
+                                                        : displaySeasons(
+                                                            snapshot.data![0]
+                                                                .totalSeasons),
                                                     style: movieDetailsData,
                                                   ),
                                                   Text(
@@ -221,9 +254,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                         movieDetailsDescription,
                                                   ),
                                                   Text(
-                                                    getLanguageName(snapshot
-                                                        .data![1]
-                                                        .originalLanguage),
+                                                    getLanguageName(
+                                                        key: snapshot.data![1]
+                                                            .originalLanguage),
                                                     style: movieDetailsData,
                                                   ),
                                                 ],
@@ -276,6 +309,18 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                           style: movieDetailsDescription,
                                         ),
                                       ),
+                                      if (snapshot.data![0].status != '')
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                            left: offset,
+                                            top: 12,
+                                            right: 24,
+                                          ),
+                                          child: Text(
+                                            snapshot.data![0].status,
+                                            style: movieDetailsDescription,
+                                          ),
+                                        ),
                                       renderSections(
                                         size: size,
                                         offset: offset,

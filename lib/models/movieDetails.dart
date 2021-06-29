@@ -11,6 +11,7 @@ class MovieDetails {
   final int collectionId;
   final String collectionName;
   List collectionParts;
+  final String tagline;
 
   MovieDetails({
     required this.originalLanguage,
@@ -21,6 +22,7 @@ class MovieDetails {
     required this.collectionId,
     required this.collectionName,
     required this.collectionParts,
+    required this.tagline,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json, contentType) {
@@ -44,6 +46,7 @@ class MovieDetails {
       overview: json['overview'],
       recommendations: recommendations,
       videos: videos,
+      tagline: json['tagline'] ?? '',
     );
   }
 }

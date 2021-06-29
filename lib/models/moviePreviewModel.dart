@@ -6,13 +6,18 @@ import 'movieTilesModel.dart';
 import 'package:http/http.dart' as http;
 
 class MoviePreviewModel {
-  Future<String> getImdbID({required tmdbID, required contentType}) async {
-    final Uri uri = Uri.parse(
-        '$BASE_URL/$contentType/$tmdbID/external_ids?api_key=$API_KEY');
+  Future<List<Rating>> getRatings({required imdbID}) async {
+    final Uri uri = Uri.parse('$OMDB_BASE_URL/?apikey=$OMDB_API_KEY&i=$imdbID');
+
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
-      return map["imdb_id"] ?? '';
+      List<Rating> ratingsList = List<Rating>.from(
+        map['Ratings'].map(
+          (rating) => Rating.fromJson(rating),
+        ),
+      );
+      return ratingsList;
     }
     throw Exception('Failed to fetch IMDB ID');
   }
@@ -25,16 +30,20 @@ class MoviePreviewModel {
     } else if (contentType == Type.TV) {
       type = 'tv';
     }
-    String imdbID = await getImdbID(tmdbID: tmdbID, contentType: type);
-    if (imdbID == '') {
-      uri = Uri.parse('$BASE_URL/$type/$tmdbID?api_key=$API_KEY');
-    } else {
-      uri = Uri.parse('$OMDB_BASE_URL/?apikey=$OMDB_API_KEY&i=$imdbID');
-    }
+
+    uri = Uri.parse(
+        '$BASE_URL/$type/$tmdbID?api_key=$API_KEY&append_to_response=external_ids');
+
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
-      return Preview.fromJson(map, imdbID);
+      String imdbID = map['external_ids']?['imdb_id'] ?? '';
+      Preview preview = Preview.fromJson(map, contentType);
+      if (imdbID != '') {
+        List<Rating> ratings = await getRatings(imdbID: imdbID);
+        preview.ratings = ratings;
+      }
+      return preview;
     }
     throw Exception('Failed to fetch preview');
   }

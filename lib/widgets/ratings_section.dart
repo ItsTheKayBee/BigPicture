@@ -16,19 +16,15 @@ class RatingsSection extends StatelessWidget {
       missingRating,
       missingRating
     ];
-    // bool noRatings = true;
     for (Rating rating in ratings) {
       if (rating.source == 'Internet Movie Database') {
         modifiedRatings[0] = rating;
-        // noRatings = false;
       }
       if (rating.source == 'Rotten Tomatoes') {
         modifiedRatings[1] = rating;
-        // noRatings = false;
       }
       if (rating.source == 'Metacritic') {
         modifiedRatings[2] = rating;
-        // noRatings = false;
       }
     }
 
