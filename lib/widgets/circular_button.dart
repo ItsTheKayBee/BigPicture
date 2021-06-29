@@ -5,7 +5,7 @@ class CircularButton extends StatelessWidget {
   final double height;
   final Color color;
   final Icon icon;
-  final Function onClick;
+  final onClick;
 
   CircularButton({
     required this.color,
@@ -30,7 +30,7 @@ class CircularButton extends StatelessWidget {
       ),
       width: width,
       height: height,
-      child: IconButton(icon: icon, enableFeedback: true, onPressed: onClick()),
+      child: IconButton(icon: icon, enableFeedback: true, onPressed: onClick),
     );
   }
 }

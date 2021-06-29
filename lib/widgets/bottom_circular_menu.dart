@@ -75,6 +75,17 @@ class _BottomCircularMenuState extends State<BottomCircularMenu>
     super.dispose();
   }
 
+  onFabClicked() {
+    setState(() {
+      isFabCLicked = !isFabCLicked;
+    });
+    if (animationController.isCompleted) {
+      animationController.reverse();
+    } else {
+      animationController.forward();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -163,16 +174,7 @@ class _BottomCircularMenuState extends State<BottomCircularMenu>
                   Icons.close_rounded,
                   color: Colors.white,
                 ),
-                onClick: () {
-                  setState(() {
-                    isFabCLicked = !isFabCLicked;
-                  });
-                  if (animationController.isCompleted) {
-                    animationController.reverse();
-                  } else {
-                    animationController.forward();
-                  }
-                },
+                onClick: onFabClicked,
               ),
             ),
           ),
