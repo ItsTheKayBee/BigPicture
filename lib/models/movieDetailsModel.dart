@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:big_picture/constants/config.dart';
+import 'package:big_picture/models/movieTile.dart';
 import 'package:http/http.dart' as http;
 import 'movieTilesModel.dart';
 import 'movieDetails.dart';
@@ -18,8 +19,34 @@ class MovieDetailsModel {
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
-      return MovieDetails.fromJson(map, contentType);
+      MovieDetails movieDetails = MovieDetails.fromJson(map, contentType);
+      int collectionId = movieDetails.collectionId;
+      if (collectionId != 0) {
+        List<MovieTile> collectionParts = await getCollection(
+          collectionId: collectionId,
+          contentType: contentType,
+        );
+        movieDetails.collectionParts = collectionParts;
+      }
+      return movieDetails;
     }
     throw Exception('Failed to fetch $type');
+  }
+
+  Future<List<MovieTile>> getCollection(
+      {required int collectionId, required contentType}) async {
+    final Uri uri =
+        Uri.parse('$BASE_URL/collection/$collectionId?api_key=$API_KEY');
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> map = json.decode(response.body);
+      List<dynamic> parts = map["parts"];
+      List<MovieTile> collectionParts =
+          parts.map((part) => MovieTile.fromJson(part, contentType)).toList();
+      collectionParts.sort((a, b) => a.releaseDate.compareTo(b.releaseDate));
+      return collectionParts;
+    }
+    throw Exception('Failed to fetch collection');
   }
 }

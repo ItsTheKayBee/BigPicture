@@ -21,4 +21,7 @@ const String searchTitle = 'Search';
 const String searchText = 'Search...';
 const String movieText = 'Movies';
 const String actorText = 'Actors';
-const String directorText = 'Directors';
+
+//defaults
+const String defaultDate = '9999-99-99';
+const String hyphen = '-';

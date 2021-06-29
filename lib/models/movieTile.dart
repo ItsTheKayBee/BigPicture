@@ -1,17 +1,20 @@
+import 'package:big_picture/constants/strings.dart';
+
 class MovieTile {
   final int movieId;
   final String imageUrl;
   final String movieName;
   final List genre;
   final type;
+  final String releaseDate;
 
-  MovieTile({
-    required this.movieId,
-    required this.imageUrl,
-    required this.movieName,
-    required this.genre,
-    required this.type,
-  });
+  MovieTile(
+      {required this.movieId,
+      required this.imageUrl,
+      required this.movieName,
+      required this.genre,
+      required this.type,
+      required this.releaseDate});
 
   factory MovieTile.fromJson(Map<String, dynamic> json, contentType) {
     return MovieTile(
@@ -29,6 +32,8 @@ class MovieTile {
 
       //content type
       type: contentType,
+
+      releaseDate: json['release_date'] ?? defaultDate,
     );
   }
 }

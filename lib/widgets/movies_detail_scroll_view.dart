@@ -50,19 +50,25 @@ class MoviesDetailScrollView extends StatelessWidget {
                   if (sectionTitle == 'Cast')
                     return CastTileItem(
                       castTile: items[index],
-                      posterHeight: 250,
-                      posterWidth: 190,
+                      posterHeight: 230,
+                      posterWidth: 160,
                     );
                   else if (sectionTitle == 'Videos')
                     return VideoItem(
                       videoTile: items[index],
                       videoWidth: size.width - 2 * offset,
                     );
-                  else
+                  else if (sectionTitle == 'Recommendations')
                     return MovieTileItem(
                       movieTile: items[index],
-                      posterHeight: 250,
-                      posterWidth: 190,
+                      posterHeight: 230,
+                      posterWidth: 160,
+                    );
+                  else 
+                    return MovieTileItem(
+                      movieTile: items[index],
+                      posterHeight: 230,
+                      posterWidth: 160,
                     );
                 },
                 itemCount: items.length,

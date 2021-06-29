@@ -9,6 +9,8 @@ class MovieDetails {
   final List videos;
   final List recommendations;
   final int collectionId;
+  final String collectionName;
+  List collectionParts;
 
   MovieDetails({
     required this.originalLanguage,
@@ -17,6 +19,8 @@ class MovieDetails {
     required this.videos,
     required this.recommendations,
     required this.collectionId,
+    required this.collectionName,
+    required this.collectionParts,
   });
 
   factory MovieDetails.fromJson(Map<String, dynamic> json, contentType) {
@@ -34,6 +38,8 @@ class MovieDetails {
     return MovieDetails(
       castList: castList,
       collectionId: json['belongs_to_collection']?['id'] ?? 0,
+      collectionName: json['belongs_to_collection']?['name'] ?? '',
+      collectionParts: [],
       originalLanguage: json['original_language'],
       overview: json['overview'],
       recommendations: recommendations,

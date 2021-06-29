@@ -1,4 +1,5 @@
 import 'package:big_picture/constants/config.dart';
+import 'package:big_picture/constants/strings.dart';
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/movieDetails.dart';
 import 'package:big_picture/models/movieDetailsModel.dart';
@@ -179,7 +180,11 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                         .spaceEvenly,
                                                 children: [
                                                   Text(
-                                                    snapshot.data![0].year,
+                                                    snapshot.data![0].year ==
+                                                            defaultDate
+                                                        ? hyphen
+                                                        : snapshot
+                                                            .data![0].year,
                                                     style: movieDetailsData,
                                                   ),
                                                   Text(
@@ -254,7 +259,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                         ),
                                       ),
                                       Container(
-                                        height: 1500,
+                                        height: 1800,
                                         child: Stack(
                                           children: [
                                             MoviesDetailScrollView(
@@ -274,17 +279,51 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                 items: snapshot.data![1].videos,
                                               ),
                                             ),
-                                            Positioned(
-                                              top: 2 * 374,
-                                              child: MoviesDetailScrollView(
-                                                size: size,
-                                                color: greenCustomViewColor,
-                                                offset: offset,
-                                                sectionTitle: 'Recommendations',
-                                                items: snapshot
-                                                    .data![1].recommendations,
+                                            snapshot.data![1].collectionId != 0
+                                                ? Positioned(
+                                                    top: 2 * 374,
+                                                    child:
+                                                        MoviesDetailScrollView(
+                                                      size: size,
+                                                      color:
+                                                          blueCustomViewColor,
+                                                      offset: offset,
+                                                      sectionTitle: snapshot
+                                                          .data![1]
+                                                          .collectionName,
+                                                      items: snapshot.data![1]
+                                                          .collectionParts,
+                                                    ),
+                                                  )
+                                                : Positioned(
+                                                    top: 2 * 374,
+                                                    child:
+                                                        MoviesDetailScrollView(
+                                                      size: size,
+                                                      color:
+                                                          greenCustomViewColor,
+                                                      offset: offset,
+                                                      sectionTitle:
+                                                          'Recommendations',
+                                                      items: snapshot.data![1]
+                                                          .recommendations,
+                                                    ),
+                                                  ),
+                                            if (snapshot
+                                                    .data![1].collectionId !=
+                                                0)
+                                              Positioned(
+                                                top: 3 * 374,
+                                                child: MoviesDetailScrollView(
+                                                  size: size,
+                                                  color: greenCustomViewColor,
+                                                  offset: offset,
+                                                  sectionTitle:
+                                                      'Recommendations',
+                                                  items: snapshot
+                                                      .data![1].recommendations,
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       )

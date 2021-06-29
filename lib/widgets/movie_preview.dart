@@ -1,4 +1,5 @@
 import 'package:big_picture/constants/config.dart';
+import 'package:big_picture/constants/strings.dart';
 import 'package:big_picture/constants/styles.dart';
 import 'package:big_picture/models/moviePreviewModel.dart';
 import 'package:big_picture/models/preview.dart';
@@ -106,7 +107,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Container(
                                       child: Text(
-                                        '${snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${widget.genreString}',
+                                        '${snapshot.data!.year==defaultDate?hyphen:snapshot.data!.year} ‧ ${convertTime(snapshot.data!.runtime)} ‧ ${widget.genreString}',
                                         style: moviePreviewSubTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,

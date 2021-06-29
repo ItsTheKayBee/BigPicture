@@ -1,3 +1,5 @@
+import 'package:big_picture/constants/strings.dart';
+
 class Preview {
   final String title;
   final String year;
@@ -36,7 +38,7 @@ class Preview {
         title: json['title'] ?? json['name'],
 
         //get the year only from the release date
-        year: json['release_date']?.substring(0, 4),
+        year: json['release_date']?.substring(0, 4) ?? defaultDate,
 
         //convert int duration to string
         runtime: json['runtime'].toString(),
