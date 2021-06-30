@@ -2,7 +2,7 @@ import '../constants/config.dart';
 import '../constants/strings.dart';
 import '../constants/styles.dart';
 import '../models/moviePreviewModel.dart';
-import '../models/movieTilesModel.dart';
+import '../constants/content_type.dart';
 import '../models/preview.dart';
 import '../screens/movie_details_screen.dart';
 import '../utilities/utility.dart';
@@ -155,7 +155,7 @@ class _MoviePreviewState extends State<MoviePreview> {
                                     ),
                                     Container(
                                       child: Text(
-                                        '${snapshot.data!.year == defaultDate ? hyphen : snapshot.data!.year} ‧ ${widget.contentType == Type.MOVIE ? convertTime(runtime: snapshot.data!.runtime) : displaySeasons(snapshot.data!.totalSeasons)} ‧ ${widget.genreString}',
+                                        '${snapshot.data!.year == defaultDate ? hyphen : snapshot.data!.year} ‧ ${widget.contentType == Type.movie ? convertTime(runtime: snapshot.data!.runtime) : displaySeasons(snapshot.data!.totalSeasons)} ‧ ${widget.genreString}',
                                         style: moviePreviewSubTitle,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,

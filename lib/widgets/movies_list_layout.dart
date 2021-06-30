@@ -1,9 +1,10 @@
-import 'package:big_picture/constants/strings.dart';
-import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/movieTile.dart';
-import 'package:big_picture/models/searchModel.dart';
-import 'choice_chip_group.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/strings.dart';
+import '../constants/styles.dart';
+import '../constants/content_type.dart';
+import '../models/searchModel.dart';
+import 'choice_chip_group.dart';
 import 'default_header.dart';
 import 'movies_grid_view.dart';
 
@@ -25,16 +26,30 @@ class MoviesListLayout extends StatefulWidget {
 class _MoviesListLayoutState extends State<MoviesListLayout> {
   SearchModel searchModel = SearchModel();
   String searchQuery = '';
+  var selectedType = Type.movie;
 
-  Future<List<MovieTile>> updateSearchResults() {
-    return searchModel.getSearchResults(query: searchQuery);
+  Future<List> updateSearchResults() async {
+    String query = searchQuery.trim();
+    if (query == '') {
+      return [];
+    }
+    return searchModel.getSearchResults(
+      query: query,
+      contentType: selectedType,
+    );
   }
 
   void onSearch(String query) {
     setState(() {
       searchQuery = query;
-      updateSearchResults();
     });
+  }
+
+  void setSelected(selectedType) {
+    setState(() {
+      this.selectedType = selectedType;
+    });
+    onSearch(searchQuery);
   }
 
   @override
@@ -83,11 +98,20 @@ class _MoviesListLayoutState extends State<MoviesListLayout> {
                   ),
                 ],
               ),
-              if (widget.isChoiceChipGroupPresent) ChoiceChipGroup(),
+              if (widget.isChoiceChipGroupPresent)
+                ChoiceChipGroup(
+                  selectedType: selectedType,
+                  onSelected: setSelected,
+                ),
             ],
           ),
           SizedBox(height: size4),
-          Flexible(child: MoviesGridView(movieTiles: updateSearchResults())),
+          Flexible(
+            child: MoviesGridView(
+              items: updateSearchResults(),
+              contentType: selectedType,
+            ),
+          ),
         ],
       ),
     );

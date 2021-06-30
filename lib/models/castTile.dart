@@ -2,7 +2,7 @@ class CastTile {
   final int castId;
   final String imageUrl;
   final String castName;
-  final String castRoleName ;
+  final String castRoleName;
 
   CastTile({
     required this.castId,
@@ -20,10 +20,10 @@ class CastTile {
       imageUrl: json['profile_path'] ?? '',
 
       //name of cast
-      castName: json['name'],
+      castName: json['name'] ?? '',
 
       // cast character name
-      castRoleName: json['character'],
+      castRoleName: json['character'] ?? '',
     );
   }
 }

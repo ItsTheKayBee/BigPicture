@@ -57,14 +57,15 @@ class CastTileItem extends StatelessWidget {
                 maxLines: 2,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: size1),
-              child: Text(
-                castTile.castRoleName,
-                style: subTitleStyle,
-                overflow: TextOverflow.ellipsis,
+            if (castTile.castRoleName != '')
+              Padding(
+                padding: EdgeInsets.only(left: size1),
+                child: Text(
+                  castTile.castRoleName,
+                  style: subTitleStyle,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
           ],
         ),
       ),

@@ -31,7 +31,6 @@ class _MoviesSectionState extends State<MoviesSection> {
     try {
       moviesList =
           movieTilesModel.getMovieList(movieListType: widget.movieListType);
-      print('init');
     } on Exception catch (_) {
       print('exception');
     }
@@ -39,7 +38,6 @@ class _MoviesSectionState extends State<MoviesSection> {
 
   @override
   Widget build(BuildContext context) {
-    print('built');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

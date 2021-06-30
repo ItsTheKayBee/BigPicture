@@ -1,5 +1,5 @@
-import 'package:big_picture/constants/strings.dart';
-import 'movieTilesModel.dart';
+import '../constants/strings.dart';
+import '../constants/content_type.dart';
 
 class Preview {
   final String title;
@@ -26,7 +26,7 @@ class Preview {
     String status = '';
     int runtime = 0;
 
-    if (contentType == Type.MOVIE) {
+    if (contentType == Type.movie) {
       //for movies
       title = json['title'] ?? '';
       year = json['release_date'] != ''
@@ -34,14 +34,16 @@ class Preview {
           : defaultDate;
       runtime = json['runtime'];
       status = json['status'] ?? '';
-    } else if (contentType == Type.TV) {
+    } else if (contentType == Type.tv) {
       //for tv
       title = json['name'] ?? '';
       status = json['status'] ?? '';
-      String firstAirDate =
-          json['first_air_date']?.substring(0, 4) ?? defaultDate;
-      String lastAirDate =
-          json['last_air_date']?.substring(0, 4) ?? defaultDate;
+      String firstAirDate = json['first_air_date'] != ''
+          ? json['first_air_date']?.substring(0, 4)
+          : defaultDate;
+      String lastAirDate = json['last_air_date'] != ''
+          ? json['last_air_date']?.substring(0, 4)
+          : defaultDate;
       if (firstAirDate == defaultDate) {
         year = hyphen;
       } else if (firstAirDate == lastAirDate && status != 'Returning Series') {

@@ -5,7 +5,7 @@ import '../constants/strings.dart';
 import '../constants/styles.dart';
 import '../models/movieDetails.dart';
 import '../models/movieDetailsModel.dart';
-import '../models/movieTilesModel.dart';
+import '../constants/content_type.dart';
 import '../models/preview.dart';
 import '../utilities/progressive_image.dart';
 import '../utilities/scrollable_view_clipper.dart';
@@ -238,7 +238,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                   ),
                                                   Text(
                                                     widget.contentType ==
-                                                            Type.MOVIE
+                                                            Type.movie
                                                         ? convertTime(
                                                             runtime: snapshot
                                                                 .data![0]

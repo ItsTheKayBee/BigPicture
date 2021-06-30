@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:big_picture/constants/config.dart';
-import 'package:big_picture/models/preview.dart';
-import 'movieTilesModel.dart';
+import '../constants/config.dart';
+import '../constants/content_type.dart';
+import '../models/preview.dart';
 import 'package:http/http.dart' as http;
 
 class MoviePreviewModel {
@@ -25,9 +25,9 @@ class MoviePreviewModel {
   Future<Preview> getPreview({required tmdbID, required contentType}) async {
     final Uri uri;
     String type = '';
-    if (contentType == Type.MOVIE) {
+    if (contentType == Type.movie) {
       type = 'movie';
-    } else if (contentType == Type.TV) {
+    } else if (contentType == Type.tv) {
       type = 'tv';
     }
 

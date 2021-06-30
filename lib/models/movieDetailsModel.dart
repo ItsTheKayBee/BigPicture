@@ -1,17 +1,17 @@
 import 'dart:convert';
-import 'package:big_picture/constants/config.dart';
-import 'package:big_picture/models/movieTile.dart';
+import '../constants/config.dart';
+import '../constants/content_type.dart';
+import '../models/movieTile.dart';
 import 'package:http/http.dart' as http;
-import 'movieTilesModel.dart';
 import 'movieDetails.dart';
 
 class MovieDetailsModel {
   Future<MovieDetails> getMovieDetails(
       {required tmdbID, required contentType}) async {
     String type = '';
-    if (contentType == Type.MOVIE) {
+    if (contentType == Type.movie) {
       type = 'movie';
-    } else if (contentType == Type.TV) {
+    } else if (contentType == Type.tv) {
       type = 'tv';
     }
     final Uri uri = Uri.parse(

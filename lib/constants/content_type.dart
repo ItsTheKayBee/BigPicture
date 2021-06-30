@@ -1,0 +1,1 @@
+enum Type { movie, tv, people, }

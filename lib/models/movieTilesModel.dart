@@ -1,9 +1,12 @@
 import 'dart:convert';
-import 'package:big_picture/constants/config.dart';
+
+import '../constants/config.dart';
+import '../constants/genre_list.dart';
+import '../constants/content_type.dart';
 import 'movieTile.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:country_codes/country_codes.dart';
-import '../constants/genre_list.dart';
 
 enum Explore {
   nowPlaying,
@@ -17,8 +20,6 @@ enum Explore {
   upcomingInRegion
 }
 
-enum Type { MOVIE, TV }
-
 class MovieTilesModel {
   List<MovieTile> _movieTiles = [];
 
@@ -28,42 +29,42 @@ class MovieTilesModel {
     switch (movieListType) {
       case Explore.nowPlaying:
         url = '$BASE_URL/movie/now_playing?api_key=$API_KEY';
-        type = Type.MOVIE;
+        type = Type.movie;
         break;
       case Explore.newInRegion:
         final isoCode = await getIsoCode();
         url = '$BASE_URL/movie/now_playing?api_key=$API_KEY&region=$isoCode';
-        type = Type.MOVIE;
+        type = Type.movie;
         break;
       case Explore.popular:
         url = '$BASE_URL/movie/popular?api_key=$API_KEY';
-        type = Type.MOVIE;
+        type = Type.movie;
         break;
       case Explore.popularInRegion:
         final isoCode = await getIsoCode();
         url = '$BASE_URL/movie/popular?api_key=$API_KEY&region=$isoCode';
-        type = Type.MOVIE;
+        type = Type.movie;
         break;
       case Explore.popularTv:
-        type = Type.TV;
+        type = Type.tv;
         url = '$BASE_URL/tv/popular?api_key=$API_KEY';
         break;
       case Explore.airingNowTv:
-        type = Type.TV;
+        type = Type.tv;
         url = '$BASE_URL/tv/on_the_air?api_key=$API_KEY';
         break;
       case Explore.upcoming:
-        type = Type.MOVIE;
+        type = Type.movie;
         url = '$BASE_URL/movie/upcoming?api_key=$API_KEY';
         break;
       case Explore.upcomingInRegion:
-        type = Type.MOVIE;
+        type = Type.movie;
         final isoCode = await getIsoCode();
         url = '$BASE_URL/movie/upcoming?api_key=$API_KEY&region=$isoCode';
         break;
       case Explore.recommendations:
         //TODO: Make recommendations dynamic
-        type = Type.MOVIE;
+        type = Type.movie;
         url = '$BASE_URL/movie/popular?api_key=$API_KEY';
         break;
       default:

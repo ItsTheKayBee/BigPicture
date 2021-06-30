@@ -1,28 +1,38 @@
 import 'dart:convert';
 
-import 'package:big_picture/constants/config.dart';
 import 'package:http/http.dart' as http;
-
+import 'castTile.dart';
 import 'movieTile.dart';
-import 'movieTilesModel.dart';
+import '../constants/config.dart';
+import '../constants/content_type.dart';
 
 class SearchModel {
-  Future<List<MovieTile>> getSearchResults({required query}) async {
+  Future<List> getSearchResults(
+      {required String query, required contentType}) async {
     if (query == '') {
       return [];
     }
-    //TODO: make dynamic search results
-    final String url = '$BASE_URL/search/movie?api_key=$API_KEY&query=$query';
+    final String url;
+    if (contentType == Type.movie) {
+      url = '$BASE_URL/search/movie?api_key=$API_KEY&query=$query';
+    } else if (contentType == Type.tv) {
+      url = '$BASE_URL/search/tv?api_key=$API_KEY&query=$query';
+    } else {
+      url = '$BASE_URL/search/person?api_key=$API_KEY&query=$query';
+    }
 
     final Uri uri = Uri.parse(url);
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
       List<dynamic> list = map["results"];
-      return list
-          .map((model) => MovieTile.fromJson(model, Type.MOVIE))
-          .toList();
+      if (contentType == Type.movie || contentType == Type.tv)
+        return list
+            .map((model) => MovieTile.fromJson(model, contentType))
+            .toList();
+      else
+        return list.map((model) => CastTile.fromJson(model)).toList();
     }
-    throw Exception('Search failed');
+    throw Exception('No search results found');
   }
 }

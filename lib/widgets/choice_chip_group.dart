@@ -1,19 +1,16 @@
-import 'package:big_picture/constants/styles.dart';
 import 'package:flutter/material.dart';
 
-class ChoiceChipGroup extends StatefulWidget {
-  @override
-  _ChoiceChipGroupState createState() => _ChoiceChipGroupState();
-}
+import '../constants/styles.dart';
+import '../constants/content_type.dart';
 
-class _ChoiceChipGroupState extends State<ChoiceChipGroup> {
-  int selectedIndex = 0;
+class ChoiceChipGroup extends StatelessWidget {
+  final selectedType;
+  final void Function(dynamic) onSelected;
 
-  void onSelected(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+  ChoiceChipGroup({
+    required this.onSelected,
+    required this.selectedType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +23,25 @@ class _ChoiceChipGroupState extends State<ChoiceChipGroup> {
             labelText: 'Movies',
             iconData: Icons.movie_creation_outlined,
             selectedIconData: Icons.movie_creation,
-            index: 0,
+            index: Type.movie,
             onSelected: onSelected,
-            selectedIndex: selectedIndex,
+            selectedIndex: selectedType,
           ),
           SearchChoiceChip(
             labelText: 'TV Series',
             iconData: Icons.videocam_outlined,
             selectedIconData: Icons.videocam,
-            index: 2,
+            index: Type.tv,
             onSelected: onSelected,
-            selectedIndex: selectedIndex,
+            selectedIndex: selectedType,
           ),
           SearchChoiceChip(
             labelText: 'People',
             iconData: Icons.face_outlined,
             selectedIconData: Icons.face,
-            index: 1,
+            index: Type.people,
             onSelected: onSelected,
-            selectedIndex: selectedIndex,
+            selectedIndex: selectedType,
           ),
         ],
       ),
@@ -56,9 +53,9 @@ class SearchChoiceChip extends StatelessWidget {
   final String labelText;
   final IconData iconData;
   final IconData selectedIconData;
-  final int index;
+  final index;
   final Function onSelected;
-  final int selectedIndex;
+  final selectedIndex;
 
   SearchChoiceChip({
     required this.labelText,
