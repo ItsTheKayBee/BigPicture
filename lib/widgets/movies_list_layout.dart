@@ -1,3 +1,4 @@
+import 'package:big_picture/widgets/filter_modal.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/strings.dart';
@@ -92,7 +93,16 @@ class _MoviesListLayoutState extends State<MoviesListLayout> {
                           Icons.tune_outlined,
                           color: fontColorDark,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            enableDrag: false,
+                            backgroundColor: Colors.transparent,
+                            builder: (ctx) {
+                              return FilterModal();
+                            },
+                          );
+                        },
                       ),
                     ),
                   ),

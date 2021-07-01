@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:big_picture/models/filter.dart';
 import 'package:http/http.dart' as http;
 import 'castTile.dart';
 import 'movieTile.dart';
@@ -32,6 +33,30 @@ class SearchModel {
             .toList();
       else
         return list.map((model) => CastTile.fromJson(model)).toList();
+    }
+    throw Exception('No search results found');
+  }
+
+  Future<List> getFilteredResults(
+      {required Filter filter, required contentType}) async {
+    String url = '';
+    if (contentType == Type.movie) {
+      url = '';
+    } else if (contentType == Type.tv) {
+      url = '';
+    } else {
+      throw Exception('Filters only exist for movies and TV');
+    }
+
+    final Uri uri = Uri.parse(url);
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      Map<String, dynamic> map = json.decode(response.body);
+      List<dynamic> list = map["results"];
+      if (contentType == Type.movie || contentType == Type.tv)
+        return list
+            .map((model) => MovieTile.fromJson(model, contentType))
+            .toList();
     }
     throw Exception('No search results found');
   }
