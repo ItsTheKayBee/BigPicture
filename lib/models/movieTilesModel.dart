@@ -1,12 +1,13 @@
 import 'dart:convert';
 
+import 'package:big_picture/utilities/utility.dart';
+
 import '../constants/config.dart';
 import '../constants/genre_list.dart';
 import '../constants/content_type.dart';
 import 'movieTile.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:country_codes/country_codes.dart';
 
 enum Explore {
   nowPlaying,
@@ -95,15 +96,6 @@ class MovieTilesModel {
     } catch (e) {
       throw Exception('Genre not found: $e');
     }
-  }
-
-// this function return ISO code of country (US, IN, etc)
-  Future getIsoCode() async {
-    await CountryCodes.init();
-
-    final CountryDetails details = CountryCodes.detailsForLocale();
-
-    return details.alpha2Code;
   }
 
   List<MovieTile> get allMovieTiles => _movieTiles;

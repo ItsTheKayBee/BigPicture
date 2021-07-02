@@ -1,5 +1,6 @@
-import 'package:big_picture/constants/language.dart';
-import 'package:big_picture/constants/strings.dart';
+import '../constants/language.dart';
+import '../constants/strings.dart';
+import 'package:country_codes/country_codes.dart';
 
 String convertTime({required int runtime}) {
   if (runtime == 0) {
@@ -20,3 +21,10 @@ String convertTime({required int runtime}) {
 
 String getLanguageName({required String key}) =>
     isoLangs[key]?['name'] ?? hyphen;
+
+// this function return ISO code of country (US, IN, etc)
+Future getIsoCode() async {
+  await CountryCodes.init();
+
+  return CountryCodes.detailsForLocale().alpha2Code;
+}

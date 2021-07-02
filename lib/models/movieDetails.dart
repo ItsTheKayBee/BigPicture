@@ -50,3 +50,23 @@ class MovieDetails {
     );
   }
 }
+
+class WatchProviders {
+  final String logoPath;
+  final int id;
+  final String name;
+
+  WatchProviders({
+    required this.id,
+    required this.logoPath,
+    required this.name,
+  });
+
+  factory WatchProviders.fromJson(Map<String, dynamic> json) {
+    return WatchProviders(
+      id: json['provider_id'],
+      logoPath: json['logo_path'],
+      name: json['provider_name'],
+    );
+  }
+}

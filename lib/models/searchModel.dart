@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:big_picture/models/filter.dart';
+import 'package:big_picture/utilities/utility.dart';
 import 'package:http/http.dart' as http;
 import 'castTile.dart';
 import 'movieTile.dart';
@@ -40,12 +41,81 @@ class SearchModel {
   Future<List> getFilteredResults(
       {required Filter filter, required contentType}) async {
     String url = '';
+
+    List? genres = filter.genres;
+    List? actors = filter.actors;
+    List? directors = filter.directors;
+    int? year = filter.year;
+    int? runtimeMin = filter.runtimeMin;
+    int? runtimeMax = filter.runtimeMax;
+    String? fromDate = filter.fromDate;
+    String? toDate = filter.toDate;
+    List? keywords = filter.keywords;
+    List? watchProviders = filter.watchProviders;
+
     if (contentType == Type.movie) {
-      url = '';
+      url = '$BASE_URL/discover/movie?api_key=$API_KEY';
+      // appends director + actors
+      if (actors.isNotEmpty && directors.isNotEmpty) {
+        url += '&with_people=' + actors.join(',') + ',' + directors.join(',');
+      } else if (actors.isNotEmpty) {
+        //appends actors
+        url += '&with_cast=' + actors.join(',');
+      } else if (directors.isNotEmpty) {
+        //appends directors
+        url += '&with_crew=' + directors.join(',');
+      }
+      //appends year
+      if (year != 0) {
+        url += '&primary_release_year=$year';
+      } else {
+        if (fromDate != '') {
+          //appends start date
+          url += '&primary_release_date.gte=$fromDate-01-01';
+        }
+        if (toDate != '') {
+          // appends end date
+          url += '&primary_release_date.lte=$toDate-12-31';
+        }
+      }
     } else if (contentType == Type.tv) {
-      url = '';
+      url = '$BASE_URL/discover/tv?api_key=$API_KEY';
+      if (fromDate != '') {
+        //appends start date
+        url += '&first_air_date.gte=$fromDate-01-01';
+      }
+      if (toDate != '') {
+        // appends end date
+        url += '&first_air_date.lte=$toDate-12-31';
+      }
     } else {
       throw Exception('Filters only exist for movies and TV');
+    }
+
+    // appends genre ids
+    if (genres.isNotEmpty) {
+      url += '&with_genres=' + genres.join(',');
+    }
+
+    // with runtime atmax runtimeMax
+    if (runtimeMax != 0) {
+      url += '&with_runtime.lte=$runtimeMax';
+    }
+
+    //with runtime atleast runtimeMin
+    url += '&with_runtime.gte=$runtimeMin';
+
+    // appends keyword ids
+    if (keywords.isNotEmpty) {
+      url += '&with_keywords=' + keywords.join(',');
+    }
+
+    // appends watch providers ids
+    if (watchProviders.isNotEmpty) {
+      final String isoCode = await getIsoCode();
+      url += '&with_watch_providers=' + watchProviders.join(',');
+      url += '&watch_region=$isoCode';
+      url += '&with_watch_monetization_types=flatrate';
     }
 
     final Uri uri = Uri.parse(url);
