@@ -1,4 +1,6 @@
 import 'dart:convert';
+import '../utilities/utility.dart';
+
 import '../constants/config.dart';
 import '../constants/content_type.dart';
 import '../models/movieTile.dart';
@@ -15,11 +17,13 @@ class MovieDetailsModel {
       type = 'tv';
     }
     final Uri uri = Uri.parse(
-        '$BASE_URL/$type/$tmdbID?api_key=$API_KEY&append_to_response=videos,credits,recommendations');
+        '$BASE_URL/$type/$tmdbID?api_key=$API_KEY&append_to_response=videos,credits,recommendations,watch/providers');
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
-      MovieDetails movieDetails = MovieDetails.fromJson(map, contentType);
+      final String isoCode = await getIsoCode();
+      MovieDetails movieDetails =
+          MovieDetails.fromJson(map, contentType, isoCode);
       int collectionId = movieDetails.collectionId;
       if (collectionId != 0) {
         List<MovieTile> collectionParts = await getCollection(

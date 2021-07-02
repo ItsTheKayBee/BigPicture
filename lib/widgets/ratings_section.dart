@@ -1,5 +1,5 @@
-import 'package:big_picture/constants/styles.dart';
-import 'package:big_picture/models/preview.dart';
+import '../constants/styles.dart';
+import '../models/preview.dart';
 import 'package:flutter/material.dart';
 
 class RatingsSection extends StatelessWidget {

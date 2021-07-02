@@ -1,5 +1,6 @@
 import 'package:big_picture/models/castTile.dart';
 import 'package:big_picture/models/movieTile.dart';
+import 'package:big_picture/utilities/utility.dart';
 import 'videoTile.dart';
 
 class MovieDetails {
@@ -8,6 +9,7 @@ class MovieDetails {
   final List castList;
   final List videos;
   final List recommendations;
+  final List watchProviders;
   final int collectionId;
   final String collectionName;
   List collectionParts;
@@ -23,9 +25,10 @@ class MovieDetails {
     required this.collectionName,
     required this.collectionParts,
     required this.tagline,
+    required this.watchProviders,
   });
 
-  factory MovieDetails.fromJson(Map<String, dynamic> json, contentType) {
+  factory MovieDetails.fromJson(Map<String, dynamic> json, contentType, isoCode) {
     List<CastTile> castList = List<CastTile>.from(
       json['credits']['cast'].map((cast) => CastTile.fromJson(cast)),
     );
@@ -35,6 +38,10 @@ class MovieDetails {
     );
     List<VideoTile> videos = List<VideoTile>.from(
       json['videos']['results'].map((video) => VideoTile.fromJson(video)),
+    );
+    List<WatchProviders> watchProviders = List<WatchProviders>.from(
+      json['watch/providers']['results'][isoCode]['flatrate']
+          .map((watchProvider) => WatchProviders.fromJson(watchProvider)),
     );
 
     return MovieDetails(
@@ -47,6 +54,7 @@ class MovieDetails {
       recommendations: recommendations,
       videos: videos,
       tagline: json['tagline'] ?? '',
+      watchProviders: watchProviders,
     );
   }
 }

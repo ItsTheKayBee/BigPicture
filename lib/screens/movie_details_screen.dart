@@ -1,3 +1,4 @@
+import 'package:big_picture/widgets/watch_providers_section.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/config.dart';
@@ -216,7 +217,6 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                               padding: EdgeInsets.only(
                                                 left: 12,
                                                 top: 8,
-                                                right: 12,
                                               ),
                                               child: Row(
                                                 mainAxisAlignment:
@@ -255,9 +255,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                                   ),
                                                   Text(
                                                     getLanguageName(
-                                                        key: snapshot.data![1]
-                                                            .originalLanguage),
+                                                            key: snapshot
+                                                                .data![1]
+                                                                .originalLanguage)
+                                                        .split(';')[0],
                                                     style: movieDetailsData,
+                                                    softWrap: true,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
                                                   ),
                                                 ],
                                               ),
@@ -321,6 +327,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                             style: movieDetailsDescription,
                                           ),
                                         ),
+                                      WatchProvidersSection(
+                                        watchProviders:
+                                            snapshot.data![1].watchProviders,
+                                      ),
                                       renderSections(
                                         size: size,
                                         offset: offset,
