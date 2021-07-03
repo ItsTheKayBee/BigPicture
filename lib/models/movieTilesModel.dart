@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:big_picture/utilities/utility.dart';
+import '../utilities/utility.dart';
 
 import '../constants/config.dart';
 import '../constants/genre_list.dart';
-import '../constants/content_type.dart';
+import '../constants/strings.dart';
 import 'movieTile.dart';
 
 import 'package:http/http.dart' as http;

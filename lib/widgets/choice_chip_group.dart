@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/styles.dart';
-import '../constants/content_type.dart';
+import '../constants/strings.dart';
 
 class ChoiceChipGroup extends StatelessWidget {
   final selectedType;

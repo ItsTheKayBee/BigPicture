@@ -1,5 +1,4 @@
 import '../constants/strings.dart';
-import '../constants/content_type.dart';
 
 class Preview {
   final String title;

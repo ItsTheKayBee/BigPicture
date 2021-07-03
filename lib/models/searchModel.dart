@@ -1,12 +1,12 @@
 import 'dart:convert';
-
-import 'package:big_picture/models/filter.dart';
-import 'package:big_picture/utilities/utility.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/filter.dart';
+import '../utilities/utility.dart';
 import 'castTile.dart';
 import 'movieTile.dart';
 import '../constants/config.dart';
-import '../constants/content_type.dart';
+import '../constants/strings.dart';
 
 class SearchModel {
   Future<List> getSearchResults(
@@ -42,16 +42,16 @@ class SearchModel {
       {required Filter filter, required contentType}) async {
     String url = '';
 
-    List? genres = filter.genres;
-    List? actors = filter.actors;
-    List? directors = filter.directors;
-    int? year = filter.year;
-    int? runtimeMin = filter.runtimeMin;
-    int? runtimeMax = filter.runtimeMax;
-    String? fromDate = filter.fromDate;
-    String? toDate = filter.toDate;
-    List? keywords = filter.keywords;
-    List? watchProviders = filter.watchProviders;
+    List? genres = filter.genres; //dropdown
+    List? actors = filter.actors; //search
+    List? directors = filter.directors; //search
+    int? year = filter.year; //number slider
+    int? runtimeMin = filter.runtimeMin; //slider range
+    int? runtimeMax = filter.runtimeMax; //slider range
+    String? fromDate = filter.fromDate; //slider range
+    String? toDate = filter.toDate; //slider range
+    List? keywords = filter.keywords; //search
+    List? watchProviders = filter.watchProviders; //dropdown
 
     if (contentType == Type.movie) {
       url = '$BASE_URL/discover/movie?api_key=$API_KEY';
@@ -130,4 +130,6 @@ class SearchModel {
     }
     throw Exception('No search results found');
   }
+
+
 }

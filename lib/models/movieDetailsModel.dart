@@ -2,7 +2,7 @@ import 'dart:convert';
 import '../utilities/utility.dart';
 
 import '../constants/config.dart';
-import '../constants/content_type.dart';
+import '../constants/strings.dart';
 import '../models/movieTile.dart';
 import 'package:http/http.dart' as http;
 import 'movieDetails.dart';

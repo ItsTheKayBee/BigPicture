@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import '../constants/config.dart';
-import '../constants/content_type.dart';
+import '../constants/strings.dart';
 import '../models/preview.dart';
 import 'package:http/http.dart' as http;
 

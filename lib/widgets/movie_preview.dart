@@ -2,7 +2,6 @@ import '../constants/config.dart';
 import '../constants/strings.dart';
 import '../constants/styles.dart';
 import '../models/moviePreviewModel.dart';
-import '../constants/content_type.dart';
 import '../models/preview.dart';
 import '../screens/movie_details_screen.dart';
 import '../utilities/utility.dart';

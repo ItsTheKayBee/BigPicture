@@ -1,9 +1,8 @@
-import 'package:big_picture/widgets/filter_modal.dart';
+import '../widgets/filter_modal.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/strings.dart';
 import '../constants/styles.dart';
-import '../constants/content_type.dart';
 import '../models/searchModel.dart';
 import 'choice_chip_group.dart';
 import 'default_header.dart';
@@ -99,7 +98,7 @@ class _MoviesListLayoutState extends State<MoviesListLayout> {
                             enableDrag: false,
                             backgroundColor: Colors.transparent,
                             builder: (ctx) {
-                              return FilterModal();
+                              return FilterModal(contentType: selectedType);
                             },
                           );
                         },

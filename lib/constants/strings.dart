@@ -30,3 +30,10 @@ const String recommendationsTitle = 'Recommendations';
 //defaults
 const String defaultDate = '9999-99-99';
 const String hyphen = '-';
+
+//enum
+enum Type {
+  movie,
+  tv,
+  people,
+}
