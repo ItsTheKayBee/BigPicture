@@ -51,7 +51,7 @@ class SearchModel {
     String? fromDate = filter.fromDate; //slider range
     String? toDate = filter.toDate; //slider range
     List? keywords = filter.keywords; //search
-    List? watchProviders = filter.watchProviders; //dropdown
+    List? watchProviders = filter.watchProviders; //search
 
     if (contentType == Type.movie) {
       url = '$BASE_URL/discover/movie?api_key=$API_KEY';

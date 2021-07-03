@@ -1,4 +1,9 @@
+import 'package:big_picture/models/castTile.dart';
+
+import '../models/searchModel.dart';
+import '../constants/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 class FilterSection extends StatefulWidget {
   @override
@@ -135,6 +140,24 @@ class _FilterSectionState extends State<FilterSection> {
             setState(() {
               _runtimeRangeSliderDiscreteValues = values;
             });
+          },
+        ),
+        TypeAheadField(
+          textFieldConfiguration: TextFieldConfiguration(
+              decoration: InputDecoration(border: OutlineInputBorder())),
+          suggestionsCallback: (pattern) async {
+            return await SearchModel()
+                .getSearchResults(query: pattern, contentType: Type.people);
+          },
+          itemBuilder: (context, suggestion) {
+            return ListTile(
+              leading: Icon(Icons.shopping_cart),
+              title: Text((suggestion as CastTile).castName),
+              subtitle: Text(suggestion.castId.toString()),
+            );
+          },
+          onSuggestionSelected: (suggestion) {
+            //TODO: implement chips
           },
         ),
       ],
