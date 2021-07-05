@@ -179,8 +179,14 @@ class _FilterSectionState extends State<FilterSection> {
             ),
           ),
           suggestionsCallback: (pattern) async {
-            return await search.getSearchResults(
+            List suggestions = await search.getSearchResults(
                 query: pattern, contentType: Type.people);
+            for (CastTile actor in actorChips) {
+              suggestions.removeWhere(
+                (suggestion) => suggestion.castId == actor.castId,
+              );
+            }
+            return suggestions;
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
@@ -241,8 +247,14 @@ class _FilterSectionState extends State<FilterSection> {
             ),
           ),
           suggestionsCallback: (pattern) async {
-            return await search.getSearchResults(
+            List suggestions = await search.getSearchResults(
                 query: pattern, contentType: Type.people);
+            for (CastTile director in directorChips) {
+              suggestions.removeWhere(
+                (suggestion) => suggestion.castId == director.castId,
+              );
+            }
+            return suggestions;
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
@@ -297,7 +309,12 @@ class _FilterSectionState extends State<FilterSection> {
             ),
           ),
           suggestionsCallback: (pattern) async {
-            return search.getGenres(query: pattern);
+            List suggestions = search.getGenres(query: pattern);
+            for (Genre genre in genreChips) {
+              suggestions
+                  .removeWhere((suggestion) => suggestion.id == genre.id);
+            }
+            return suggestions;
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
@@ -305,7 +322,8 @@ class _FilterSectionState extends State<FilterSection> {
             );
           },
           onSuggestionSelected: (suggestion) {
-            addGenreChips(suggestion as Genre);
+            genreController.text = (suggestion as Genre).name;
+            addGenreChips(suggestion);
             genreController.clear();
             genreFocusNode.requestFocus();
           },
@@ -344,8 +362,13 @@ class _FilterSectionState extends State<FilterSection> {
             ),
           ),
           suggestionsCallback: (pattern) async {
-            return await search.getSearchResults(
+            List suggestions = await search.getSearchResults(
                 query: pattern, contentType: Type.keyword);
+            for (Keyword keyword in keywordChips) {
+              suggestions
+                  .removeWhere((suggestion) => suggestion.id == keyword.id);
+            }
+            return suggestions;
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
@@ -398,11 +421,16 @@ class _FilterSectionState extends State<FilterSection> {
             ),
           ),
           suggestionsCallback: (pattern) async {
-            return await search.getSearchResults(
+            List suggestions = await search.getSearchResults(
               query: pattern,
               contentType: Type.movie,
               isWatchProviders: true,
             );
+            watchProviderChips.forEach((watchProvider) {
+              suggestions.removeWhere(
+                  (suggestion) => suggestion.id == watchProvider.id);
+            });
+            return suggestions;
           },
           itemBuilder: (context, suggestion) {
             return ListTile(
