@@ -99,7 +99,12 @@ class _MoviesListLayoutState extends State<MoviesListLayout> {
                             enableDrag: false,
                             backgroundColor: Colors.transparent,
                             builder: (ctx) {
-                              return FilterModal(contentType: selectedType);
+                              return Padding(
+                                padding: EdgeInsets.only(
+                                  bottom: MediaQuery.of(ctx).viewInsets.bottom,
+                                ),
+                                child: FilterModal(contentType: selectedType),
+                              );
                             },
                           );
                         },

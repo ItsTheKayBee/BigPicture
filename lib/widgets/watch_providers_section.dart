@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class WatchProvidersSection extends StatelessWidget {
   WatchProvidersSection({required this.watchProviders});
 
-  final List<WatchProviders> watchProviders;
+  final List<WatchProvider> watchProviders;
 
   @override
   Widget build(BuildContext context) {

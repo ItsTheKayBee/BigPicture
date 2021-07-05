@@ -1,26 +1,38 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../constants/genre_list.dart';
 import '../models/filter.dart';
 import '../utilities/utility.dart';
 import 'castTile.dart';
+import 'movieDetails.dart';
 import 'movieTile.dart';
 import '../constants/config.dart';
 import '../constants/strings.dart';
 
 class SearchModel {
   Future<List> getSearchResults(
-      {required String query, required contentType}) async {
+      {required String query,
+      required Type contentType,
+      bool isWatchProviders = false}) async {
     if (query == '') {
       return [];
     }
     final String url;
-    if (contentType == Type.movie) {
+    if (isWatchProviders) {
+      String content = 'movie';
+      String watchRegion = await getIsoCode();
+      if (contentType == Type.tv) content = 'tv';
+      url =
+          '$BASE_URL/watch/providers/$content?api_key=$API_KEY&watch_region=$watchRegion';
+    } else if (contentType == Type.movie) {
       url = '$BASE_URL/search/movie?api_key=$API_KEY&query=$query';
     } else if (contentType == Type.tv) {
       url = '$BASE_URL/search/tv?api_key=$API_KEY&query=$query';
-    } else {
+    } else if (contentType == Type.people) {
       url = '$BASE_URL/search/person?api_key=$API_KEY&query=$query';
+    } else {
+      url = '$BASE_URL/search/keyword?api_key=$API_KEY&query=$query';
     }
 
     final Uri uri = Uri.parse(url);
@@ -28,18 +40,37 @@ class SearchModel {
     if (response.statusCode == 200) {
       Map<String, dynamic> map = json.decode(response.body);
       List<dynamic> list = map["results"];
-      if (contentType == Type.movie || contentType == Type.tv)
+      if (isWatchProviders)
+        return list
+            .map((model) => WatchProvider.fromJson(model))
+            .where((model) =>
+                model.name.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      else if (contentType == Type.movie || contentType == Type.tv)
         return list
             .map((model) => MovieTile.fromJson(model, contentType))
             .toList();
-      else
+      else if (contentType == Type.people)
         return list.map((model) => CastTile.fromJson(model)).toList();
+      else
+        return list.map((model) => Keyword.fromJson(model)).toList();
     }
     throw Exception('No search results found');
   }
 
+  List<Genre> getGenres({required String query}) {
+    List<Genre> list = [];
+    for (int key in genreList.keys) {
+      if (!genreList[key]!.toLowerCase().contains(query.toLowerCase()))
+        continue;
+
+      list.add(Genre(id: key, name: genreList[key] ?? ''));
+    }
+    return list;
+  }
+
   Future<List> getFilteredResults(
-      {required Filter filter, required contentType}) async {
+      {required Filter filter, required Type contentType}) async {
     String url = '';
 
     List? genres = filter.genres; //dropdown
@@ -130,6 +161,4 @@ class SearchModel {
     }
     throw Exception('No search results found');
   }
-
-
 }

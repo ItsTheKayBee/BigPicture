@@ -1,12 +1,11 @@
-import 'package:big_picture/widgets/filter_section.dart';
+import '../widgets/filter_section.dart';
 import 'package:flutter/material.dart';
 import '../constants/styles.dart';
 import '../constants/strings.dart';
 
 class FilterModal extends StatelessWidget {
-  final contentType;
+  final Type contentType;
   FilterModal({required this.contentType});
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +26,10 @@ class FilterModal extends StatelessWidget {
             SizedBox(
               height: 50.0,
             ),
-            Container(
-              height: size.height * 0.6 - 180,
+            Expanded(
               child: SingleChildScrollView(
                 child: FilterSection(),
               ),
-            ),
-            Divider(
-              thickness: 1,
-            ),
-            Container(
-              height: 20.0,
-              child: Text('Save'),
             ),
           ],
         ),

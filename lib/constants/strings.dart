@@ -36,4 +36,5 @@ enum Type {
   movie,
   tv,
   people,
+  keyword,
 }

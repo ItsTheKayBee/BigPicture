@@ -32,8 +32,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true, // required for transparent curve in bottom bar
-      resizeToAvoidBottomInset:
-          false, // to not add padding at the bottom when keybaord opens
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavBar(
         onChangeTab:
             onChangeTab, // call back which gets called when tab changes

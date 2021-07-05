@@ -5,16 +5,17 @@ class MovieTile {
   final String imageUrl;
   final String movieName;
   final List genre;
-  final type;
+  final Type type;
   final String releaseDate;
 
-  MovieTile(
-      {required this.movieId,
-      required this.imageUrl,
-      required this.movieName,
-      required this.genre,
-      required this.type,
-      required this.releaseDate});
+  MovieTile({
+    required this.movieId,
+    required this.imageUrl,
+    required this.movieName,
+    required this.genre,
+    required this.type,
+    required this.releaseDate,
+  });
 
   factory MovieTile.fromJson(Map<String, dynamic> json, contentType) {
     return MovieTile(

@@ -1,6 +1,6 @@
 import 'package:big_picture/models/castTile.dart';
 import 'package:big_picture/models/movieTile.dart';
-import 'package:big_picture/utilities/utility.dart';
+import 'package:flutter/foundation.dart';
 import 'videoTile.dart';
 
 class MovieDetails {
@@ -28,7 +28,8 @@ class MovieDetails {
     required this.watchProviders,
   });
 
-  factory MovieDetails.fromJson(Map<String, dynamic> json, contentType, isoCode) {
+  factory MovieDetails.fromJson(
+      Map<String, dynamic> json, contentType, isoCode) {
     List<CastTile> castList = List<CastTile>.from(
       json['credits']['cast'].map((cast) => CastTile.fromJson(cast)),
     );
@@ -39,9 +40,9 @@ class MovieDetails {
     List<VideoTile> videos = List<VideoTile>.from(
       json['videos']['results'].map((video) => VideoTile.fromJson(video)),
     );
-    List<WatchProviders> watchProviders = List<WatchProviders>.from(
+    List<WatchProvider> watchProviders = List<WatchProvider>.from(
       json['watch/providers']['results'][isoCode]['flatrate']
-          .map((watchProvider) => WatchProviders.fromJson(watchProvider)),
+          .map((watchProvider) => WatchProvider.fromJson(watchProvider)),
     );
 
     return MovieDetails(
@@ -59,22 +60,49 @@ class MovieDetails {
   }
 }
 
-class WatchProviders {
+class WatchProvider {
   final String logoPath;
   final int id;
   final String name;
 
-  WatchProviders({
+  WatchProvider({
     required this.id,
     required this.logoPath,
     required this.name,
   });
 
-  factory WatchProviders.fromJson(Map<String, dynamic> json) {
-    return WatchProviders(
+  factory WatchProvider.fromJson(Map<String, dynamic> json) {
+    return WatchProvider(
       id: json['provider_id'],
-      logoPath: json['logo_path'],
+      logoPath: json['logo_path'] ?? '',
       name: json['provider_name'],
     );
   }
+}
+
+class Keyword {
+  final int id;
+  final String name;
+
+  Keyword({
+    required this.id,
+    required this.name,
+  });
+
+  factory Keyword.fromJson(Map<String, dynamic> json) {
+    return Keyword(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
+}
+
+class Genre {
+  final int id;
+  final String name;
+
+  Genre({
+    required this.id,
+    required this.name,
+  });
 }
